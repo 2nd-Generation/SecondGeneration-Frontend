@@ -9,9 +9,9 @@ function App() {
           {/* Logo */}
           <a href="#" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-yellow-400 rounded flex items-center justify-center">
-              <span className="text-gray-900 font-black text-xl">C</span>
+              <span className="text-gray-900 font-black text-xl">S</span>
             </div>
-            <span className="text-2xl font-black text-yellow-400">CoreClass</span>
+            <span className="text-2xl font-black text-yellow-400">SGeA</span>
           </a>
           
           {/* Menu */}
@@ -38,7 +38,7 @@ function App() {
         {/* Text Content */}
         <div className="relative z-10 text-center px-4">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4">
-            CoreClass
+            SGeA
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 font-semibold max-w-3xl mx-auto">
             최고와 완벽을 추구하는 이스포츠 아카데미
@@ -51,14 +51,14 @@ function App() {
         {/* 학원 소개 Section */}
         <section id="about" className="mb-20">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 text-center">
-            체계적인 이스포츠 아카데미 <span className="text-yellow-400">CoreClass</span>
+            체계적인 이스포츠 아카데미 <span className="text-yellow-400">SGeA</span>
           </h2>
           <div className="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl leading-relaxed">
             <p className="text-gray-300 mb-6 text-lg">
-              (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 'CoreClass 이스포츠 아카데미 (CoreClass E-Sports Academy)'를 설립하였습니다.
+              (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 'SGeA 이스포츠 아카데미 (SGeA E-Sports Academy)'를 설립하였습니다.
             </p>
             <p className="text-gray-300 mb-6 text-lg">
-              CoreClass 이스포츠 아카데미는 체계적인 커리큘럼과 건강한 교육 환경을 갖춘 전문 이스포츠 교육 문화 기관입니다.
+              SGeA 이스포츠 아카데미는 체계적인 커리큘럼과 건강한 교육 환경을 갖춘 전문 이스포츠 교육 문화 기관입니다.
               이름 그대로 <strong>SUPER+PERFECT</strong>, 최고와 완벽함을 추구하며 각 종목의 메이저 리그 출신 감독, 프로 선수로 구성된 강사진이 경험에 기반한 맞춤형 훈련 프로그램을 제공합니다.
             </p>
             <p className="text-gray-300 mb-6 text-lg">
@@ -92,7 +92,7 @@ function App() {
 
         {/* 강사진 소개 Section */}
         <section className="mb-20">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 text-center">CoreClass 강사진 소개</h2>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 text-center">SGeA 강사진 소개</h2>
           <div className="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl text-center">
             <p className="text-gray-400 text-lg mb-4">
               <strong>LCK, LPL, LLA, VCJ, PMJL</strong> 등 각 종목 e스포츠 메이저리그 출신의 강사진!
@@ -106,9 +106,9 @@ function App() {
         {/* 공간 소개 Section */}
         <section id="class" className="mb-20">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 text-center">
-            최고의 이스포츠 공간 <span className="text-yellow-400">CoreClass</span>
+            최고의 이스포츠 공간 <span className="text-yellow-400">SGeA</span>
           </h2>
-          <p className="text-center text-gray-400 mb-12 text-lg">CoreClass 이스포츠 아카데미의 공간을 소개합니다.</p>
+          <p className="text-center text-gray-400 mb-12 text-lg">SGeA 이스포츠 아카데미의 공간을 소개합니다.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Master */}
             <div className="relative bg-gray-800 p-6 rounded-2xl shadow-lg overflow-hidden group">
@@ -161,7 +161,7 @@ function App() {
         <section id="contact" className="mb-20 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6">상담 신청하기</h2>
           <p className="text-gray-400 mb-8 text-lg max-w-2xl mx-auto">
-            CoreClass 아카데미의 전문 상담사들이 개인 맞춤형으로 각자의 상황과 필요에 맞춘 조언과 지원을 제공합니다.
+            SGeA 아카데미의 전문 상담사들이 개인 맞춤형으로 각자의 상황과 필요에 맞춘 조언과 지원을 제공합니다.
           </p>
           <a href="#" className="inline-block px-10 py-4 rounded-full text-gray-900 font-bold bg-yellow-400 hover:bg-yellow-500 transition-all duration-300 text-xl shadow-lg transform hover:scale-105">
             상담 신청하기
@@ -184,7 +184,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-gray-900 py-12 border-t border-gray-700">
         <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <h3 className="text-xl font-bold text-yellow-400 mb-4">CoreClass | CoreClass 이스포츠 아카데미</h3>
+          <h3 className="text-xl font-bold text-yellow-400 mb-4">SGeA | SGeA 이스포츠 아카데미</h3>
           <p>대표 박시한 | 상호명 (주)케이제이이스포츠 | 사업자번호 792-87-03015 | 학원등록번호 제14661호</p>
           <p className="mt-1">주소 서울특별시 강남구 역삼로 550, 5층 (대치동)</p>
           <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base">
@@ -197,7 +197,7 @@ function App() {
             <p>월~금 | 14:00-22:00</p>
             <p>토~일 | 12:00-22:00</p>
           </div>
-          <p className="mt-8 text-xs">©2024. CoreClass All rights reserved.</p>
+          <p className="mt-8 text-xs">©2024. SGeA All rights reserved.</p>
           <div className="flex justify-center space-x-4 mt-4 text-xs">
             <a href="#" className="text-gray-500 hover:text-white transition-colors duration-300">이용약관</a>
             <span className="text-gray-600">|</span>
