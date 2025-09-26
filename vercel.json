@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run build:ci",
+  "outputDirectory": "dist",
+  "framework": "vite"
+}
