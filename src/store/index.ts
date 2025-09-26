@@ -13,5 +13,3 @@ export const useCounterStore = create<CounterState>((set) => ({
   decrement: () => set((state) => ({ value: state.value - 1 })),
   incrementByAmount: (amount: number) => set((state) => ({ value: state.value + amount })),
 }));
-
-

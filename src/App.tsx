@@ -1,31 +1,28 @@
 import React from 'react';
-import { Counter } from './components/Counter';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import About from './pages/About';
+import Class from './pages/Class';
+import Teachers from './pages/Teachers';
+import News from './pages/News';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* 헤더 */}
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-8">
-            <h1 className="text-2xl font-bold text-white text-center">Zustand 카운터 데모</h1>
-          </div>
+    <Router>
+      <div className="bg-gray-900 text-white font-['Noto_Sans_KR']">
+        <Navigation />
 
-          {/* 메인 컨텐츠 */}
-          <div className="p-8">
-            <Counter />
-          </div>
-
-          {/* 푸터 */}
-          <div className="bg-gray-50 px-6 py-4 border-t border-gray-100">
-            <p className="text-sm text-gray-500 text-center">React Kit CLI Demo</p>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/class" element={<Class />} />
+          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/news" element={<News />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
 export default App;
-
-
