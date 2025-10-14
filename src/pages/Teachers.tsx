@@ -10,7 +10,7 @@ const Teachers: React.FC = () => {
         {/* 강사진 소개 */}
         <section className="mb-20">
           <h1 className="text-5xl md:text-6xl font-black text-white mb-8 text-center">
-            <span className="text-yellow-400">SGeA</span> 강사진
+            <span className="text-purple-500">SGEA</span> 강사진
           </h1>
           <p className="text-center text-xl text-gray-400 mb-12">
             <span className="font-bold">LCK, LPL, LLA, VCJ, PMJL</span> 등 각 종목 e스포츠 메이저리그 출신 강사진이 직접 지도합니다.
@@ -18,8 +18,8 @@ const Teachers: React.FC = () => {
           <div className="bg-gray-800 p-8 md:p-12 rounded-2xl lg:rounded-3xl shadow-xl">
             <p className="text-gray-300 text-lg leading-relaxed text-center max-w-4xl mx-auto">
               e스포츠는 이제 단순 게임이 아닌 하나의 문화이자 직업적 스포츠입니다.  
-              <span className="text-yellow-400 font-bold">기본기와 실력이 가장 중요합니다. </span>  
-              SGeA 강사진은 이러한 기본기를 탄탄하게 다질 수 있도록 체계적인 교육을 제공합니다.
+              <span className="text-purple-500 font-bold">기본기와 실력이 가장 중요합니다. </span>  
+              SGEA 강사진은 이러한 기본기를 탄탄하게 다질 수 있도록 체계적인 교육을 제공합니다.
             </p>
           </div>
         </section>

@@ -13,11 +13,9 @@ const Navigation: React.FC = () => {
     <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-xl transition-shadow duration-300">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="w-10 h-10 bg-yellow-400 rounded flex items-center justify-center">
-            <span className="text-gray-900 font-black text-xl">S</span>
-          </div>
-          <span className="text-2xl font-black text-yellow-400">SGeA</span>
+        <Link to="/" className="flex items-center space-x-3">
+          <img src="/logo.png" alt="SGEA 로고" className="w-10 h-10 object-contain" />
+          <span className="text-2xl font-black text-purple-500">SGEA</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -25,7 +23,7 @@ const Navigation: React.FC = () => {
           <Link
             to="/about"
             className={`transition-colors duration-300 ${
-              isActive('/about') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+              isActive('/about') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             소개
@@ -33,15 +31,15 @@ const Navigation: React.FC = () => {
           <Link
             to="/class"
             className={`transition-colors duration-300 ${
-              isActive('/class') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+              isActive('/class') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
             }`}
           >
-            클래스
+            프로그램
           </Link>
           <Link
             to="/teachers"
             className={`transition-colors duration-300 ${
-              isActive('/teachers') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+              isActive('/teachers') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             강사진
@@ -49,14 +47,14 @@ const Navigation: React.FC = () => {
           <Link
             to="/news"
             className={`transition-colors duration-300 ${
-              isActive('/news') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+              isActive('/news') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
             }`}
           >
-            소식
+            뉴스
           </Link>
           <Link
             to="/#contact"
-            className="px-6 py-3 rounded-full text-gray-900 font-bold bg-yellow-400 hover:bg-yellow-500 transition-colors duration-300 transform hover:scale-105 shadow-lg"
+            className="px-6 py-3 rounded-full text-white font-bold bg-purple-500 hover:bg-purple-600 transition-colors duration-300 transform hover:scale-105 shadow-lg"
           >
             문의하기
           </Link>
@@ -77,7 +75,7 @@ const Navigation: React.FC = () => {
             <Link
               to="/about"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/about') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+                isActive('/about') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -86,16 +84,16 @@ const Navigation: React.FC = () => {
             <Link
               to="/class"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/class') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+                isActive('/class') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              클래스
+              프로그램
             </Link>
             <Link
               to="/teachers"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/teachers') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+                isActive('/teachers') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -104,15 +102,15 @@ const Navigation: React.FC = () => {
             <Link
               to="/news"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/news') ? 'text-yellow-400' : 'text-gray-300 hover:text-white'
+                isActive('/news') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              소식
+              뉴스
             </Link>
             <Link
               to="/#contact"
-              className="inline-block px-6 py-3 rounded-full text-gray-900 font-bold bg-yellow-400 hover:bg-yellow-500 transition-colors duration-300"
+              className="inline-block px-6 py-3 rounded-full text-white font-bold bg-purple-500 hover:bg-purple-600 transition-colors duration-300"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               문의하기
