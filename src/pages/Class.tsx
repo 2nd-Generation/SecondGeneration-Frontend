@@ -10,7 +10,7 @@ const Class: React.FC = () => {
         {/* 클래스 헤더 */}
         <section className="mb-20">
           <h1 className="text-5xl md:text-6xl font-black text-white mb-8 text-center">
-            <span className="text-yellow-400">SGeA</span> 클래스
+            <span className="text-purple-500">SGEA</span> 프로그램
           </h1>
           <p className="text-center text-gray-400 mb-12 text-lg">각각의 레벨과 목적에 맞춘 전문 클래스를 제공합니다.</p>
         </section>
@@ -21,7 +21,7 @@ const Class: React.FC = () => {
           <div className="relative bg-gray-800 p-8 rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500">
             <div className="bg-gradient-to-br from-purple-600 to-purple-800 absolute top-0 left-0 w-full h-2"></div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              <span className="text-yellow-400">CLASS </span>MASTER
+              <span className="text-purple-500">CLASS </span>MASTER
             </h3>
             <p className="text-gray-300 text-lg font-semibold mb-4">
               최첨단 하이엔드 게이밍 환경에서 완벽한 직접 수강을 제공하는 전문 교육 공간입니다.
@@ -44,7 +44,7 @@ const Class: React.FC = () => {
           <div className="relative bg-gray-800 p-8 rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500">
             <div className="bg-gradient-to-br from-blue-600 to-blue-800 absolute top-0 left-0 w-full h-2"></div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              <span className="text-yellow-400">CLASS </span>ADVANCED
+              <span className="text-purple-500">CLASS </span>ADVANCED
             </h3>
             <p className="text-gray-300 text-lg font-semibold mb-4">
               귀중한 시간에 최상급의 효율적인 내 아이의 동기학습을 제공하는 아카데미 교육 공간입니다.
@@ -67,7 +67,7 @@ const Class: React.FC = () => {
           <div className="relative bg-gray-800 p-8 rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500">
             <div className="bg-gradient-to-br from-green-600 to-green-800 absolute top-0 left-0 w-full h-2"></div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              <span className="text-yellow-400">CLASS </span>BASIC
+              <span className="text-purple-500">CLASS </span>BASIC
             </h3>
             <p className="text-gray-300 text-lg font-semibold mb-4">
               이스포츠에 처음 입문하는 학생들을 위해 설계된 기초기술을 위한 최신 중급 사양의 이스포츠 교육 환경입니다.
@@ -90,7 +90,7 @@ const Class: React.FC = () => {
           <div className="relative bg-gray-800 p-8 rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-500">
             <div className="bg-gradient-to-br from-orange-600 to-orange-800 absolute top-0 left-0 w-full h-2"></div>
             <h3 className="text-3xl font-bold text-white mb-4">
-              <span className="text-yellow-400">TRAINING SYSTEM</span>
+              <span className="text-purple-500">TRAINING SYSTEM</span>
             </h3>
             <p className="text-gray-300 text-lg font-semibold mb-4">
               집중 연습과 기초 기술 습득을 위한 전용 훈련 공간으로, 체계적인 수업을 제공합니다.
@@ -116,20 +116,20 @@ const Class: React.FC = () => {
           <div className="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl text-center">
             <p className="text-gray-400 text-lg leading-relaxed">
               국제 무대 진출의 기회가 열려있습니다! 만의 하나 높아진 이스포츠 경기 예시로, 안정성보다는 뇌의 몰입과
-              조작을 활용한 창의성 교육을 통해 진취적인 성능 증진에 큰 의미를 담고 있는 SGeA Track&Field랩의 전문 교육
+              조작을 활용한 창의성 교육을 통해 진취적인 성능 증진에 큰 의미를 담고 있는 SGEA Track&Field랩의 전문 교육
               과정입니다.
             </p>
             <div className="mt-8 grid md:grid-cols-3 gap-8">
               <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-yellow-400 mb-2">읽기와 단순 기술 향상</h3>
+                <h3 className="text-xl font-bold text-purple-500 mb-2">읽기와 단순 기술 향상</h3>
                 <p className="text-gray-300">이스포츠의 기초를 확립하고 체계적으로 실력 향상</p>
               </div>
               <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-yellow-400 mb-2">창의적 기술 개발</h3>
+                <h3 className="text-xl font-bold text-purple-500 mb-2">창의적 기술 개발</h3>
                 <p className="text-gray-300">천재보다는 고수들은 독창적인 움직임이 필수</p>
               </div>
               <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-yellow-400 mb-2">리더십과 인내심</h3>
+                <h3 className="text-xl font-bold text-purple-500 mb-2">리더십과 인내심</h3>
                 <p className="text-gray-300">실력과 최고의 포스가 결합된 인간교육</p>
               </div>
             </div>
