@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isActive = (path: string) => {
     return location.pathname === path;
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900 bg-opacity-80 backdrop-blur-sm shadow-xl transition-shadow duration-300">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-custom-bg/95 backdrop-blur-lg shadow-2xl' 
+        : 'bg-custom-bg/80 backdrop-blur-sm shadow-xl'
+    }`}>
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3">
-          <img src="/logo.png" alt="SGEA 로고" className="w-10 h-10 object-contain" />
-          <span className="text-2xl font-black text-purple-500">SGEA</span>
+        <Link to="/" className="group flex items-center space-x-3">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full blur group-hover:blur-md transition-all duration-300 opacity-50"></div>
+            <img src="/logo.png" alt="SGEA 로고" className="relative w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300" />
+          </div>
+          <span className="font-bebas text-3xl font-black bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-indigo-400 transition-all duration-300 tracking-wider">
+            SGEA
+          </span>
         </Link>
 
         {/* Desktop Menu */}
@@ -23,7 +42,7 @@ const Navigation: React.FC = () => {
           <Link
             to="/about"
             className={`transition-colors duration-300 ${
-              isActive('/about') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+              isActive('/about') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             소개
@@ -31,7 +50,7 @@ const Navigation: React.FC = () => {
           <Link
             to="/class"
             className={`transition-colors duration-300 ${
-              isActive('/class') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+              isActive('/class') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             프로그램
@@ -39,7 +58,7 @@ const Navigation: React.FC = () => {
           <Link
             to="/teachers"
             className={`transition-colors duration-300 ${
-              isActive('/teachers') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+              isActive('/teachers') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             강사진
@@ -47,16 +66,19 @@ const Navigation: React.FC = () => {
           <Link
             to="/news"
             className={`transition-colors duration-300 ${
-              isActive('/news') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+              isActive('/news') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
             }`}
           >
             뉴스
           </Link>
           <Link
             to="/#contact"
-            className="px-6 py-3 rounded-full text-white font-bold bg-purple-500 hover:bg-purple-600 transition-colors duration-300 transform hover:scale-105 shadow-lg"
+            className="font-bebas group px-6 py-3 rounded-full text-white font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 flex items-center gap-2 text-lg tracking-wider"
           >
             문의하기
+            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </Link>
         </div>
 
@@ -70,12 +92,12 @@ const Navigation: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-gray-900 border-t border-gray-700">
+        <div className="md:hidden bg-custom-bg border-t border-gray-700">
           <div className="px-6 py-4 space-y-4">
             <Link
               to="/about"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/about') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+                isActive('/about') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -84,7 +106,7 @@ const Navigation: React.FC = () => {
             <Link
               to="/class"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/class') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+                isActive('/class') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -93,7 +115,7 @@ const Navigation: React.FC = () => {
             <Link
               to="/teachers"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/teachers') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+                isActive('/teachers') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -102,7 +124,7 @@ const Navigation: React.FC = () => {
             <Link
               to="/news"
               className={`block text-lg font-semibold transition-colors duration-300 ${
-                isActive('/news') ? 'text-purple-500' : 'text-gray-300 hover:text-white'
+                isActive('/news') ? 'text-violet-500' : 'text-gray-300 hover:text-white'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -110,10 +132,13 @@ const Navigation: React.FC = () => {
             </Link>
             <Link
               to="/#contact"
-              className="inline-block px-6 py-3 rounded-full text-white font-bold bg-purple-500 hover:bg-purple-600 transition-colors duration-300"
+              className="font-bebas inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 shadow-lg text-lg tracking-wider"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               문의하기
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>
