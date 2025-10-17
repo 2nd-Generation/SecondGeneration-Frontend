@@ -2,7 +2,7 @@ import React from 'react';
 
 const Teachers: React.FC = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-custom-bg text-white min-h-screen">
       {/* Header Space */}
       <div className="pt-24"></div>
 

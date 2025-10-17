@@ -109,7 +109,7 @@ const News: React.FC = () => {
 
   if (selectedNews) {
     return (
-      <div className="bg-gray-900 text-white min-h-screen">
+      <div className="bg-custom-bg text-white min-h-screen">
         <div className="pt-24"></div>
         <main className="container mx-auto px-6 py-12 md:py-24">
           {/* Back Button */}
@@ -169,7 +169,7 @@ const News: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div className="bg-custom-bg text-white min-h-screen">
       <div className="pt-24"></div>
 
       <main className="container mx-auto px-6 py-12 md:py-24">
