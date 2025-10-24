@@ -10,7 +10,7 @@ const Class: React.FC = () => {
         {/* 클래스 헤더 */}
         <section className="mb-20">
           <h1 className="text-5xl md:text-6xl font-black text-white mb-8 text-center">
-            <span className="text-purple-500">SGEA</span> 프로그램
+            <span className="font-bebas text-purple-500">SGEA</span> 프로그램
           </h1>
           <p className="text-center text-gray-400 mb-12 text-lg">각각의 레벨과 목적에 맞춘 전문 클래스를 제공합니다.</p>
         </section>

@@ -181,7 +181,7 @@ const News: React.FC = () => {
           <div className="relative px-6 md:px-16 py-16 md:py-24 border border-white/10 rounded-3xl bg-white/5 backdrop-blur">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-                <span className="text-white">SGEA</span> <span className="text-purple-400">뉴스</span>
+                <span className="font-bebas text-white">SGEA</span> <span className="text-purple-400">뉴스</span>
               </h1>
               <p className="mt-6 text-gray-300 text-lg md:text-xl max-w-3xl">
                 공지, 강사 소식, 행사 안내, 이벤트 정보를 확인하세요.

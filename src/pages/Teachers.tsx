@@ -15,7 +15,7 @@ const Teachers: React.FC = () => {
           <div className="relative px-6 md:px-16 py-16 md:py-24 border border-white/10 rounded-3xl bg-white/5 backdrop-blur">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-                <span className="text-white">세계 무대 경험의</span> <span className="text-purple-400">SGEA</span> 강사진
+                <span className="text-white">세계 무대 경험의</span> <span className="font-bebas text-purple-400">SGEA</span> 강사진
               </h1>
               <p className="mt-6 text-gray-300 text-lg md:text-xl max-w-3xl">
                 메이저 리그 출신 코치진의 노하우로 기본기를 설계하고, 선수로 성장하는 로드맵을 제시합니다.

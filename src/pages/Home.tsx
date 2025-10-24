@@ -18,11 +18,8 @@ const Home: React.FC = () => {
 
           {/* Text Content */}
           <div className="relative z-10 text-center px-4 space-y-8 animate-fadeIn">
-            <h1 className="font-bebas text-7xl md:text-9xl lg:text-[12rem] font-black text-white mb-6 tracking-wider">
-              <span className="inline-block animate-float">S</span>
-              <span className="inline-block animate-float" style={{ animationDelay: '0.1s' }}>G</span>
-              <span className="inline-block animate-float" style={{ animationDelay: '0.2s' }}>E</span>
-              <span className="inline-block animate-float" style={{ animationDelay: '0.3s' }}>A</span>
+            <h1 className="font-bebas text-7xl md:text-9xl lg:text-[12rem] text-white mb-6 tracking-wider">
+              <span className="inline-block animate-float font-bebas">SGEA</span>
             </h1>
             <p className="font-noto text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-indigo-300 font-bold max-w-4xl mx-auto leading-relaxed">
               최고와 완벽을 추구하는 이스포츠 아카데미
@@ -60,7 +57,7 @@ const Home: React.FC = () => {
         <section id="about" className="mb-32">
           <div className="text-center mb-16">
             <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              체계적인 이스포츠 아카데미 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
+              체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -162,7 +159,7 @@ const Home: React.FC = () => {
         <section className="mb-32">
           <div className="text-center mb-16">
             <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              SGEA <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">강사진 소개</span>
+              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">강사진 소개</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -199,7 +196,7 @@ const Home: React.FC = () => {
         <section id="class" className="mb-32">
           <div className="text-center mb-16">
             <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              최고의 이스포츠 공간 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
+              최고의 이스포츠 공간 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
             <p className="font-noto text-gray-400 text-xl">SGEA 이스포츠 아카데미의 공간을 소개합니다.</p>
@@ -343,7 +340,7 @@ const Home: React.FC = () => {
       {/* Footer */}
       <footer className="bg-custom-bg py-12 border-t border-gray-700">
         <div className="container mx-auto px-6 text-center benz:text-gray-500 text-sm">
-          <h3 className="text-xl font-bold text-purple-500 mb-4">SGEA | SGEA 이스포츠 아카데미</h3>
+          <h3 className="text-xl font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
           <p>대표 김민수 | 상호명 (주)에듀테크스포츠 | 사업자번호 123-45-67890 | 학원등록번호 제22001호</p>
           <p className="mt-1">주소 경기도 성남시 분당구 판교로 289, 12층 (삼평동)</p>
           <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base">
@@ -357,7 +354,7 @@ const Home: React.FC = () => {
             <p>월~금 | 14:00-22:00</p>
             <p>토~일 | 12:00-22:00</p>
           </div>
-          <p className="mt-8 text-xs">©2024. SGEA All rights reserved.</p>
+          <p className="mt-8 text-xs">©2024. <span className="font-bebas">SGEA</span> All rights reserved.</p>
           <div className="flex justify-center space-x-4 mt-4 text-xs">
             <a href="#" className="text-gray-500 hover:text-white transition-colors duration-300">
               이용약관
