@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        'sans': ['"Pretendard Variable"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', '"Helvetica Neue"', '"Segoe UI"', '"Apple SD Gothic Neo"', '"Noto Sans KR"', 'Malgun Gothic', 'sans-serif'],
         'bebas': ['"Bebas Neue"', 'cursive'],
         'noto': ['"Noto Sans KR"', 'sans-serif'],
+        'pretendard': ['"Pretendard Variable"', 'Pretendard', 'sans-serif'],
       },
       colors: {
         // Fiorentina inspired color palette
