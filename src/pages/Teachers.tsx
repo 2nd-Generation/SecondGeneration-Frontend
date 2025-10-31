@@ -1,5 +1,80 @@
 import React from 'react';
 
+// 팀 로고 파일 경로 매핑 - static으로 진행
+const teamLogoSrcByName: Record<string, string> = {
+  'New York Excelsior': '/ NewYork Excelsior.png',
+  'Eternity Gaming': '/Eternity Gaming.png',
+  'Gen.G Global Academy': '/GenG Global Academy.png',
+  'Guangzhou Charge': '/Guangzhou Charge.png',
+  'Maru Game Academy': '/Maru Game Academy.png',
+  'Neutral Break Gaming': '/Neutral Break Gaming.png',
+  'O2 Blast': '/O2 Blast.png',
+  'Seoulgame Academy': '/Seoul Game Academy.png',
+  'SkyFoxes': '/Skyfoxes.png',
+  'WGS Armament': '/WGS Armament.png',
+  'WindTree': '/Windtree.png',
+  'X-Gaming': '/X-gaming.png',
+  'SG E-Sports Academy': '/logo.png',
+};
+
+type HistoryItem = {
+  year: string;
+  team: string;
+  role?: string;
+};
+
+type Coach = {
+  id: string;
+  name: string;
+  displayName: string;
+  title: string;
+  photoSrc: string;
+  playerHistory: HistoryItem[];
+  coachHistory: HistoryItem[];
+};
+
+const coaches: Coach[] = [
+  {
+    id: 'rexi',
+    name: '서재원',
+    displayName: 'Rexi 서재원',
+    title: 'Head/Coach',
+    photoSrc: '/coach/rexi.png',
+    playerHistory: [
+      { year: '2018', team: 'SkyFoxes' },
+      { year: '2019', team: 'X-Gaming' },
+      { year: '2020', team: 'Neutral Break Gaming' },
+    ],
+    coachHistory: [
+      { year: '2019', team: 'Eternity Gaming', role: 'Head Coach' },
+      { year: '2020', team: 'Seoulgame Academy', role: 'Coach' },
+      { year: '2021', team: 'Gen.G Global Academy', role: 'Coach' },
+      { year: '2022-2023', team: 'Maru Game Academy', role: 'Coach' },
+      { year: '2024', team: 'WindTree', role: 'Head Coach' },
+      { year: '2025', team: 'SG E-Sports Academy', role: 'Coach' },
+    ],
+  },
+  {
+    id: 'mandu',
+    name: '김찬희',
+    displayName: 'Mandu 김찬희',
+    title: 'Coach',
+    photoSrc: '/coach/mandu.jpg',
+    playerHistory: [
+      { year: '2018', team: 'WGS Armament' },
+      { year: '2019', team: 'O2 Blast' },
+      { year: '2020', team: 'New York Excelsior' },
+      { year: '2021', team: 'Guangzhou Charge' },
+      { year: '2024', team: 'WindTree' },
+    ],
+    coachHistory: [
+      { year: '2023', team: 'Maru Game Academy', role: 'Coach' },
+      { year: '2025', team: 'Maru Game Academy', role: 'Coach' },
+      { year: '2025', team: 'SG E-Sports Academy', role: 'Coach' },
+    ],
+  },
+];
+
 const Teachers: React.FC = () => {
   return (
     <div className="bg-custom-bg text-white min-h-screen">
@@ -35,85 +110,63 @@ const Teachers: React.FC = () => {
         <section className="mb-24">
           <h2 className="text-4xl font-black text-white mb-12 text-center">코치 프로필</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Rexi | 서재원 코치 */}
-            <div className="relative group rounded-2xl p-[1px] bg-gradient-to-br from-purple-600 via-indigo-600 to-fuchsia-500 shadow-2xl">
-              <div className="bg-gray-900 rounded-2xl h-full w-full p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-black">Rexi 서재원</h3>
-                    <p className="text-purple-400 font-bold">Head/Coach</p>
+            {coaches.map((coach) => (
+              <div key={coach.id} className="relative group rounded-2xl p-[1px] bg-gradient-to-br from-purple-600 via-indigo-600 to-fuchsia-500 shadow-2xl">
+                <div className="bg-gray-900 rounded-2xl h-full w-full p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <img src={coach.photoSrc} alt={`${coach.displayName} 프로필`} className="w-20 h-20 md:w-24 md:h-24 rounded-xl object-cover object-center ring-2 ring-purple-500/40" />
+                      <div>
+                        <h3 className="text-2xl font-black">{coach.displayName}</h3>
+                        <p className="text-purple-400 font-bold">{coach.title}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white font-black">R</div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="text-base font-bold text-gray-100 mb-3">선수</h4>
-                    <ul className="text-gray-300 space-y-2 text-sm">
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2018</span> SkyFoxes</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2019</span> X-Gaming</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2020</span> Neutral Break Gaming</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-gray-100 mb-3">코치</h4>
-                    <div className="relative">
-                      <div className="absolute left-2 top-0 bottom-0 w-px bg-purple-500/30"></div>
-                      <ul className="text-gray-300 space-y-3 text-sm pl-6">
-                        <li><span className="text-purple-400 font-semibold mr-2">2019</span>Eternity Gaming (Head Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2020</span>Seoulgame Academy (Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2021</span>Gen.G Global Academy (Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2022-2023</span>Maru Game Academy (Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2024</span>WindTree (Head Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2025</span>SG E-Sports Academy (Coach)</li>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-base font-bold text-gray-100 mb-3">선수</h4>
+                      <ul className="text-gray-300 space-y-2 text-sm">
+                        {coach.playerHistory.map((h) => (
+                          <li key={`${coach.id}-player-${h.year}-${h.team}`} className="flex items-center gap-3">
+                            <span className="text-purple-400 min-w-[56px]">{h.year}</span>
+                            {teamLogoSrcByName[h.team] ? (
+                              <img src={teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-6 h-6 object-contain" />
+                            ) : (
+                              <div className="w-6 h-6" />
+                            )}
+                            <span>{h.team}</span>
+                          </li>
+                        ))}
                       </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-base font-bold text-gray-100 mb-3">코치</h4>
+                      <div className="relative">
+                        <div className="absolute left-2 top-0 bottom-0 w-px bg-purple-500/30"></div>
+                        <ul className="text-gray-300 space-y-3 text-sm pl-6">
+                          {coach.coachHistory.map((h) => (
+                            <li key={`${coach.id}-coach-${h.year}-${h.team}`} className="flex items-center gap-3">
+                              <span className="text-purple-400 font-semibold min-w-[72px]">{h.year}</span>
+                              {teamLogoSrcByName[h.team] ? (
+                                <img src={teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-6 h-6 object-contain" />
+                              ) : (
+                                <div className="w-6 h-6" />
+                              )}
+                              <span>
+                                {h.team}
+                                {h.role ? <span className="text-gray-400"> ({h.role})</span> : null}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Mandu | 김찬희 */}
-            <div className="relative group rounded-2xl p-[1px] bg-gradient-to-br from-purple-600 via-indigo-600 to-fuchsia-500 shadow-2xl">
-              <div className="bg-gray-900 rounded-2xl h-full w-full p-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-black">Mandu 김찬희</h3>
-                    <p className="text-purple-400 font-bold">Coach</p>
-                  </div>
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center text-white font-black">M</div>
-                </div>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="text-base font-bold text-gray-100 mb-3">선수</h4>
-                    <ul className="text-gray-300 space-y-2 text-sm">
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2018</span> WGS Armament</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2019</span> O2 Blast</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2020</span> New York Excelsior</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2021</span> Guangzhou Charge</li>
-                      <li className="flex items-center gap-2"><span className="text-purple-400">2024</span> WindTree</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-gray-100 mb-3">코치</h4>
-                    <div className="relative">
-                      <div className="absolute left-2 top-0 bottom-0 w-px bg-purple-500/30"></div>
-                      <ul className="text-gray-300 space-y-3 text-sm pl-6">
-                        <li><span className="text-purple-400 font-semibold mr-2">2023</span>Maru Game Academy (Coach)</li>
-                        <li><span className="text-purple-400 font-semibold mr-2">2025</span>Maru Game Academy (Coach)</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="text-center">
-          <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-            <a href="/#contact" className="font-bold">상담 신청하기</a>
+            ))}
           </div>
         </section>
       </main>
