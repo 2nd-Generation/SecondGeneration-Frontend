@@ -14,7 +14,7 @@ const teamLogoSrcByName: Record<string, string> = {
   'WGS Armament': '/WGS Armament.png',
   'WindTree': '/Windtree.png',
   'X-Gaming': '/X-gaming.png',
-  'SG E-Sports Academy': '/logo.png',
+  'SG E-Sports Academy': '/mainLogo.png',
 };
 
 type HistoryItem = {
