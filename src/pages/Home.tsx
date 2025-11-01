@@ -24,23 +24,6 @@ const Home: React.FC = () => {
             <p className="font-noto text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-indigo-300 font-bold max-w-4xl mx-auto leading-relaxed">
               최고와 완벽을 추구하는 이스포츠 아카데미
             </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-            <a
-              href="#about"
-              className="font-bebas group px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-2xl text-2xl font-bold flex items-center gap-3 tracking-wider"
-            >
-              시작하기
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a
-              href="#contact"
-              className="font-bebas px-10 py-5 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20 hover:bg-white/20 transition-all duration-300 text-2xl font-bold tracking-wider"
-            >
-              상담 신청
-            </a>
-          </div>
         </div>
 
         {/* Scroll Indicator */}
