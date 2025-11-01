@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-custom-bg text-white font-['Noto_Sans_KR']">
+    <div className="bg-white font-['Noto_Sans_KR']">
       {/* Hero Section */}
       <header className="relative flex items-center justify-center h-screen overflow-hidden">
         {/* Animated Background Gradients */}
@@ -56,8 +56,8 @@ const Home: React.FC = () => {
         {/* 학원 소개 Section */}
         <section id="about" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+              체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -67,30 +67,30 @@ const Home: React.FC = () => {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 md:p-16 rounded-3xl border border-white/10 shadow-2xl">
+            <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
               <div className="space-y-8 text-lg leading-relaxed">
-                <p className="text-gray-300">
-                  (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 <span className="text-purple-400 font-semibold">'SGEA 이스포츠 아카데미 (SGEA E-Sports Academy)'</span>를 설립하였습니다.
+                <p className="text-gray-700">
+                  (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 <span className="text-purple-600 font-semibold">'SGEA 이스포츠 아카데미 (SGEA E-Sports Academy)'</span>를 설립하였습니다.
                 </p>
                 
                 <div className="relative pl-6 border-l-4 border-purple-500/50">
-                  <p className="text-gray-300">
+                  <p className="text-gray-700">
                     SGEA 이스포츠 아카데미는 체계적인 커리큘럼과 건강한 교육 환경을 갖춘 전문 이스포츠 교육 문화 기관입니다.
-                    이름 그대로 <strong className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SUPER+PERFECT</strong>, 최고와 완벽함을 추구하며 각 종목의 메이저 리그 출신 감독, 프로
+                    이름 그대로 <strong className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SUPER+PERFECT</strong>, 최고와 완벽함을 추구하며 각 종목의 메이저 리그 출신 감독, 프로
                     선수로 구성된 강사진이 경험에 기반한 맞춤형 훈련 프로그램을 제공합니다.
                   </p>
                 </div>
                 
-                <p className="text-gray-300">
-                  또한 저희 아카데미에서는 학생들에게 이스포츠의 기술적인 부분뿐만 아니라 <span className="text-purple-400 font-semibold">팀워크, 커뮤니케이션</span> 등의 다양한
+                <p className="text-gray-700">
+                  또한 저희 아카데미에서는 학생들에게 이스포츠의 기술적인 부분뿐만 아니라 <span className="text-purple-600 font-semibold">팀워크, 커뮤니케이션</span> 등의 다양한
                   능력을 키울 수 있도록 훈련하고, 스트레스 관리, 자신감 향상 등의 멘탈 코칭이 포함된 전문 상담 심리
                   프로그램을 제공하고 있습니다.
                 </p>
                 
                 <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-6 rounded-2xl border border-purple-500/20">
-                  <p className="text-gray-200 text-center">
+                  <p className="text-gray-800 text-center">
                     이를 통해 모든 학생들이 자신의 잠재력을 최대한 발휘하면서<br />
-                    <span className="text-purple-300 font-bold">즐겁고 건강한 이스포츠를 체험할 수 있도록</span> 지원하고자 합니다.
+                    <span className="text-purple-600 font-bold">즐겁고 건강한 이스포츠를 체험할 수 있도록</span> 지원하고자 합니다.
                   </p>
                 </div>
               </div>
@@ -101,53 +101,50 @@ const Home: React.FC = () => {
         {/* 강점 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              건강한 교육, 맞춤형 교육, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">잠재력 향상</span>
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+              건강한 교육, 맞춤형 교육, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">잠재력 향상</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-10 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-indigo-500/10 rounded-3xl transition-all duration-500"></div>
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="font-bebas text-3xl font-bold text-white mb-4 group-hover:text-purple-400 transition-colors tracking-wide">전문 상담 프로그램</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">전문 상담 프로그램</h3>
+                <p className="text-gray-700 leading-relaxed">
                   e스포츠에 특화된 전문 상담 프로그램을 통하여 관계 개선, 멘탈 코칭을 제공합니다.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-10 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-indigo-500/10 rounded-3xl transition-all duration-500"></div>
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                   </svg>
                 </div>
-                <h3 className="font-bebas text-3xl font-bold text-white mb-4 group-hover:text-purple-400 transition-colors tracking-wide">맞춤형 커리큘럼</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">맞춤형 커리큘럼</h3>
+                <p className="text-gray-700 leading-relaxed">
                   메이저 리그 출신 강사진의 노하우가 담긴 맞춤형 커리큘럼으로 실력 향상을 돕습니다.
                 </p>
               </div>
             </div>
             
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-10 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-indigo-500/10 rounded-3xl transition-all duration-500"></div>
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
               <div className="relative">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="font-bebas text-3xl font-bold text-white mb-4 group-hover:text-purple-400 transition-colors tracking-wide">멘탈 강화</h3>
-                <p className="text-gray-400 leading-relaxed">
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">멘탈 강화</h3>
+                <p className="text-gray-700 leading-relaxed">
                   자세 교정과 멘탈 강화를 통해 잠재력을 최대한 발휘하도록 지원합니다.
                 </p>
               </div>
@@ -158,13 +155,13 @@ const Home: React.FC = () => {
         {/* 강사진 소개 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">강사진 소개</span>
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">강사진 소개</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
           
-          <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 md:p-16 rounded-3xl border border-white/10 shadow-2xl">
+          <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
             <div className="text-center space-y-6">
               <div className="flex flex-wrap justify-center gap-3 mb-8">
                 {['LCK', 'LPL', 'LLA', 'VCJ', 'PMJL'].map((league, index) => (
@@ -178,104 +175,98 @@ const Home: React.FC = () => {
                 ))}
               </div>
               
-              <p className="text-gray-300 text-xl leading-relaxed">
-                각 종목 e스포츠 <span className="text-purple-400 font-bold">메이저리그 출신</span>의 강사진!
+              <p className="text-gray-700 text-xl leading-relaxed">
+                각 종목 e스포츠 <span className="text-purple-600 font-bold">메이저리그 출신</span>의 강사진!
               </p>
               
               <div className="max-w-3xl mx-auto mt-8 p-6 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-2xl border border-purple-500/20">
-                <p className="text-gray-300 text-lg leading-relaxed">
+                <p className="text-gray-700 text-lg leading-relaxed">
                   더 이상 게임이 아닌 하나의 문화로서 자리 잡은 e스포츠는 취미와 직업 스포츠에서도 그렇듯,<br />
-                  <span className="text-purple-400 font-semibold">e스포츠도 기본기가 가장 중요합니다.</span>
+                  <span className="text-purple-600 font-semibold">e스포츠도 기본기가 가장 중요합니다.</span>
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* 공간 소개 Section */}
-        <section id="class" className="mb-32">
+        {/* 커리큘럼 Section */}
+        <section id="curriculum" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              최고의 이스포츠 공간 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">SGEA</span>
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+              <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span> 커리큘럼
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-            <p className="font-noto text-gray-400 text-xl">SGEA 이스포츠 아카데미의 공간을 소개합니다.</p>
+            <p className="font-noto text-gray-600 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Master */}
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/0 group-hover:from-purple-500/20 group-hover:to-indigo-500/20 transition-all duration-500"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bebas text-4xl font-black text-white group-hover:text-purple-400 transition-colors tracking-wider">Master</h3>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
+          <div className="relative">
+            {/* 커리큘럼 플로우 */}
+            <div className="relative bg-white rounded-3xl p-8 md:p-16 border border-gray-200">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                {/* 1. 취미 성장반 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/hobby.svg" alt="취미 성장반" className="w-20 h-20 object-contain" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">취미 성장반</h3>
+                  <p className="text-gray-600 text-center text-sm">기초 다지기<br />실력 향상</p>
                 </div>
-                <p className="text-purple-300 font-semibold mb-4 text-lg">고속 성장과 최상의 퍼포먼스</p>
-                <p className="text-gray-400 leading-relaxed">
-                  최첨단 하이엔드 게이밍 컴퓨터와 초고주사율 모니터, 그리고 커스터마이징 가능한 전문 게이밍 장비를 갖추고 있습니다.
-                </p>
-              </div>
-            </div>
-            
-            {/* Advanced */}
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/0 group-hover:from-blue-500/20 group-hover:to-indigo-500/20 transition-all duration-500"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bebas text-4xl font-black text-white group-hover:text-blue-400 transition-colors tracking-wider">Advanced</h3>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
+
+                {/* Arrow 1 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 2. 프로 준비반 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/proPrepare.svg" alt="프로 준비반" className="w-20 h-20 object-contain" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 준비반</h3>
+                  <p className="text-gray-600 text-center text-sm">심화 훈련<br />전략적 플레이</p>
                 </div>
-                <p className="text-blue-300 font-semibold mb-4 text-lg">심화 훈련과 전략적 플레이</p>
-                <p className="text-gray-400 leading-relaxed">
-                  고사양의 게이밍 컴퓨터와 고주사율 모니터, 그리고 전문 게이밍 장비를 갖추고 있어 높은 퀄리티의 훈련을 지원합니다.
-                </p>
-              </div>
-            </div>
-            
-            {/* Basic */}
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/0 to-green-500/0 group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all duration-500"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bebas text-4xl font-black text-white group-hover:text-green-400 transition-colors tracking-wider">Basic</h3>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+
+                {/* Arrow 2 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 3. 입단 테스트 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/test.svg" alt="입단 테스트" className="w-20 h-20 object-contain" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">입단 테스트</h3>
+                  <p className="text-gray-600 text-center text-sm">프로 입단<br />기회 부여</p>
                 </div>
-                <p className="text-green-300 font-semibold mb-4 text-lg">기초 다지기와 실력 향상</p>
-                <p className="text-gray-400 leading-relaxed">
-                  이스포츠에 처음 입문하는 학생들을 위해 설계된 공간으로, 최신 중급 사양의 컴퓨터를 제공합니다.
-                </p>
-              </div>
-            </div>
-            
-            {/* Training */}
-            <div className="group relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-3xl border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/20 group-hover:to-red-500/20 transition-all duration-500"></div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bebas text-4xl font-black text-white group-hover:text-orange-400 transition-colors tracking-wider">Training</h3>
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+
+                {/* Arrow 3 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 4. 프로 선수 데뷔 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/proDebut.svg" alt="프로 선수 데뷔" className="w-20 h-20 object-contain" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 선수 데뷔</h3>
+                  <p className="text-gray-600 text-center text-sm">프로 선수<br />데뷔</p>
                 </div>
-                <p className="text-orange-300 font-semibold mb-4 text-lg">집중 연습과 기초 기술 습득</p>
-                <p className="text-gray-400 leading-relaxed">
-                  집중 연습과 기초 기술 습득을 위한 최적의 환경을 제공하여 이스포츠의 기초를 확립합니다.
-                </p>
               </div>
             </div>
           </div>
@@ -339,28 +330,27 @@ const Home: React.FC = () => {
 
       {/* Footer */}
       <footer className="bg-custom-bg py-12 border-t border-gray-700">
-        <div className="container mx-auto px-6 text-center benz:text-gray-500 text-sm">
+        <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
           <h3 className="text-xl font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
           <p>대표 김민수 | 상호명 (주)에듀테크스포츠 | 사업자번호 123-45-67890 | 학원등록번호 제22001호</p>
           <p className="mt-1">주소 경기도 성남시 분당구 판교로 289, 12층 (삼평동)</p>
-          <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base">
-            <span className="text-white font-bold">연락처</span> <span className="text-gray-300">031-999-8888</span>
-            <span className="hidden md:inline text-gray-600">|</span>
-            <span className="text-white font-bold">E-mail</span>{' '}
-            <span className="text-gray-300">info@sgea-academy.com</span>
+          <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base text-gray-300">
+            <span className="font-bold">연락처</span> <span>031-999-8888</span>
+            <span className="hidden md:inline">|</span>
+            <span className="font-bold">E-mail</span> <span>info@sgea-academy.com</span>
           </div>
-          <div className="my-6 text-base">
-            <span className="text-white font-bold block mb-2">운영시간 안내</span>
+          <div className="my-6 text-base text-gray-300">
+            <span className="font-bold block mb-2">운영시간 안내</span>
             <p>월~금 | 14:00-22:00</p>
             <p>토~일 | 12:00-22:00</p>
           </div>
-          <p className="mt-8 text-xs">©2024. <span className="font-bebas">SGEA</span> All rights reserved.</p>
+          <p className="mt-8 text-xs text-gray-400">©2024. <span className="font-bebas">SGEA</span> All rights reserved.</p>
           <div className="flex justify-center space-x-4 mt-4 text-xs">
-            <a href="#" className="text-gray-500 hover:text-white transition-colors duration-300">
+            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
               이용약관
             </a>
             <span className="text-gray-600">|</span>
-            <a href="#" className="text-gray-500 hover:text-white transition-colors duration-300">
+            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
               개인정보처리방침
             </a>
           </div>
