@@ -56,6 +56,15 @@
   }
 }
 
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 1s ease-out;
 }
@@ -74,6 +83,10 @@
 
 .animate-scaleIn {
   animation: scaleIn 0.5s ease-out;
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 20s linear infinite;
 }
 
 /* Smooth Scrolling */

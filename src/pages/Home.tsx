@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-white font-['Noto_Sans_KR']">
+    <div className="bg-custom-bg font-['Noto_Sans_KR']">
       {/* Hero Section */}
       <header className="relative flex items-center justify-center h-screen overflow-hidden">
         {/* Animated Background Gradients */}
@@ -16,38 +16,59 @@ const Home: React.FC = () => {
           style={{ backgroundImage: "url('https://placehold.co/1920x1080/000000/363636?text=Background+Image')" }}
         ></div>
 
-          {/* Text Content */}
-          <div className="relative z-10 text-center px-4 space-y-8 animate-fadeIn">
-            <h1 className="font-bebas text-7xl md:text-9xl lg:text-[12rem] text-white mb-6 tracking-wider">
-              <span className="inline-block animate-float font-bebas">SGEA</span>
-            </h1>
-            <p className="font-noto text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-indigo-300 font-bold max-w-4xl mx-auto leading-relaxed">
-              최고와 완벽을 추구하는 이스포츠 아카데미
-            </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12">
-            <a
-              href="#about"
-              className="font-bebas group px-10 py-5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-2xl text-2xl font-bold flex items-center gap-3 tracking-wider"
-            >
-              시작하기
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a
-              href="#contact"
-              className="font-bebas px-10 py-5 rounded-full bg-white/10 backdrop-blur-sm border-2 border-white/20 hover:bg-white/20 transition-all duration-300 text-2xl font-bold tracking-wider"
-            >
-              상담 신청
-            </a>
-          </div>
-        </div>
+        {/* Infinite Scroll Marquee at bottom of hero */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden bg-white/90 backdrop-blur-sm border-t border-gray-300">
+          <div className="flex animate-infinite-scroll whitespace-nowrap">
+            {/* First set */}
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+
+          </div>
         </div>
       </header>
 
@@ -56,7 +77,7 @@ const Home: React.FC = () => {
         {/* 학원 소개 Section */}
         <section id="about" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -67,7 +88,7 @@ const Home: React.FC = () => {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+            <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
               <div className="space-y-8 text-lg leading-relaxed">
                 <p className="text-gray-700">
                   (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 <span className="text-purple-600 font-semibold">'SGEA 이스포츠 아카데미 (SGEA E-Sports Academy)'</span>를 설립하였습니다.
@@ -98,105 +119,14 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* 강점 Section */}
-        <section className="mb-32">
+                {/* 커리큘럼 Section */}
+                <section id="curriculum" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
-              건강한 교육, 맞춤형 교육, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">잠재력 향상</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">전문 상담 프로그램</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  e스포츠에 특화된 전문 상담 프로그램을 통하여 관계 개선, 멘탈 코칭을 제공합니다.
-                </p>
-              </div>
-            </div>
-            
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">맞춤형 커리큘럼</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  메이저 리그 출신 강사진의 노하우가 담긴 맞춤형 커리큘럼으로 실력 향상을 돕습니다.
-                </p>
-              </div>
-            </div>
-            
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">멘탈 강화</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  자세 교정과 멘탈 강화를 통해 잠재력을 최대한 발휘하도록 지원합니다.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 강사진 소개 Section */}
-        <section className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
-              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">강사진 소개</span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
-            <div className="text-center space-y-6">
-              <div className="flex flex-wrap justify-center gap-3 mb-8">
-                {['LCK', 'LPL', 'LLA', 'VCJ', 'PMJL'].map((league, index) => (
-                  <span 
-                    key={league} 
-                    className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold text-lg shadow-lg hover:scale-110 transition-transform duration-300"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {league}
-                  </span>
-                ))}
-              </div>
-              
-              <p className="text-gray-700 text-xl leading-relaxed">
-                각 종목 e스포츠 <span className="text-purple-600 font-bold">메이저리그 출신</span>의 강사진!
-              </p>
-              
-              <div className="max-w-3xl mx-auto mt-8 p-6 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-2xl border border-purple-500/20">
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  더 이상 게임이 아닌 하나의 문화로서 자리 잡은 e스포츠는 취미와 직업 스포츠에서도 그렇듯,<br />
-                  <span className="text-purple-600 font-semibold">e스포츠도 기본기가 가장 중요합니다.</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 커리큘럼 Section */}
-        <section id="curriculum" className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span> 커리큘럼
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-            <p className="font-noto text-gray-600 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
+            <p className="font-noto text-gray-100 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
           </div>
           
           <div className="relative">
@@ -269,6 +199,73 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* 강점 Section */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
+              건강한 교육, 맞춤형 교육, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">잠재력 향상</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">전문 상담 프로그램</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  e스포츠에 특화된 전문 상담 프로그램을 통하여 관계 개선, 멘탈 코칭을 제공합니다.
+                </p>
+              </div>
+            </div>
+            
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">맞춤형 커리큘럼</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  메이저 리그 출신 강사진의 노하우가 담긴 맞춤형 커리큘럼으로 실력 향상을 돕습니다.
+                </p>
+              </div>
+            </div>
+            
+            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">멘탈 강화</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  자세 교정과 멘탈 강화를 통해 잠재력을 최대한 발휘하도록 지원합니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 강사진 소개 Section */}
+        <section className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
+              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">강사진 소개</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
           </div>
         </section>
 
