@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home: React.FC = () => {
   return (
-    <div className="bg-white font-['Noto_Sans_KR']">
+    <div className="bg-custom-bg font-['Noto_Sans_KR']">
       {/* Hero Section */}
       <header className="relative flex items-center justify-center h-screen overflow-hidden">
         {/* Animated Background Gradients */}
@@ -16,21 +16,59 @@ const Home: React.FC = () => {
           style={{ backgroundImage: "url('https://placehold.co/1920x1080/000000/363636?text=Background+Image')" }}
         ></div>
 
-          {/* Text Content */}
-          <div className="relative z-10 text-center px-4 space-y-8 animate-fadeIn">
-            <h1 className="font-bebas text-7xl md:text-9xl lg:text-[12rem] text-white mb-6 tracking-wider">
-              <span className="inline-block animate-float font-bebas">SGEA</span>
-            </h1>
-            <p className="font-noto text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-indigo-300 font-bold max-w-4xl mx-auto leading-relaxed">
-              최고와 완벽을 추구하는 이스포츠 아카데미
-            </p>
-        </div>
+        {/* Infinite Scroll Marquee at bottom of hero */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden bg-white/90 backdrop-blur-sm border-t border-gray-300">
+          <div className="flex animate-infinite-scroll whitespace-nowrap">
+            {/* First set */}
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+            <div className="flex items-center space-x-8 mx-8 py-4">
+              <img src="/mainLogo.png" alt="SGEA Logo" className="h-10 w-auto" />
+              <span className="font-bebas text-purple-600 text-2xl font-black tracking-wider">SECOND GENERATION</span>
+              <div className="w-1 h-6 bg-purple-200"></div>
+            </div>
+
+          </div>
         </div>
       </header>
 
@@ -39,7 +77,7 @@ const Home: React.FC = () => {
         {/* 학원 소개 Section */}
         <section id="about" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -50,7 +88,7 @@ const Home: React.FC = () => {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+            <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
               <div className="space-y-8 text-lg leading-relaxed">
                 <p className="text-gray-700">
                   (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 <span className="text-purple-600 font-semibold">'SGEA 이스포츠 아카데미 (SGEA E-Sports Academy)'</span>를 설립하였습니다.
@@ -84,11 +122,11 @@ const Home: React.FC = () => {
                 {/* 커리큘럼 Section */}
                 <section id="curriculum" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span> 커리큘럼
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-            <p className="font-noto text-gray-600 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
+            <p className="font-noto text-gray-100 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
           </div>
           
           <div className="relative">
@@ -167,7 +205,7 @@ const Home: React.FC = () => {
         {/* 강점 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               건강한 교육, 맞춤형 교육, <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">잠재력 향상</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -221,13 +259,13 @@ const Home: React.FC = () => {
         {/* 강사진 소개 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-gray-900 mb-6 tracking-wide">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
               <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">강사진 소개</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
           
-          <div className="relative bg-gray-50 p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+          <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
           </div>
         </section>
 
