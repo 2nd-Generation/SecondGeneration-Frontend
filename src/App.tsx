@@ -9,7 +9,7 @@ import News from './pages/News';
 function App() {
   return (
     <Router>
-      <div className="bg-custom-bg text-white font-['Noto_Sans_KR']">
+      <div className="bg-custom-bg text-white">
         <Navigation />
 
         <Routes>

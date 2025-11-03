@@ -110,27 +110,84 @@ const Class: React.FC = () => {
           </div>
         </section>
 
-        {/* 이벤트 섹션 */}
+        {/* 커리큘럼 섹션 */}
         <section className="mb-20">
-          <h2 className="text-4xl font-black text-white mb-12 text-center">예정된 일정</h2>
-          <div className="bg-gray-800 p-8 md:p-12 rounded-2xl shadow-xl text-center">
-            <p className="text-gray-400 text-lg leading-relaxed">
-              국제 무대 진출의 기회가 열려있습니다! 만의 하나 높아진 이스포츠 경기 예시로, 안정성보다는 뇌의 몰입과
-              조작을 활용한 창의성 교육을 통해 진취적인 성능 증진에 큰 의미를 담고 있는 SGEA Track&Field랩의 전문 교육
-              과정입니다.
-            </p>
-            <div className="mt-8 grid md:grid-cols-3 gap-8">
-              <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-purple-500 mb-2">읽기와 단순 기술 향상</h3>
-                <p className="text-gray-300">이스포츠의 기초를 확립하고 체계적으로 실력 향상</p>
-              </div>
-              <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-purple-500 mb-2">창의적 기술 개발</h3>
-                <p className="text-gray-300">천재보다는 고수들은 독창적인 움직임이 필수</p>
-              </div>
-              <div className="bg-gray-700 p-6 rounded-xl">
-                <h3 className="text-xl font-bold text-purple-500 mb-2">리더십과 인내심</h3>
-                <p className="text-gray-300">실력과 최고의 포스가 결합된 인간교육</p>
+          <div className="text-center mb-16">
+            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
+              <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span> 양성 시스템
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-100 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
+          </div>
+          
+          <div className="relative">
+            {/* 커리큘럼 플로우 */}
+            <div className="relative bg-white rounded-3xl p-8 md:p-16 border border-gray-200">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                {/* 1. 취미 성장반 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/hobby.svg" alt="취미 성장반" className="w-20 h-20 object-contain" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">취미 성장반</h3>
+                  <p className="text-gray-600 text-center text-sm">기초 다지기<br />실력 향상</p>
+                </div>
+
+                {/* Arrow 1 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 2. 프로 준비반 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/proPrepare.svg" alt="프로 준비반" className="w-20 h-20 object-contain" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 준비반</h3>
+                  <p className="text-gray-600 text-center text-sm">심화 훈련<br />전략적 플레이</p>
+                </div>
+
+                {/* Arrow 2 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 3. 입단 테스트 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/test.svg" alt="입단 테스트" className="w-20 h-20 object-contain" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">입단 테스트</h3>
+                  <p className="text-gray-600 text-center text-sm">프로 입단<br />기회 부여</p>
+                </div>
+
+                {/* Arrow 3 */}
+                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+
+                {/* 4. 프로 선수 데뷔 */}
+                <div className="flex flex-col items-center flex-1">
+                  <div className="relative mb-6">
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      <img src="/proDebut.svg" alt="프로 선수 데뷔" className="w-20 h-20 object-contain" />
+                    </div>
+                  </div>
+                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 선수 데뷔</h3>
+                  <p className="text-gray-600 text-center text-sm">프로 선수<br />데뷔</p>
+                </div>
               </div>
             </div>
           </div>

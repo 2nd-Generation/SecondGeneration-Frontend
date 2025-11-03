@@ -30,8 +30,11 @@ const Navigation: React.FC = () => {
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <Link to="/" className="group flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full blur group-hover:blur-md transition-all duration-300 opacity-50"></div>
-              <img src="/mainLogo.png" alt="SGEA 로고" className="relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain group-hover:scale-110 transition-transform duration-300" />
+              <img 
+                src={scrolled ? "/LogoPurple.svg" : "/LogoWhite.png"} 
+                alt="SGEA 로고" 
+                className="relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain group-hover:scale-110 transition-all duration-300" 
+              />
             </div>
           </Link>
         </div>
@@ -86,7 +89,7 @@ const Navigation: React.FC = () => {
             to="/#contact"
             className="font-bebas group px-4 py-2 lg:px-6 lg:py-3 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 flex items-center gap-2 text-base lg:text-lg tracking-wider text-white"
           >
-            문의하기
+            상담 신청
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

@@ -7,10 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['"Pretendard Variable"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', '"Helvetica Neue"', '"Segoe UI"', '"Apple SD Gothic Neo"', '"Noto Sans KR"', 'Malgun Gothic', 'sans-serif'],
+        'sans': ['"NEXON Lv2 Gothic"', '"Pretendard Variable"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', '"Helvetica Neue"', '"Segoe UI"', 'sans-serif'],
         'bebas': ['"Bebas Neue"', 'cursive'],
-        'noto': ['"Noto Sans KR"', 'sans-serif'],
+        'noto': ['"NEXON Lv2 Gothic"', '"Pretendard Variable"', 'Pretendard', 'sans-serif'],
         'pretendard': ['"Pretendard Variable"', 'Pretendard', 'sans-serif'],
+        'nexon': ['"NEXON Lv2 Gothic"', 'sans-serif'],
       },
       colors: {
         // Fiorentina inspired color palette
