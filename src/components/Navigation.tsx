@@ -31,11 +31,8 @@ const Navigation: React.FC = () => {
           <Link to="/" className="group flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full blur group-hover:blur-md transition-all duration-300 opacity-50"></div>
-              <img src="/mainLogo.png" alt="SGEA 로고" className="relative w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain group-hover:scale-110 transition-transform duration-300" />
+              <img src="/mainLogo.png" alt="SGEA 로고" className="relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain group-hover:scale-110 transition-transform duration-300" />
             </div>
-            <span className="font-bebas text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent group-hover:from-purple-400 group-hover:to-indigo-400 transition-all duration-300 tracking-wider">
-              SGEA
-            </span>
           </Link>
         </div>
 
