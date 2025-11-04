@@ -22,49 +22,81 @@ const Home: React.FC = () => {
             {/* First set */}
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
 
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
             <div className="flex items-center space-x-6 mx-6 py-3">
               <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-bebas text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
+              <div className="w-1 h-4 bg-purple-600"></div>
+            </div>
+            <div className="flex items-center space-x-6 mx-6 py-3">
+              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
+              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
               <div className="w-1 h-4 bg-purple-600"></div>
             </div>
 

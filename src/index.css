@@ -2,13 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif !important;
+  }
+  
+  body {
+    font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif !important;
+  }
+  
+  * {
+    font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif !important;
+  }
+}
+
 /* NEXON Lv2 Gothic 폰트 정의 */
 @font-face {
   font-family: 'NEXON Lv2 Gothic';
   src: url('/NEXON Lv2 Gothic.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -16,7 +30,7 @@
   src: url('/NEXON Lv2 Gothic Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -24,7 +38,7 @@
   src: url('/NEXON Lv2 Gothic Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -32,7 +46,16 @@
   src: url('/NEXON Lv2 Gothic Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
+}
+
+/* Russo One 폰트 정의 */
+@font-face {
+  font-family: 'Russo One';
+  src: url('/RussoOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
 }
 
 /* Custom Animations */
@@ -125,16 +148,6 @@
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
-  font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif;
-}
-
-/* 기본 폰트 설정 */
-body {
-  font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif;
-}
-
-* {
-  font-family: "NEXON Lv2 Gothic", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Nanum Gothic", sans-serif;
 }
 
 /* Custom Scrollbar */

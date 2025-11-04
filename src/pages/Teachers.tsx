@@ -15,6 +15,14 @@ const teamLogoSrcByName: Record<string, string> = {
   'O2 Blast': '/O2 Blast.png',
   'New York Excelsior': '/ NewYork Excelsior.png',
   'Guangzhou Charge': '/Guangzhou Charge.png',
+  'Heroes Player': '/Heroes Player.png',
+  'APEX PEOPLE': '/APEX PEOPLE.png',
+  'DWG KIA': '/DWG KIA.png',
+  'Maru Gaming': '/Maru Gaming.png',
+  'Nongshim RedForce': '/Nongshim RedForce.png',
+  'Regans Gaming': '/Regans Gaming.png',
+  'BNK FearX': '/BNK FearX.png',
+  'Pulsar Esports': '/Pulsar Esports.png',
 };
 
 type HistoryItem = {
@@ -30,17 +38,39 @@ type Coach = {
   displayName: string;
   title: string;
   photoSrc: string;
+  gameLogoSrc?: string | string[];
   playerHistory: HistoryItem[];
   coachHistory: HistoryItem[];
 };
 
 const coaches: Coach[] = [
   {
+    id: 'jeonghi',
+    name: '이정하',
+    displayName: 'Jeong Hi 이정하',
+    title: 'Coach',
+    photoSrc: '/Jeong Hi.png',
+    gameLogoSrc: '/CITYPNG11.png',
+    playerHistory: [
+      { year: '2015-2018', team: 'Heroes Player' },
+      { year: '2021', team: 'APEX PEOPLE' },
+      { year: '2021-2022', team: 'DWG KIA' },
+      { year: '2022', team: 'Maru Gaming' },
+      { year: '2023', team: 'Nongshim RedForce' },
+      { year: '2023', team: 'Regans Gaming' },
+      { year: '2024', team: 'BNK FearX' },
+      { year: '2025', team: 'Pulsar Esports' },
+      { year: '2025', team: 'SGEA' },
+    ],
+    coachHistory: [],
+  },
+  {
     id: 'rexi',
     name: '서재원',
     displayName: 'Rexi 서재원',
     title: 'Head/Coach',
     photoSrc: '/coach/rexi.png',
+    gameLogoSrc: ['/Overwatch.png', '/CITYPNG11.png'],
     playerHistory: [
       { year: '2018', team: 'SkyFoxes' },
       { year: '2019', team: 'X-Gaming' },
@@ -61,6 +91,7 @@ const coaches: Coach[] = [
     displayName: 'Mandu 김찬희',
     title: 'Coach',
     photoSrc: '/coach/mandu.jpg',
+    gameLogoSrc: ['/Overwatch.png', '/CITYPNG11.png'],
     playerHistory: [
       { year: '2018', team: 'WGS Armament' },
       { year: '2019', team: 'O2 Blast' },
@@ -103,7 +134,7 @@ const Teachers: React.FC = () => {
         {/* 코치 프로필 */}
         <section className="mb-24">
           <h2 className="text-4xl font-black text-gray-100 mb-12 text-center">강사 프로필</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {coaches.map((coach) => (
               <div key={coach.id} className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl">
                 {/* 메인 이미지 */}
@@ -111,35 +142,52 @@ const Teachers: React.FC = () => {
                   <img 
                     src={coach.photoSrc} 
                     alt={`${coach.displayName} 프로필`} 
-                    className="w-full h-[600px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-[500px] lg:h-[550px] object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   
+                  {/* 블랙 그라데이션 오버레이 */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
+                  
                   {/* 기본 정보 오버레이 */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-6 md:p-8 transition-opacity duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/60 to-transparent p-5 md:p-6 lg:p-8 transition-opacity duration-500">
                     <div className="flex items-end justify-between">
-                      <div className="flex items-end gap-3">
-                        <img src="/LogoWhite.png" alt="SGEA Logo" className="w-16 h-16 object-contain" />
+                      <div className="flex items-end gap-2 md:gap-3">
+                        <div className="flex-shrink-0">
+                          <img src="/LogoWhite.png" alt="SGEA Logo" className="h-[calc(2.5rem+0.25rem+1.25rem-0.5rem)] md:h-[calc(3rem+0.25rem+1.5rem-1.5rem)] lg:h-[calc(4rem+0.25rem+1.75rem-1.5rem)] w-auto object-contain" />
+                        </div>
                         <div>
-                          <h3 className="text-4xl font-black text-white mb-1" style={{ letterSpacing: 0 }}>
-                            <strong>{coach.displayName.split(' ')[0]}</strong>
+                          <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-0.2" style={{ letterSpacing: 0 }}>
+                            <strong>{coach.displayName.replace(` ${coach.name}`, '')}</strong>
                           </h3>
-                          <p className="text-white/80 text-lg">{coach.displayName.split(' ').slice(1).join(' ')}</p>
+                          <p className="text-white/80 text-sm md:text-base lg:text-lg">{coach.name}</p>
                         </div>
                       </div>
+                      {coach.gameLogoSrc && (
+                        <div className="flex items-center gap-2">
+                          {(Array.isArray(coach.gameLogoSrc) ? coach.gameLogoSrc : [coach.gameLogoSrc]).map((logoSrc, idx) => (
+                            <div key={idx} className="relative">
+                              <div className="absolute inset-0"></div>
+                              <div className="relative">
+                                <img src={logoSrc} alt="Game Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain" />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Hover 오버레이 - 상세 정보 */}
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-                    <div className="p-10 w-full h-full overflow-hidden">
-                      <p className="text-gray-700 text-base mb-7 leading-relaxed">
+                    <div className="p-4 md:p-5 lg:p-6 w-full h-full overflow-hidden flex flex-col">
+                      <p className="text-gray-700 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed flex-shrink-0 mt-8 md:mt-10">
                         메이저 리그 출신 코치의 풍부한 경험과 노하우를 바탕으로<br />
                         학생 개개인의 특성을 분석하여 맞춤형 훈련을 제공합니다.
                       </p>
                       
-                      <div className="border-t border-gray-200 pt-6">
-                        <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-5">경력</h4>
-                        <ul className="space-y-3">
+                      <div className="border-t border-gray-200 pt-3 md:pt-4 flex-1 overflow-hidden">
+                        <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 md:mb-3 flex-shrink-0">경력</h4>
+                        <ul className="space-y-2 md:space-y-3 overflow-hidden">
                           {[...coach.playerHistory, ...coach.coachHistory]
                             .sort((a, b) => {
                               // 년도 파싱 (예: "2022-2023" -> 2022)
@@ -148,14 +196,14 @@ const Teachers: React.FC = () => {
                               return yearA - yearB; // 과거순
                             })
                             .map((h, idx) => (
-                            <li key={`${coach.id}-${idx}-${h.year}-${h.team}`} className="flex items-center gap-3">
-                              <span className="text-purple-600 font-bold min-w-[72px] text-base">{h.year}</span>
+                            <li key={`${coach.id}-${idx}-${h.year}-${h.team}`} className="flex items-center gap-2 flex-shrink-0">
+                              <span className="text-purple-600 font-bold min-w-[55px] md:min-w-[65px] text-xs md:text-sm">{h.year}</span>
                               {teamLogoSrcByName[h.team] ? (
-                                <img src={teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-6 h-6 object-contain" />
+                                <img src={teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-4 h-4 md:w-5 md:h-5 object-contain flex-shrink-0" />
                               ) : (
-                                <div className="w-6 h-6" />
+                                <div className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                               )}
-                              <span className="text-base font-medium text-gray-700">
+                              <span className="text-xs md:text-sm font-medium text-gray-700 truncate">
                                 {h.team}
                                 {h.isCoach && h.role ? <span className="text-gray-500 font-normal"> · {h.role}</span> : null}
                               </span>

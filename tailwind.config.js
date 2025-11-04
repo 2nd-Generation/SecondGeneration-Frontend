@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         'sans': ['"NEXON Lv2 Gothic"', '"Pretendard Variable"', 'Pretendard', '-apple-system', 'BlinkMacSystemFont', '"Malgun Gothic"', '"맑은 고딕"', 'system-ui', 'Roboto', '"Helvetica Neue"', '"Segoe UI"', '"Apple SD Gothic Neo"', '"Noto Sans KR"', '"Nanum Gothic"', 'sans-serif'],
         'bebas': ['"Bebas Neue"', 'cursive'],
+        'russo': ['"Russo One"', 'sans-serif'],
         'noto': ['"NEXON Lv2 Gothic"', '"Pretendard Variable"', 'Pretendard', '"Malgun Gothic"', '"맑은 고딕"', 'sans-serif'],
         'pretendard': ['"Pretendard Variable"', 'Pretendard', '"Malgun Gothic"', '"맑은 고딕"', 'sans-serif'],
         'nexon': ['"NEXON Lv2 Gothic"', '"Malgun Gothic"', '"맑은 고딕"', 'sans-serif'],
