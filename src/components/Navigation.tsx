@@ -31,9 +31,9 @@ const Navigation: React.FC = () => {
           <Link to="/" className="group flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
             <div className="relative">
               <img 
-                src={scrolled ? "/LogoPurple.svg" : "/LogoWhite.png"} 
+                src={scrolled ? "/TopLogoPurple.png" : "/TopLogoWhite.png"} 
                 alt="SGEA 로고" 
-                className="relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 object-contain group-hover:scale-110 transition-all duration-300" 
+                className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain group-hover:scale-110 transition-all duration-300" 
               />
             </div>
           </Link>

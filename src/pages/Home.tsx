@@ -17,89 +17,15 @@ const Home: React.FC = () => {
         ></div>
 
         {/* Infinite Scroll Marquee at bottom of hero */}
-        <div className="absolute bottom-0 left-0 right-0 overflow-hidden bg-black/90 backdrop-blur-sm border-t border-gray-700">
-          <div className="flex animate-infinite-scroll whitespace-nowrap">
-            {/* First set */}
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
+        <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-t border-gray-700">
+          <div className="overflow-hidden">
+            <div className="flex animate-infinite-scroll whitespace-nowrap">
+              {Array.from({ length: 15 }).map((_, i) => (
+                <div key={i} className="flex items-center mx-4 sm:mx-5 md:mx-6 lg:mx-8">
+                  <img src="/MainLogoStripe.png" alt="Second Generation" className="h-14 sm:h-16 md:h-20 lg:h-24 xl:h-28 w-auto min-w-[140px] sm:min-w-[160px] md:min-w-[200px] lg:min-w-[260px] xl:min-w-[300px] object-contain opacity-90" />
+                </div>
+              ))}
             </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-            <div className="flex items-center space-x-6 mx-6 py-3">
-              <img src="/44422d4d40ba63b2.png" alt="SGEA Logo" className="h-12 w-auto" />
-              <span className="font-russo text-purple-400 text-xl font-black tracking-wider">Second Generation</span>
-              <div className="w-1 h-4 bg-purple-600"></div>
-            </div>
-
           </div>
         </div>
       </header>
@@ -109,8 +35,10 @@ const Home: React.FC = () => {
         {/* 학원 소개 Section */}
         <section id="about" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              체계적인 이스포츠 아카데미 <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span>
+            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+              <div className="flex justify-center w-full">
+                <img src="/SGEAAbout.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+              </div>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -122,28 +50,28 @@ const Home: React.FC = () => {
             
             <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
               <div className="space-y-8 text-lg leading-relaxed">
-                <p className="text-gray-700">
-                  (주)케이제이 이스포츠는 건강한 이스포츠 문화를 확립하고자 <span className="text-purple-600 font-semibold">'SGEA 이스포츠 아카데미 (SGEA E-Sports Academy)'</span>를 설립하였습니다.
+                <p className="text-gray-700 text-2xl font-bold">
+                  수강생 모두가 프로게이머가 되지는 못합니다.
                 </p>
                 
+
                 <div className="relative pl-6 border-l-4 border-purple-500/50">
-                  <p className="text-gray-700">
-                    SGEA 이스포츠 아카데미는 체계적인 커리큘럼과 건강한 교육 환경을 갖춘 전문 이스포츠 교육 문화 기관입니다.
-                    이름 그대로 <strong className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SUPER+PERFECT</strong>, 최고와 완벽함을 추구하며 각 종목의 메이저 리그 출신 감독, 프로
-                    선수로 구성된 강사진이 경험에 기반한 맞춤형 훈련 프로그램을 제공합니다.
-                  </p>
+                <p className="text-gray-700">
+                  저희 SGEA는 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>를 슬로건하여 스스로 목표를 세우고 달성하기 위해 노력하는 방법을 찾으며 성취감과 <span className="text-purple-600 font-semibold">"나도 이렇게 열심히 할 수 있는 사람이다"</span> 라는 긍정적인 자아를 얻어 시너지를 발휘할 수 있도록 지향합니다.
+                </p>
                 </div>
                 
-                <p className="text-gray-700">
-                  또한 저희 아카데미에서는 학생들에게 이스포츠의 기술적인 부분뿐만 아니라 <span className="text-purple-600 font-semibold">팀워크, 커뮤니케이션</span> 등의 다양한
-                  능력을 키울 수 있도록 훈련하고, 스트레스 관리, 자신감 향상 등의 멘탈 코칭이 포함된 전문 상담 심리
-                  프로그램을 제공하고 있습니다.
-                </p>
+                  <p className="text-gray-700">
+                    저희의 핵심 가치 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>는 아이가 게임을 그만두는 시점이 오더라도 저희가 지향하는 긍정적인 자아의 시너지로 해당 분야에서도 노력하는 방법을 응용할 수 있는 것을 의미합니다.
+                  </p>
                 
                 <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-6 rounded-2xl border border-purple-500/20">
-                  <p className="text-gray-800 text-center">
-                    이를 통해 모든 학생들이 자신의 잠재력을 최대한 발휘하면서<br />
-                    <span className="text-purple-600 font-bold">즐겁고 건강한 이스포츠를 체험할 수 있도록</span> 지원하고자 합니다.
+                <p className="text-gray-800">
+                  SGEA를 설립한 저희는 프로게이머였습니다. 현재 프로게이머를 꿈꾸는 학생들과 같은 시기를 경험했습니다. <br />10대 시절 저희 역시 비슷한 고민을 했기에 학부모님들의 마음 또한 깊이 공감 할 수 있습니다.
+                </p>
+                  <p className="text-gray-800">
+                  <br /> 마음껏 꿈을 꿀 수 있는 나이임과 동시에 중요한 시기라는 것을 알고 있습니다.<br />
+                    <span className="text-purple-600 font-bold">최선을 다해서 지도할 준비가 되어있습니다.</span>
                   </p>
                 </div>
               </div>
@@ -154,8 +82,10 @@ const Home: React.FC = () => {
                 {/* 커리큘럼 Section */}
                 <section id="curriculum" className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">SGEA</span> 양성 시스템
+            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+              <div className="flex justify-center w-full">
+                <img src="/SGEASystem.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+              </div>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
             <p className="font-noto text-gray-100 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
@@ -237,8 +167,10 @@ const Home: React.FC = () => {
         {/* 강점 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              SGEA 프로그램
+            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+              <div className="flex justify-center w-full">
+                <img src="/SGEAProgram.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+              </div>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -291,13 +223,22 @@ const Home: React.FC = () => {
         {/* 강사진 소개 Section */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
-              <span className="font-bebas">SGEA</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">강사진 소개</span>
+            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+              <img src="/SGEATeacher.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain block mx-auto my-0" style={{ marginLeft: 'auto', marginRight: 'auto' }} />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
           
-          <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+          <div className="relative flex items-center justify-center">
+            <a 
+              href="/teachers" 
+              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white"
+            >
+              더 알아보기
+              <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
           </div>
         </section>
 
@@ -328,7 +269,7 @@ const Home: React.FC = () => {
                   href="http://pf.kakao.com/_xayxnLG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bebas group inline-flex items-center gap-3 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -343,7 +284,7 @@ const Home: React.FC = () => {
                   href="http://pf.kakao.com/_xayxnLG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bebas group inline-flex items-center gap-3 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 0 1-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.665 6.201 3 12 3zm5.907 8.06l1.47-1.424a.472.472 0 0 0-.656-.678l-1.928 1.866V9.282a.472.472 0 0 0-.944 0v2.557a.471.471 0 0 0 0 .222V13.5a.472.472 0 0 0 .944 0v-1.363l.427-.413 1.428 2.033a.472.472 0 1 0 .773-.543l-1.514-2.155zm-2.958 1.924h-1.46V9.297a.472.472 0 0 0-.943 0v4.159c0 .26.21.472.471.472h1.932a.472.472 0 1 0 0-.944zm-5.857-1.092l.696-1.707.638 1.707H9.092zm2.523.488l.002-.016a.469.469 0 0 0-.127-.32l-1.046-2.8a.69.69 0 0 0-.627-.474.696.696 0 0 0-.653.447l-1.661 4.075a.472.472 0 0 0 .874.357l.33-.813h2.07l.299.8a.472.472 0 1 0 .884-.33l-.345-.926zM8.293 9.302a.472.472 0 0 0-.471-.472H4.577a.472.472 0 1 0 0 .944h1.16v3.736a.472.472 0 0 0 .944 0V9.774h1.14c.261 0 .472-.212.472-.472z"/>
@@ -356,7 +297,7 @@ const Home: React.FC = () => {
                 
                 <a
                   href="tel:031-999-8888"
-                  className="font-bebas group inline-flex items-center gap-3 px-10 py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

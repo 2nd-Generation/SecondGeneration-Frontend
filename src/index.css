@@ -58,6 +58,22 @@
   font-display: block;
 }
 
+/* HY Gothic 폰트 정의 */
+@font-face {
+  font-family: 'HY Gothic';
+  src: url('/HYGoThicStd-Medium-Alphabetic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* HY Gothic 폰트 클래스 */
+.gothic-a1-regular {
+  font-family: "HY Gothic", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* Custom Animations */
 @keyframes fadeIn {
   from {
