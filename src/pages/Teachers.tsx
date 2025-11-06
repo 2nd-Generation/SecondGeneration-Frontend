@@ -60,9 +60,10 @@ const coaches: Coach[] = [
       { year: '2023', team: 'Regans Gaming' },
       { year: '2024', team: 'BNK FearX' },
       { year: '2025', team: 'Pulsar Esports' },
-      { year: '2025', team: 'SGEA' },
     ],
-    coachHistory: [],
+    coachHistory: [
+      { year: '2025', team: 'SGEA', role: 'Coach', isCoach: true },
+    ],
   },
   {
     id: 'rexi',
@@ -157,7 +158,7 @@ const Teachers: React.FC = () => {
                         </div>
                         <div>
                           <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-0.2" style={{ letterSpacing: 0 }}>
-                            <strong>{coach.displayName.replace(` ${coach.name}`, '')}</strong>
+                            <strong className="gothic-a1-regular">{coach.displayName.replace(` ${coach.name}`, '')}</strong>
                           </h3>
                           <p className="text-white/80 text-sm md:text-base lg:text-lg">{coach.name}</p>
                         </div>
@@ -204,8 +205,8 @@ const Teachers: React.FC = () => {
                                 <div className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                               )}
                               <span className="text-xs md:text-sm font-medium text-gray-700 truncate">
-                                {h.team}
-                                {h.isCoach && h.role ? <span className="text-gray-500 font-normal"> · {h.role}</span> : null}
+                                <span className="gothic-a1-regular">{h.team}</span>
+                                {h.isCoach && h.role ? <span className="text-gray-500 font-normal gothic-a1-regular"> · {h.role}</span> : null}
                               </span>
                             </li>
                           ))}
