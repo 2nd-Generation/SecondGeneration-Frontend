@@ -10,11 +10,23 @@ const Home: React.FC = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         
-        {/* Background Image/Video Placeholder */}
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://placehold.co/1920x1080/000000/363636?text=Background+Image')" }}
-        ></div>
+        {/* Background Video */}
+        <video 
+          className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/homepageMain.mp4" type="video/mp4" />
+        </video>
+
+        {/* Hero Text Content
+        <div className="absolute bottom-20 md:bottom-24 lg:bottom-28 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-center px-6">
+          <p className="font-bebas text-2xl md:text-2xl lg:text-4xl xl:text-5xl font-black text-white mb-4 tracking-wide">
+            이스포츠 아카데미 SGEA 입니다 <br /> 저희는 돈 많이 벌고 싶습니다.
+          </p>
+        </div> */}
 
         {/* Infinite Scroll Marquee at bottom of hero */}
         <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-t border-gray-700">
