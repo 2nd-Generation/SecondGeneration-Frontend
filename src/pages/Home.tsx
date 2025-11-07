@@ -10,11 +10,23 @@ const Home: React.FC = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         
-        {/* Background Image/Video Placeholder */}
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://placehold.co/1920x1080/000000/363636?text=Background+Image')" }}
-        ></div>
+        {/* Background Video */}
+        <video 
+          className="absolute inset-0 w-full h-full object-cover opacity-60 z-0"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/homepageMain.mp4" type="video/mp4" />
+        </video>
+
+        {/* Hero Text Content
+        <div className="absolute bottom-20 md:bottom-24 lg:bottom-28 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-center px-6">
+          <p className="font-bebas text-2xl md:text-2xl lg:text-4xl xl:text-5xl font-black text-white mb-4 tracking-wide">
+            이스포츠 아카데미 SGEA 입니다 <br /> 저희는 돈 많이 벌고 싶습니다.
+          </p>
+        </div> */}
 
         {/* Infinite Scroll Marquee at bottom of hero */}
         <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-t border-gray-700">
@@ -166,7 +178,7 @@ const Home: React.FC = () => {
 
         {/* 강점 Section */}
         <section className="mb-32">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
               <div className="flex justify-center w-full">
                 <img src="/SGEAProgram.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
@@ -174,49 +186,101 @@ const Home: React.FC = () => {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
+
+          {/* 수강가능종목 */}
+          <div className="mb-12">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <img src="/ValorantLogo.png" alt="발로란트" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
+                <span className="font-bebas text-lg md:text-xl font-bold text-white">발로란트</span>
+              </div>
+              <div className="text-white/40 text-xl font-bold hidden md:block">•</div>
+              <div className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <img src="/Overwatch.png" alt="오버워치" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
+                <span className="font-bebas text-lg md:text-xl font-bold text-white">오버워치</span>
+              </div>
+            </div>
+          </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+          {/* 수업 형태 */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+            {/* 1대1 프리미엄 집중 수업 */}
+            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[200px] md:min-h-[250px]">
+              {/* 배경 이미지 */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/playingAlone.png')" }}
+              ></div>
+              {/* 어두운 오버레이 */}
+              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
+              {/* 콘텐츠 */}
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8 group-hover:top-16 group-hover:translate-y-0 group-hover:mb-0 transition-all duration-300">
+                  1:1 프리미엄 집중반
+                </h3>
+                <div className="flex-1 flex items-end justify-center pb-8 md:pb-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="grid grid-cols-2 gap-4 md:gap-6 w-full px-4">
+                    <div className="text-center">
+                      <p className="text-white text-xl md:text-2xl font-medium">
+                        주1회 / 3시간
+                      </p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white text-xl md:text-2xl font-medium">
+                        주 3회 / 6시간
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">전문 상담 프로그램</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  e스포츠에 특화된 전문 상담 프로그램을 통하여 관계 개선, 멘탈 코칭을 제공합니다.
-                </p>
               </div>
             </div>
-            
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
+
+            {/* 1대5 팀 그룹 수업 */}
+            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[200px] md:min-h-[250px]">
+              {/* 배경 이미지 */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/playingTeam.png')" }}
+              ></div>
+              {/* 어두운 오버레이 */}
+              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
+              {/* 콘텐츠 */}
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8 group-hover:top-16 group-hover:translate-y-0 group-hover:mb-0 transition-all duration-300">
+                  1:5 팀 그룹반
+                </h3>
+                <div className="flex-1 flex items-end justify-center pb-2 md:pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="grid grid-cols-3 gap-3 md:gap-4 w-full px-4">
+                    <div className="text-center">
+                      <p className="text-white text-base md:text-lg font-medium mb-1">취미반</p>
+                      <p className="text-white/90 text-sm md:text-base">주1회 / 3시간</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white text-base md:text-lg font-medium mb-1">성장반</p>
+                      <p className="text-white/90 text-sm md:text-base">주2회 / 6시간</p>
+                      <p className="text-white/70 text-xs md:text-sm mt-1">브론즈-다이아</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white text-base md:text-lg font-medium mb-1">프로반</p>
+                      <p className="text-white/90 text-sm md:text-base">주3회 / 9시간</p>
+                      <p className="text-white/70 text-xs md:text-sm mt-1">다이아+</p>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">맞춤형 커리큘럼</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  메이저 리그 출신 강사진의 노하우가 담긴 맞춤형 커리큘럼으로 실력 향상을 돕습니다.
-                </p>
               </div>
             </div>
-            
-            <div className="group relative bg-white p-10 rounded-3xl border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="font-bebas text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors tracking-wide">멘탈 강화</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  자세 교정과 멘탈 강화를 통해 잠재력을 최대한 발휘하도록 지원합니다.
-                </p>
-              </div>
-            </div>
+          </div>
+          
+          <div className="relative flex items-center justify-center mt-12">
+            <a 
+              href="/class" 
+              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white"
+            >
+              더 알아보기
+              <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </a>
           </div>
         </section>
 

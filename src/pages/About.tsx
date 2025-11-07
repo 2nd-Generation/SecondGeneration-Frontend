@@ -1,27 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const About: React.FC = () => {
-  return (
-    <div className="bg-custom-bg text-white min-h-screen">
-      {/* Header Space */}
-      <div className="pt-24"></div>
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-      <main className="container mx-auto px-6 py-12 md:py-24 space-y-20">
-        <section className="relative overflow-hidden mb-20 md:mb-32">
-          {/* Background Elements */}
-          <div className="absolute inset-0 bg-gradient-to-br from-custom-bg via-custom-bg/95 to-violet-900/20"></div>
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent-light-purple/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          
-          {/* Main Content */}
-          <div className="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-32">
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      // 첫 화면 높이의 2배 스크롤 시 최대값 도달
+      const maxScroll = windowHeight * 2;
+      const progress = Math.min(scrollTop / maxScroll, 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // 초기값 설정
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="relative text-white min-h-screen">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: "url('/AboutPic.png')" }}
+      ></div>
+      
+      {/* Overlay for better text readability */}
+      <div className="fixed inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
+      
+      {/* Purple overlay that increases with scroll */}
+      <div 
+        className="fixed inset-0 transition-opacity duration-300"
+        style={{ 
+          backgroundColor: `rgba(124, 58, 237, ${scrollProgress * 0.6})` // violet-600 with opacity based on scroll
+        }}
+      ></div>
+      
+      {/* Content Container */}
+      <div className="relative z-10">
+        {/* Header Space */}
+        <div className="pt-24"></div>
+
+        <main className="container mx-auto px-6 py-12 md:py-24 space-y-20">
+          <section className="relative overflow-hidden mb-20 md:mb-32">
+            {/* Main Content */}
+            <div className="max-w-6xl mx-auto px-6 py-20 md:py-32">
             <div className="text-center">
               
               {/* Main Title */}
               <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
-                <span className="text-white block mb-2">게임으로 세상과</span>
+                <span className="text-white block mb-2">요즘 아이들은 게임을 통해</span>
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-accent-light-purple">
-                  소통하고, 삶을 배웁니다
+                    세상과 소통합니다
                 </span>
               </h1>
               
@@ -39,80 +71,6 @@ const About: React.FC = () => {
                 <button className="px-8 py-4 border-2 border-violet-500/50 hover:border-violet-400 text-violet-300 hover:text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105">
                   강사진 소개
                 </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-20 md:mb-32">
-          <div className="max-w-6xl mx-auto">
-            {/* Section Header */}
-            <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 rounded-full border border-violet-500/20 mb-6">
-                <div className="w-2 h-2 bg-violet-400 rounded-full animate-pulse"></div>
-                <span className="text-violet-300 text-sm font-semibold">EDUCATION PHILOSOPHY</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-                <span className="text-violet-400">요즘 아이들은 게임을 통해</span><br />
-                <span className="text-white">세상과 소통합니다</span>
-              </h2>
-            </div>
-            
-            {/* Content Grid */}
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              {/* Left Content */}
-              <div className="space-y-8">
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-3">협동과 소통</h3>
-                      <p className="text-gray-300 leading-relaxed">
-                        그 안에서 <span className="text-violet-400 font-semibold">예절을 배우고, 협동을 배우며, 노력하는 방법</span>을 익혀갑니다.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-2xl border border-gray-700/50 backdrop-blur-sm">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg className="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-3">체계적 교육</h3>
-                      <p className="text-gray-300 leading-relaxed">
-                        저희 학원은 단순히 게임을 잘하는 법만 가르치는 곳이 아닙니다.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Right Content - Highlight Box */}
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-violet-500 to-accent-light-purple rounded-2xl blur opacity-20"></div>
-                <div className="relative bg-gradient-to-br from-violet-500/10 to-violet-600/10 p-8 rounded-2xl border border-violet-500/30 backdrop-blur-sm">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                      <svg className="w-8 h-8 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">게임이라는 매개체를 통해</h3>
-                    <p className="text-gray-200 text-lg leading-relaxed">
-                      아이들이 삶에서도 응용할 수 있는<br />
-                      <span className="text-violet-300 font-semibold">성장의 방법을 배우도록</span><br />
-                      체계적인 커리큘럼을 운영합니다.
-                    </p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -263,6 +221,7 @@ const About: React.FC = () => {
           </div>
         </section>
       </main>
+      </div>
     </div>
   );
 };
