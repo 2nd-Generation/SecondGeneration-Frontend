@@ -39,7 +39,7 @@ const Home: React.FC = () => {
         </video>
 
         <div
-          className="absolute z-10 flex flex-col items-start text-left px-6 left-4 sm:left-12 md:left-[calc(50%-670px)] top-[28%] sm:top-[30%] md:top-[35%] max-w-[85vw] sm:max-w-md space-y-2 sm:space-y-3"
+          className="absolute z-10 flex flex-col items-start text-left px-6 left-4 sm:left-12 md:left-[calc(50%-670px)] top-[28%] sm:top-[30%] md:top-[35%] max-w-[85vw] sm:max-w-lg md:max-w-none space-y-2 sm:space-y-3"
         >
           <p className="font-bebas text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-black text-white tracking-wide">
             프로게이머 꿈의 첫 시작,
@@ -81,28 +81,28 @@ const Home: React.FC = () => {
             <div className="hidden md:block absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="hidden md:block absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative bg-white p-6 sm:p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
-              <div className="space-y-8 text-base sm:text-lg leading-relaxed">
-                <p className="text-gray-700 text-xl sm:text-2xl font-bold">
+            <div className="relative bg-white p-5 sm:p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+              <div className="space-y-6 sm:space-y-8 text-sm sm:text-base leading-relaxed">
+                <p className="text-gray-700 text-lg sm:text-2xl font-bold">
                   수강생 모두가 프로게이머가 되지는 못합니다.
                 </p>
                 
                 <div className="relative pl-6 border-l-4 border-purple-500/50">
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-sm sm:text-base">
                   저희 SGEA는 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>를 슬로건하여 스스로 목표를 세우고 달성하기 위해 노력하는 방법을 찾으며 성취감과 <span className="text-purple-600 font-semibold">"나도 이렇게 열심히 할 수 있는 사람이다"</span> 라는 긍정적인 자아를 얻어 시너지를 발휘할 수 있도록 지향합니다.
                 </p>
                 </div>
                 
-                  <p className="text-gray-700">
+                  <p className="text-gray-700 text-sm sm:text-base">
                     저희의 핵심 가치 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>는 아이가 게임을 그만두는 시점이 오더라도 저희가 지향하는 긍정적인 자아의 시너지로 해당 분야에서도 노력하는 방법을 응용할 수 있는 것을 의미합니다.
                   </p>
                 
-                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-5 sm:p-6 rounded-2xl border border-purple-500/20">
-                <p className="text-gray-800">
+                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-4 sm:p-6 rounded-2xl border border-purple-500/20">
+                <p className="text-gray-800 text-sm sm:text-base">
                   SGEA를 설립한 저희는 프로게이머였습니다. 현재 프로게이머를 꿈꾸는 학생들과 같은 시기를 경험했습니다. <br />10대 시절 저희 역시 비슷한 고민을 했기에 학부모님들의 마음 또한 깊이 공감 할 수 있습니다.
                 </p>
-                  <p className="text-gray-800">
-                  <br /> 마음껏 꿈을 꿀 수 있는 나이임과 동시에 중요한 시기라는 것을 알고 있습니다.<br />
+                  <p className="text-gray-800 text-sm sm:text-base mt-4 sm:mt-6">
+                  마음껏 꿈을 꿀 수 있는 나이임과 동시에 중요한 시기라는 것을 알고 있습니다.<br className="hidden sm:block" />
                     <span className="text-purple-600 font-bold">최선을 다해서 지도할 준비가 되어있습니다.</span>
                   </p>
                 </div>
@@ -224,31 +224,36 @@ const Home: React.FC = () => {
           </div>
           
           {/* 수업 형태 */}
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 relative min-h-[400px] md:min-h-[500px]">
             {/* 1대1 프리미엄 집중 수업 */}
-            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[220px] md:min-h-[250px]">
-              {/* 배경 이미지 */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[250px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent">
               <div 
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500"
                 style={{ backgroundImage: "url('/playingAlone.png')" }}
               ></div>
-              {/* 어두운 오버레이 */}
-              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
-              {/* 콘텐츠 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-left md:text-center mb-4 md:mb-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full px-2 sm:px-4 md:px-8 md:group-hover:top-16 md:group-hover:translate-y-0 md:group-hover:mb-0 transition-all duration-300">
+              <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 md:group-hover:bg-black/80"></div>
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-center md:block md:static">
+                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden">
                   1:1 프리미엄 집중반
                 </h3>
-                <div className="flex-1 flex items-start md:items-end justify-start md:justify-center pt-2 md:pt-0 pb-4 md:pb-12 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 w-full">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full px-2 sm:px-4">
-                    <div className="text-center">
-                      <p className="text-white text-xl md:text-2xl font-medium">
-                        주1회 / 3시간
+                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  1:1 프리미엄 집중반
+                </h3>
+              </div>
+              <div className="md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto transition-all duration-500">
+                <div className="absolute inset-0 bg-custom-bg"></div>
+                <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
+                  <div className="flex-1 flex flex-col justify-center items-center text-center gap-4 md:gap-6 md:items-stretch md:text-left">
+                    <div className="bg-white/10 rounded-lg p-4 md:p-6 border border-white/20 w-full max-w-md md:max-w-none">
+                      <p className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3 text-center md:text-left">주1회 / 3시간</p>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed text-center md:text-left">
+                        개인 맞춤형 집중 수업으로 빠르게 실력을 향상시킵니다.
                       </p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-white text-xl md:text-2xl font-medium">
-                        주 3회 / 6시간
+                    <div className="bg-white/10 rounded-lg p-4 md:p-6 border border-white/20 w-full max-w-md md:max-w-none">
+                      <p className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3 text-center md:text-left">주 3회 / 6시간</p>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed text-center md:text-left">
+                        더욱 집중적인 커리큘럼으로 실력을 빠르게 성장시킵니다.
                       </p>
                     </div>
                   </div>
@@ -257,34 +262,56 @@ const Home: React.FC = () => {
             </div>
 
             {/* 1대5 팀 그룹 수업 */}
-            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[220px] md:min-h-[250px]">
-              {/* 배경 이미지 */}
+            <div className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[300px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent">
               <div 
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500"
                 style={{ backgroundImage: "url('/playingTeam.png')" }}
               ></div>
-              {/* 어두운 오버레이 */}
-              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
-              {/* 콘텐츠 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center mb-4 md:mb-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full px-2 sm:px-4 md:px-8 md:group-hover:top-16 md:group-hover:translate-y-0 md:group-hover:mb-0 transition-all duration-300">
+              <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 md:group-hover:bg-black/80"></div>
+              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-center md:block md:static">
+                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden">
                   1:5 팀 그룹반
                 </h3>
-                <div className="flex-1 flex items-start md:items-end justify-center pt-2 md:pt-0 pb-4 md:pb-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 w-full">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-4 w-full px-2 sm:px-4 text-center">
-                    <div className="text-center">
-                      <p className="text-white text-base md:text-lg font-medium mb-1">취미반</p>
-                      <p className="text-white/90 text-sm md:text-base">주1회 / 3시간</p>
+                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  1:5 팀 그룹반
+                </h3>
+              </div>
+              <div className="md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto transition-all duration-500">
+                <div className="absolute inset-0 bg-custom-bg"></div>
+                <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
+                  <div className="flex-1 flex flex-col justify-center items-center text-center gap-4 md:gap-6 md:items-stretch md:text-left">
+                    <div className="bg-white/10 rounded-lg p-4 md:p-5 border border-white/20 w-full max-w-md md:max-w-none">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <p className="text-white text-lg md:text-xl font-bold mb-1 md:mb-0 text-center md:text-left">취미반</p>
+                        <p className="text-white/90 text-base md:text-lg text-center md:text-right">주1회 / 3시간</p>
+                      </div>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed text-center md:text-left">
+                        게임의 재미를 느끼며 기본기를 다집니다. 랭크 게임을 중심으로 실력과 이해도를 쌓아가며, 즐기면서도 발전하는 플레이를 경험합니다.
+                      </p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-white text-base md:text-lg font-medium mb-1">성장반</p>
-                      <p className="text-white/90 text-sm md:text-base">주2회 / 6시간</p>
-                      <p className="text-white/70 text-xs md:text-sm mt-1">브론즈-다이아</p>
+                    <div className="bg-white/10 rounded-lg p-4 md:p-5 border border-white/20 w-full max-w-md md:max-w-none">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <div className="flex flex-col md:flex-row items-center gap-2 mb-1 md:mb-0">
+                          <p className="text-white text-lg md:text-xl font-bold text-center md:text-left">성장반</p>
+                          <span className="text-white/70 text-sm md:text-base text-center md:text-left">(브론즈-다이아)</span>
+                        </div>
+                        <p className="text-white/90 text-base md:text-lg text-center md:text-right">주2회 / 6시간</p>
+                      </div>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed text-center md:text-left">
+                        분석과 피드백을 통해 자신의 플레이를 객관적으로 바라봅니다. 기량뿐 아니라 판단력, 이해도, 팀워크까지 함께 성장시키는 단계입니다.
+                      </p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-white text-base md:text-lg font-medium mb-1">프로반</p>
-                      <p className="text-white/90 text-sm md:text-base">주3회 / 9시간</p>
-                      <p className="text-white/70 text-xs md:text-sm mt-1">다이아+</p>
+                    <div className="bg-white/10 rounded-lg p-4 md:p-5 border border-white/20 w-full max-w-md md:max-w-none">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                        <div className="flex flex-col md:flex-row items-center gap-2 mb-1 md:mb-0">
+                          <p className="text-white text-lg md:text-xl font-bold text-center md:text-left">프로반</p>
+                          <span className="text-white/70 text-sm md:text-base text-center md:text-left">(다이아+)</span>
+                        </div>
+                        <p className="text-white/90 text-base md:text-lg text-center md:text-right">주3회 / 9시간</p>
+                      </div>
+                      <p className="text-white/90 text-sm md:text-base leading-relaxed text-center md:text-left">
+                        이론에서 실전까지, 진짜 팀 플레이를 배웁니다. 전략과 소통을 중심으로 실전 감각과 프로 마인드를 완성합니다.
+                      </p>
                     </div>
                   </div>
                 </div>
