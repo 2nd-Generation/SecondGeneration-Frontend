@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home: React.FC = () => {
+  const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    const handleChange = (event: MediaQueryListEvent | MediaQueryList) => {
+      setVideoSrc(event.matches ? '/BackgroundVideoMobile.mp4' : '/BackgroundVideo.mp4');
+    };
+
+    handleChange(mediaQuery);
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
   return (
     <div className="bg-custom-bg">
       {/* Hero Section */}
@@ -13,19 +33,18 @@ const Home: React.FC = () => {
           loop
           muted
           playsInline
+          key={videoSrc}
         >
-          <source src="/BackgroundVideoMobile.mp4" type="video/mp4" media="(max-width: 768px)" />
-          <source src="/BackgroundVideo.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
 
         <div
-          className="absolute z-10 flex flex-col items-start text-left px-6 left-6 sm:left-12 md:left-[calc(50%-670px)]"
-          style={{ top: '35%' }}
+          className="absolute z-10 flex flex-col items-start text-left px-6 left-4 sm:left-12 md:left-[calc(50%-670px)] top-[28%] sm:top-[30%] md:top-[35%] max-w-[85vw] sm:max-w-md space-y-2 sm:space-y-3"
         >
-          <p className="font-bebas text-2xl md:text-2xl lg:text-4xl xl:text-5xl font-black text-white tracking-wide">
+          <p className="font-bebas text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-black text-white tracking-wide">
             프로게이머 꿈의 첫 시작,
           </p>
-          <p className="font-bebas text-2xl md:text-2xl lg:text-4xl xl:text-5xl font-black text-white tracking-wide mt-3">
+          <p className="font-bebas text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-black text-white tracking-wide">
             SGEA
           </p>
         </div>
@@ -45,13 +64,13 @@ const Home: React.FC = () => {
       </header>
 
       {/* Main Content Sections */}
-      <main className="container mx-auto px-6 py-12 md:py-24">
+      <main className="container mx-auto px-4 sm:px-6 py-12 md:py-24">
         {/* 학원 소개 Section */}
         <section id="about" className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
               <div className="flex justify-center w-full">
-                <img src="/SGEAAbout.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+                <img src="/SGEAAbout.png" alt="SGEA" className="h-20 sm:h-24 md:h-32 lg:h-40 w-auto object-contain" />
               </div>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -59,16 +78,15 @@ const Home: React.FC = () => {
           
           <div className="relative">
             {/* Decorative elements */}
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+            <div className="hidden md:block absolute -top-10 -left-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div className="hidden md:block absolute -bottom-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
             
-            <div className="relative bg-white p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
-              <div className="space-y-8 text-lg leading-relaxed">
-                <p className="text-gray-700 text-2xl font-bold">
+            <div className="relative bg-white p-6 sm:p-8 md:p-16 rounded-3xl border border-gray-200 shadow-2xl">
+              <div className="space-y-8 text-base sm:text-lg leading-relaxed">
+                <p className="text-gray-700 text-xl sm:text-2xl font-bold">
                   수강생 모두가 프로게이머가 되지는 못합니다.
                 </p>
                 
-
                 <div className="relative pl-6 border-l-4 border-purple-500/50">
                 <p className="text-gray-700">
                   저희 SGEA는 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>를 슬로건하여 스스로 목표를 세우고 달성하기 위해 노력하는 방법을 찾으며 성취감과 <span className="text-purple-600 font-semibold">"나도 이렇게 열심히 할 수 있는 사람이다"</span> 라는 긍정적인 자아를 얻어 시너지를 발휘할 수 있도록 지향합니다.
@@ -79,7 +97,7 @@ const Home: React.FC = () => {
                     저희의 핵심 가치 <span className="text-purple-600 font-semibold">"노력의 습관화"</span>는 아이가 게임을 그만두는 시점이 오더라도 저희가 지향하는 긍정적인 자아의 시너지로 해당 분야에서도 노력하는 방법을 응용할 수 있는 것을 의미합니다.
                   </p>
                 
-                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-6 rounded-2xl border border-purple-500/20">
+                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 p-5 sm:p-6 rounded-2xl border border-purple-500/20">
                 <p className="text-gray-800">
                   SGEA를 설립한 저희는 프로게이머였습니다. 현재 프로게이머를 꿈꾸는 학생들과 같은 시기를 경험했습니다. <br />10대 시절 저희 역시 비슷한 고민을 했기에 학부모님들의 마음 또한 깊이 공감 할 수 있습니다.
                 </p>
@@ -95,33 +113,35 @@ const Home: React.FC = () => {
 
                 {/* 커리큘럼 Section */}
                 <section id="curriculum" className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
               <div className="flex justify-center w-full">
-                <img src="/SGEASystem.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+                <img src="/SGEASystem.png" alt="SGEA" className="h-20 sm:h-24 md:h-32 lg:h-40 w-auto object-contain" />
               </div>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
-            <p className="font-noto text-gray-100 text-xl">체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-4 sm:mb-6"></div>
+            <p className="font-noto text-gray-100 text-base sm:text-lg">
+              체계적인 단계별 커리큘럼으로 프로 선수로 성장합니다.
+            </p>
           </div>
           
           <div className="relative">
             {/* 커리큘럼 플로우 */}
-            <div className="relative bg-white rounded-3xl p-8 md:p-16 border border-gray-200">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="relative bg-white rounded-3xl p-6 sm:p-10 md:p-16 border border-gray-200">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-8">
                 {/* 1. 취미 성장반 */}
                 <div className="flex flex-col items-center flex-1">
                   <div className="relative mb-6">
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      <img src="/hobby.svg" alt="취미 성장반" className="w-20 h-20 object-contain" />
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+                      <img src="/hobby.svg" alt="취미 성장반" className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">취미 성장반</h3>
-                  <p className="text-gray-600 text-center text-sm">기초 다지기<br />실력 향상</p>
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 text-center">취미 성장반</h3>
+                  <p className="text-gray-600 text-center text-sm sm:text-base">기초 다지기<br />실력 향상</p>
                 </div>
 
                 {/* Arrow 1 */}
-                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                <div className="text-purple-600 mx-0 md:mx-4 my-4 md:my-0 rotate-90 md:rotate-0">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -130,16 +150,16 @@ const Home: React.FC = () => {
                 {/* 2. 프로 준비반 */}
                 <div className="flex flex-col items-center flex-1">
                   <div className="relative mb-6">
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      <img src="/proPrepare.svg" alt="프로 준비반" className="w-20 h-20 object-contain" />
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+                      <img src="/proPrepare.svg" alt="프로 준비반" className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 준비반</h3>
-                  <p className="text-gray-600 text-center text-sm">심화 훈련<br />전략적 플레이</p>
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 text-center">프로 준비반</h3>
+                  <p className="text-gray-600 text-center text-sm sm:text-base">심화 훈련<br />전략적 플레이</p>
                 </div>
 
                 {/* Arrow 2 */}
-                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                <div className="text-purple-600 mx-0 md:mx-4 my-4 md:my-0 rotate-90 md:rotate-0">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -148,16 +168,16 @@ const Home: React.FC = () => {
                 {/* 3. 입단 테스트 */}
                 <div className="flex flex-col items-center flex-1">
                   <div className="relative mb-6">
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      <img src="/test.svg" alt="입단 테스트" className="w-20 h-20 object-contain" />
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+                      <img src="/test.svg" alt="입단 테스트" className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">입단 테스트</h3>
-                  <p className="text-gray-600 text-center text-sm">프로 입단<br />기회 부여</p>
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 text-center">입단 테스트</h3>
+                  <p className="text-gray-600 text-center text-sm sm:text-base">프로 입단<br />기회 부여</p>
                 </div>
 
                 {/* Arrow 3 */}
-                <div className="text-purple-600 mx-4 rotate-90 md:rotate-0">
+                <div className="text-purple-600 mx-0 md:mx-4 my-4 md:my-0 rotate-90 md:rotate-0">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -166,12 +186,12 @@ const Home: React.FC = () => {
                 {/* 4. 프로 선수 데뷔 */}
                 <div className="flex flex-col items-center flex-1">
                   <div className="relative mb-6">
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      <img src="/proDebut.svg" alt="프로 선수 데뷔" className="w-20 h-20 object-contain" />
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 flex items-center justify-center">
+                      <img src="/proDebut.svg" alt="프로 선수 데뷔" className="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
                     </div>
                   </div>
-                  <h3 className="text-2xl font-black text-gray-900 mb-2 text-center">프로 선수 데뷔</h3>
-                  <p className="text-gray-600 text-center text-sm">프로 선수<br />데뷔</p>
+                  <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 text-center">프로 선수 데뷔</h3>
+                  <p className="text-gray-600 text-center text-sm sm:text-base">프로 선수<br />데뷔</p>
                 </div>
               </div>
             </div>
@@ -181,9 +201,9 @@ const Home: React.FC = () => {
         {/* 강점 Section */}
         <section className="mb-32">
           <div className="text-center mb-12">
-            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
               <div className="flex justify-center w-full">
-                <img src="/SGEAProgram.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain" />
+                <img src="/SGEAProgram.png" alt="SGEA" className="h-20 sm:h-24 md:h-32 lg:h-40 w-auto object-contain" />
               </div>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
@@ -191,12 +211,11 @@ const Home: React.FC = () => {
 
           {/* 수강가능종목 */}
           <div className="mb-12">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6">
               <div className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300">
                 <img src="/ValorantLogo.png" alt="발로란트" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
                 <span className="font-bebas text-lg md:text-xl font-bold text-white">발로란트</span>
               </div>
-              <div className="text-white/40 text-xl font-bold hidden md:block">•</div>
               <div className="flex items-center gap-2 px-4 py-2.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300">
                 <img src="/Overwatch.png" alt="오버워치" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
                 <span className="font-bebas text-lg md:text-xl font-bold text-white">오버워치</span>
@@ -207,7 +226,7 @@ const Home: React.FC = () => {
           {/* 수업 형태 */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             {/* 1대1 프리미엄 집중 수업 */}
-            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[200px] md:min-h-[250px]">
+            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[220px] md:min-h-[250px]">
               {/* 배경 이미지 */}
               <div 
                 className="absolute inset-0 bg-cover bg-center"
@@ -217,11 +236,11 @@ const Home: React.FC = () => {
               <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
               {/* 콘텐츠 */}
               <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8 group-hover:top-16 group-hover:translate-y-0 group-hover:mb-0 transition-all duration-300">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-left md:text-center mb-4 md:mb-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full px-2 sm:px-4 md:px-8 md:group-hover:top-16 md:group-hover:translate-y-0 md:group-hover:mb-0 transition-all duration-300">
                   1:1 프리미엄 집중반
                 </h3>
-                <div className="flex-1 flex items-end justify-center pb-8 md:pb-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="grid grid-cols-2 gap-4 md:gap-6 w-full px-4">
+                <div className="flex-1 flex items-start md:items-end justify-start md:justify-center pt-2 md:pt-0 pb-4 md:pb-12 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full px-2 sm:px-4">
                     <div className="text-center">
                       <p className="text-white text-xl md:text-2xl font-medium">
                         주1회 / 3시간
@@ -238,7 +257,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* 1대5 팀 그룹 수업 */}
-            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[200px] md:min-h-[250px]">
+            <div className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex-1 min-h-[220px] md:min-h-[250px]">
               {/* 배경 이미지 */}
               <div 
                 className="absolute inset-0 bg-cover bg-center"
@@ -248,11 +267,11 @@ const Home: React.FC = () => {
               <div className="absolute inset-0 bg-black/70 group-hover:bg-black/80 transition-all duration-300"></div>
               {/* 콘텐츠 */}
               <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8 group-hover:top-16 group-hover:translate-y-0 group-hover:mb-0 transition-all duration-300">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center mb-4 md:mb-0 md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full px-2 sm:px-4 md:px-8 md:group-hover:top-16 md:group-hover:translate-y-0 md:group-hover:mb-0 transition-all duration-300">
                   1:5 팀 그룹반
                 </h3>
-                <div className="flex-1 flex items-end justify-center pb-2 md:pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="grid grid-cols-3 gap-3 md:gap-4 w-full px-4">
+                <div className="flex-1 flex items-start md:items-end justify-center pt-2 md:pt-0 pb-4 md:pb-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-4 w-full px-2 sm:px-4 text-center">
                     <div className="text-center">
                       <p className="text-white text-base md:text-lg font-medium mb-1">취미반</p>
                       <p className="text-white/90 text-sm md:text-base">주1회 / 3시간</p>
@@ -276,7 +295,7 @@ const Home: React.FC = () => {
           <div className="relative flex items-center justify-center mt-12">
             <a 
               href="/class" 
-              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white"
+              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
             >
               더 알아보기
               <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,9 +307,9 @@ const Home: React.FC = () => {
 
         {/* 강사진 소개 Section */}
         <section className="mb-32">
-          <div className="text-center mb-16">
-            <h2 className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
-              <img src="/SGEATeacher.png" alt="SGEA" className="h-24 md:h-32 lg:h-40 w-auto object-contain block mx-auto my-0" style={{ marginLeft: 'auto', marginRight: 'auto' }} />
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center">
+              <img src="/SGEATeacher.png" alt="SGEA" className="h-20 sm:h-24 md:h-32 lg:h-40 w-auto object-contain block mx-auto my-0" style={{ marginLeft: 'auto', marginRight: 'auto' }} />
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
           </div>
@@ -298,7 +317,7 @@ const Home: React.FC = () => {
           <div className="relative flex items-center justify-center">
             <a 
               href="/teachers" 
-              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white"
+              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
             >
               더 알아보기
               <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -314,28 +333,28 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-600"></div>
             <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
             
-            <div className="relative p-12 md:p-20 text-center">
+            <div className="relative p-8 sm:p-12 md:p-20 text-center">
               <div className="mb-8">
                 <span className="inline-block px-6 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white font-semibold mb-6">
                   💬 Contact Us
                 </span>
               </div>
               
-              <h2 className="font-bebas text-6xl md:text-7xl font-black text-white mb-6 tracking-wide">
+              <h2 className="font-bebas text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-wide">
                 상담 신청
               </h2>
               
-              <p className="text-white/90 mb-12 text-xl max-w-3xl mx-auto leading-relaxed">
-                SGEA 아카데미의 전문 상담사들이 개인 맞춤형으로<br />
+              <p className="text-white/90 mb-12 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+                SGEA 아카데미의 전문 상담사들이 개인 맞춤형으로<br className="hidden sm:block" />
                 각자의 상황과 필요에 맞춘 조언과 지원을 제공합니다.
               </p>
               
-              <div className="flex flex-col lg:flex-row gap-6 justify-center items-center">
+              <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <a
                   href="http://pf.kakao.com/_xayxnLG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -350,7 +369,7 @@ const Home: React.FC = () => {
                   href="http://pf.kakao.com/_xayxnLG"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                 >
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 3c5.799 0 10.5 3.664 10.5 8.185 0 4.52-4.701 8.184-10.5 8.184a13.5 13.5 0 0 1-1.727-.11l-4.408 2.883c-.501.265-.678.236-.472-.413l.892-3.678c-2.88-1.46-4.785-3.99-4.785-6.866C1.5 6.665 6.201 3 12 3zm5.907 8.06l1.47-1.424a.472.472 0 0 0-.656-.678l-1.928 1.866V9.282a.472.472 0 0 0-.944 0v2.557a.471.471 0 0 0 0 .222V13.5a.472.472 0 0 0 .944 0v-1.363l.427-.413 1.428 2.033a.472.472 0 1 0 .773-.543l-1.514-2.155zm-2.958 1.924h-1.46V9.297a.472.472 0 0 0-.943 0v4.159c0 .26.21.472.471.472h1.932a.472.472 0 1 0 0-.944zm-5.857-1.092l.696-1.707.638 1.707H9.092zm2.523.488l.002-.016a.469.469 0 0 0-.127-.32l-1.046-2.8a.69.69 0 0 0-.627-.474.696.696 0 0 0-.653.447l-1.661 4.075a.472.472 0 0 0 .874.357l.33-.813h2.07l.299.8a.472.472 0 1 0 .884-.33l-.345-.926zM8.293 9.302a.472.472 0 0 0-.471-.472H4.577a.472.472 0 1 0 0 .944h1.16v3.736a.472.472 0 0 0 .944 0V9.774h1.14c.261 0 .472-.212.472-.472z"/>
@@ -363,7 +382,7 @@ const Home: React.FC = () => {
                 
                 <a
                   href="tel:031-999-8888"
-                  className="font-bebas group inline-flex items-center gap-0 px-10 py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-xl shadow-2xl transform hover:scale-105 tracking-wider"
+                  className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -388,7 +407,7 @@ const Home: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base text-gray-300">
             <span className="font-bold">연락처</span> <span>031-999-8888</span>
             <span className="hidden md:inline">|</span>
-            <span className="font-bold">E-mail</span> <span>info@sgea-academy.com</span>
+            <span className="font-bold">E-mail</span> <span>info@sgea.kr</span>
           </div>
           <div className="my-6 text-base text-gray-300">
             <span className="font-bold block mb-2">운영시간 안내</span>
