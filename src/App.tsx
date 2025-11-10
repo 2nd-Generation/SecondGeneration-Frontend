@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
 import Class from './pages/Class';
@@ -9,6 +10,7 @@ import News from './pages/News';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="bg-custom-bg text-white">
         <Navigation />
 
