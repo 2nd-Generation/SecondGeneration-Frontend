@@ -57,8 +57,8 @@ const Class: React.FC = () => {
               {/* 어두운 오버레이 */}
               <div className={`absolute inset-0 transition-all duration-300 ${hoveredCard === 'premium' ? 'bg-black/85' : 'bg-black/70'}`}></div>
               {/* 콘텐츠 - 기본 상태 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8">
+              <div className="relative z-10 p-6 md:p-8 h-full flex items-center justify-center">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center w-full px-6 md:px-8">
                   1:1 프리미엄 집중반
                 </h3>
               </div>
@@ -66,10 +66,10 @@ const Class: React.FC = () => {
 
             {/* 1:1 프리미엄 집중반 hover 시 우측에 표시되는 상세 내용 */}
             <div 
-              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 ${
-                hoveredCard === 'premium' 
-                  ? 'opacity-100 pointer-events-auto' 
-                  : 'opacity-0 pointer-events-none'
+              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
+                hoveredCard === 'premium'
+                  ? 'md:opacity-100 md:pointer-events-auto'
+                  : 'md:opacity-0 md:pointer-events-none'
               }`}
             >
               {/* 어두운 오버레이 */}
@@ -107,8 +107,8 @@ const Class: React.FC = () => {
               {/* 어두운 오버레이 */}
               <div className={`absolute inset-0 transition-all duration-300 ${hoveredCard === 'team' ? 'bg-black/85' : 'bg-black/70'}`}></div>
               {/* 콘텐츠 - 기본 상태 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex flex-col">
-                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-6 md:px-8">
+              <div className="relative z-10 p-6 md:p-8 h-full flex items-center justify-center">
+                <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center w-full px-6 md:px-8">
                   1:5 팀 그룹반
                 </h3>
               </div>
@@ -116,10 +116,10 @@ const Class: React.FC = () => {
 
             {/* 1:5 팀 그룹반 hover 시 좌측에 표시되는 상세 내용 */}
             <div 
-              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 ${
-                hoveredCard === 'team' 
-                  ? 'opacity-100 pointer-events-auto' 
-                  : 'opacity-0 pointer-events-none'
+              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
+                hoveredCard === 'team'
+                  ? 'md:opacity-100 md:pointer-events-auto'
+                  : 'md:opacity-0 md:pointer-events-none'
               }`}
             >
               {/* 어두운 오버레이 */}
