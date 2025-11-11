@@ -441,10 +441,10 @@ const Home: React.FC = () => {
               ></div>
               <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 md:group-hover:bg-black/80"></div>
               <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-center md:block md:static">
-                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden">
+                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden whitespace-nowrap">
                   1:1 프리미엄 집중반
                 </h3>
-                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
                   1:1 프리미엄 집중반
                 </h3>
               </div>
@@ -477,10 +477,10 @@ const Home: React.FC = () => {
               ></div>
               <div className="absolute inset-0 bg-black/70 transition-opacity duration-300 md:group-hover:bg-black/80"></div>
               <div className="relative z-10 p-6 md:p-8 h-full flex flex-col justify-center md:block md:static">
-                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden">
+                <h3 className="font-bebas text-3xl font-bold text-white text-center px-6 md:hidden whitespace-nowrap">
                   1:5 팀 그룹반
                 </h3>
-                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                <h3 className="hidden md:block font-bebas text-4xl font-bold text-white text-center px-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
                   1:5 팀 그룹반
                 </h3>
               </div>
