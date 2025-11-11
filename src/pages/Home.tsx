@@ -1,42 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import {
+  easeAccent,
+  easeEmphasized,
+  easeFlow,
+  easeSoft,
+  fadeInSoft,
+  fadeInUp,
+  staggerUp,
+} from '../utils/motionPresets';
 
 const Home: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
-
-  const easeEmphasized = [0.16, 1, 0.3, 1] as const;
-  const easeSoft = [0.22, 1, 0.36, 1] as const;
-  const easeAccent = [0.33, 1, 0.68, 1] as const;
-  const easeFlow = [0.2, 1, 0.3, 1] as const;
-
-  const fadeInUp: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.9, ease: easeEmphasized },
-    },
-  };
-
-  const fadeInSoft: Variants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.75, ease: easeSoft },
-    },
-  };
-
-  const staggerUp: Variants = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.18,
-        delayChildren: 0.1,
-      },
-    },
-  };
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
