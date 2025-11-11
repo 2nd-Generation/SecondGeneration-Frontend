@@ -117,12 +117,10 @@ const Class: React.FC = () => {
             viewport={{ once: true, amount: 0.25 }}
           >
             {/* 1대1 프리미엄 집중 수업 - 기본 상태 (좌측) */}
-            <motion.div 
-              className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[250px] z-10 cursor-pointer"
+            <div 
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[250px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
               onMouseEnter={() => setHoveredCard('premium')}
               onMouseLeave={() => setHoveredCard(null)}
-              variants={fadeInUp}
-              whileHover={{ y: -10 }}
             >
               {/* 배경 이미지 */}
               <div 
@@ -137,18 +135,15 @@ const Class: React.FC = () => {
                   1:1 프리미엄 집중반
                 </h3>
               </div>
-            </motion.div>
+            </div>
 
             {/* 1:1 프리미엄 집중반 hover 시 우측에 표시되는 상세 내용 */}
-            <motion.div 
+            <div 
               className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
                 hoveredCard === 'premium'
                   ? 'md:opacity-100 md:pointer-events-auto'
                   : 'md:opacity-0 md:pointer-events-none'
               }`}
-              initial={{ opacity: 0.95 }}
-              animate={{ opacity: hoveredCard === 'premium' ? 1 : 0.95 }}
-              transition={{ duration: 0.4, ease: easeEmphasized }}
             >
               {/* 어두운 오버레이 */}
               <div className="absolute inset-0 bg-custom-bg"></div>
@@ -169,15 +164,13 @@ const Class: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* 1대5 팀 그룹 수업 - 기본 상태 (우측) */}
-            <motion.div 
-              className="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[300px] z-10 cursor-pointer"
+            <div 
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[300px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
               onMouseEnter={() => setHoveredCard('team')}
               onMouseLeave={() => setHoveredCard(null)}
-              variants={fadeInUp}
-              whileHover={{ y: -10 }}
             >
               {/* 배경 이미지 */}
               <div 
@@ -192,18 +185,15 @@ const Class: React.FC = () => {
                   1:5 팀 그룹반
                 </h3>
               </div>
-            </motion.div>
+            </div>
 
             {/* 1:5 팀 그룹반 hover 시 좌측에 표시되는 상세 내용 */}
-            <motion.div 
+            <div 
               className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
                 hoveredCard === 'team'
                   ? 'md:opacity-100 md:pointer-events-auto'
                   : 'md:opacity-0 md:pointer-events-none'
               }`}
-              initial={{ opacity: 0.95 }}
-              animate={{ opacity: hoveredCard === 'team' ? 1 : 0.95 }}
-              transition={{ duration: 0.4, ease: easeEmphasized }}
             >
               {/* 어두운 오버레이 */}
               <div className="absolute inset-0 bg-custom-bg"></div>
@@ -250,7 +240,7 @@ const Class: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.section>
 
