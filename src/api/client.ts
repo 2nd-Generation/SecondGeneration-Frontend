@@ -22,9 +22,9 @@ export const apiRequest = async <T>(
 ): Promise<T> => {
   const token = getAccessToken();
   
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   };
 
   // 토큰이 있으면 Authorization 헤더에 추가

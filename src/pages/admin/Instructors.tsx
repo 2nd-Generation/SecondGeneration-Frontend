@@ -8,7 +8,6 @@ import {
   updateInstructor,
   deleteInstructor,
   type InstructorListResponse,
-  type InstructorDetailResponse,
   type InstructorCreateRequest,
   type CareerHistoryRequest,
 } from '../../api/instructor';
@@ -51,7 +50,7 @@ const Instructors: React.FC = () => {
 
   const handleEdit = async (id: number) => {
     try {
-      const detail = await getInstructor(id);
+      await getInstructor(id);
       setEditingInstructor(id);
       // 모달이 열리면서 detail 데이터를 사용할 수 있도록 함
     } catch (err) {
@@ -297,7 +296,7 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
     });
   };
 
-  const updateCareer = (index: number, field: keyof CareerHistoryRequest, value: string) => {
+  const updateCareer = (index: number, field: keyof CareerHistoryRequest, value: string | null) => {
     const newCareers = [...formData.careers];
     newCareers[index] = { ...newCareers[index], [field]: value };
     setFormData({ ...formData, careers: newCareers });
