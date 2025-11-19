@@ -13,6 +13,9 @@ const Class: React.FC = () => {
 
   return (
     <div className="bg-custom-bg">
+      {/* Header Space */}
+      <div className="pt-8"></div>
+      
       {/* Main Content Sections */}
       <motion.main
         className="container mx-auto px-6 py-12 md:py-24"
@@ -29,14 +32,14 @@ const Class: React.FC = () => {
           viewport={{ once: true, amount: 0.25 }}
         >
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-16 md:mb-20"
             variants={staggerUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.h2
-              className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-6 tracking-wide flex flex-col items-center justify-center gap-2 text-center"
+              className="font-bebas text-5xl md:text-6xl lg:text-6xl font-black text-white mb-8 md:mb-10 tracking-wide flex flex-col items-center justify-center gap-2 text-center"
               variants={fadeInUp}
             >
               <div className="flex justify-center w-full">
@@ -52,7 +55,7 @@ const Class: React.FC = () => {
               </div>
             </motion.h2>
             <motion.div
-              className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"
+              className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-8 md:mb-10"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -110,7 +113,7 @@ const Class: React.FC = () => {
           
           {/* 수업 형태 */}
           <motion.div
-            className="relative flex flex-col md:flex-row gap-4 md:gap-6 min-h-[400px] md:min-h-[500px]"
+            className="relative flex flex-col md:flex-row gap-4 md:gap-6 min-h-[400px] md:min-h-[500px] items-center md:items-stretch"
             variants={fadeInSoft}
             initial="hidden"
             whileInView="visible"
@@ -118,7 +121,7 @@ const Class: React.FC = () => {
           >
             {/* 1대1 프리미엄 집중 수업 - 기본 상태 (좌측) */}
             <div 
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[250px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 w-full max-w-md md:max-w-none min-h-[200px] md:min-h-[250px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
               onMouseEnter={() => setHoveredCard('premium')}
               onMouseLeave={() => setHoveredCard(null)}
             >
@@ -130,16 +133,16 @@ const Class: React.FC = () => {
               {/* 어두운 오버레이 */}
               <div className={`absolute inset-0 transition-all duration-300 ${hoveredCard === 'premium' ? 'bg-black/85' : 'bg-black/70'}`}></div>
               {/* 콘텐츠 - 기본 상태 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex items-center justify-center">
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center w-full px-6 md:px-8">
-                  1:1 프리미엄 집중반
+                  1:1 프리미엄<br className="md:hidden" /> 집중반
                 </h3>
               </div>
             </div>
 
             {/* 1:1 프리미엄 집중반 hover 시 우측에 표시되는 상세 내용 */}
             <div 
-              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
+              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 w-full max-w-md md:max-w-none min-h-[200px] md:min-h-[500px] md:absolute md:right-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
                 hoveredCard === 'premium'
                   ? 'md:opacity-100 md:pointer-events-auto'
                   : 'md:opacity-0 md:pointer-events-none'
@@ -168,7 +171,7 @@ const Class: React.FC = () => {
 
             {/* 1대5 팀 그룹 수업 - 기본 상태 (우측) */}
             <div 
-              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 min-h-[200px] md:min-h-[300px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 flex-1 w-full max-w-md md:max-w-none min-h-[200px] md:min-h-[300px] z-10 cursor-pointer md:hover:-translate-y-2 md:hover:shadow-2xl md:hover:ring-2 md:hover:ring-purple-500/40 md:hover:ring-offset-2 md:hover:ring-offset-transparent"
               onMouseEnter={() => setHoveredCard('team')}
               onMouseLeave={() => setHoveredCard(null)}
             >
@@ -180,7 +183,7 @@ const Class: React.FC = () => {
               {/* 어두운 오버레이 */}
               <div className={`absolute inset-0 transition-all duration-300 ${hoveredCard === 'team' ? 'bg-black/85' : 'bg-black/70'}`}></div>
               {/* 콘텐츠 - 기본 상태 */}
-              <div className="relative z-10 p-6 md:p-8 h-full flex items-center justify-center">
+              <div className="absolute inset-0 z-10 flex items-center justify-center">
                 <h3 className="font-bebas text-3xl md:text-4xl font-bold text-white text-center w-full px-6 md:px-8">
                   1:5 팀 그룹반
                 </h3>
@@ -189,7 +192,7 @@ const Class: React.FC = () => {
 
             {/* 1:5 팀 그룹반 hover 시 좌측에 표시되는 상세 내용 */}
             <div 
-              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 min-h-[200px] md:min-h-[500px] md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
+              className={`relative rounded-2xl overflow-hidden transition-all duration-500 flex-1 w-full max-w-md md:max-w-none min-h-[200px] md:min-h-[500px] md:absolute md:left-0 md:top-0 md:w-1/2 md:h-full md:z-20 opacity-100 pointer-events-auto ${
                 hoveredCard === 'team'
                   ? 'md:opacity-100 md:pointer-events-auto'
                   : 'md:opacity-0 md:pointer-events-none'

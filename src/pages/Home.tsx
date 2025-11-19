@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import {
   easeAccent,
   easeEmphasized,
@@ -509,17 +510,20 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: easeEmphasized }}
           >
-            <motion.a 
-              href="/class" 
-              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
+            <motion.div
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.98 }}
             >
-              더 알아보기
-              <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </motion.a>
+              <Link 
+                to="/class" 
+                className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
+              >
+                더 알아보기
+                <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.section>
 
@@ -565,17 +569,20 @@ const Home: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: easeEmphasized }}
           >
-            <motion.a 
-              href="/teachers" 
-              className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
+            <motion.div
               whileHover={{ scale: 1.06 }}
               whileTap={{ scale: 0.98 }}
             >
-              더 알아보기
-              <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </motion.a>
+              <Link 
+                to="/teachers" 
+                className="font-bebas group inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 text-base md:text-lg lg:text-xl tracking-wider text-white w-full sm:w-auto justify-center"
+              >
+                더 알아보기
+                <svg className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.section>
 
@@ -628,8 +635,7 @@ const Home: React.FC = () => {
                 className="text-white/90 mb-12 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed"
                 variants={fadeInUp}
               >
-                SGEA 아카데미의 전문 상담사들이 개인 맞춤형으로<br className="hidden sm:block" />
-                각자의 상황과 필요에 맞춘 조언과 지원을 제공합니다.
+                SGEA 코치님들이 개인 맞춤형으로 직접 상담합니다.
               </motion.p>
               
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">

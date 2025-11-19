@@ -128,52 +128,6 @@ const Teachers: React.FC = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, ease: easeEmphasized }}
       >
-        {/* Hero */}
-        <motion.section
-          className="relative overflow-hidden mb-16 md:mb-24 rounded-3xl"
-          variants={fadeInSoft}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-purple-100/40 via-purple-50 to-indigo-100/40"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          ></motion.div>
-          <div className="absolute -top-24 -left-24 w-[420px] h-[420px] bg-purple-300/30 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-24 -right-24 w-[420px] h-[420px] bg-indigo-300/20 rounded-full blur-3xl"></div>
-          <motion.div
-            className="relative px-6 md:px-16 py-16 md:py-24 border border-gray-200 rounded-3xl bg-white"
-            variants={fadeInScale}
-          >
-            <motion.div
-              className="flex flex-col items-center text-center"
-              variants={staggerUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-            >
-              <motion.h1 className="text-4xl md:text-6xl font-black tracking-tight" variants={fadeInUp}>
-                <span className="text-gray-900">
-                  세계 무대 경험의{' '}
-                  <span className="font-bebas text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                    SGEA
-                  </span>{' '}
-                  강사진
-                </span>
-              </motion.h1>
-              <motion.p
-                className="mt-6 text-gray-600 text-lg md:text-xl max-w-3xl"
-                variants={fadeInUp}
-              >
-                메이저 리그 출신 강사진의 노하우로 기본기를 설계하고, 선수로 성장하는 로드맵을 제시합니다.
-              </motion.p>
-            </motion.div>
-          </motion.div>
-        </motion.section>
 
         {/* 코치 프로필 */}
         <motion.section
@@ -190,20 +144,25 @@ const Teachers: React.FC = () => {
             강사 프로필
           </motion.h2>
           <motion.div
-            className="grid md:grid-cols-3 gap-6 lg:gap-8"
+            className="overflow-x-auto pb-4 -mx-6 px-6 md:-mx-12 md:px-12 scrollbar-horizontal"
             variants={staggerUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(147, 51, 234, 0.5) transparent',
+            }}
           >
-            {coaches.map((coach) => (
-              <motion.div
-                key={coach.id}
-                className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl"
-                variants={fadeInUp}
-                whileHover={{ y: -8 }}
-                transition={{ type: 'spring', stiffness: 250, damping: 24 }}
-              >
+            <div className="flex gap-6 lg:gap-8 min-w-max">
+              {coaches.map((coach) => (
+                <motion.div
+                  key={coach.id}
+                  className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl flex-shrink-0 w-[85vw] sm:w-[200px] md:w-[300px] lg:w-[400px]"
+                  variants={fadeInUp}
+                  whileHover={{ y: -8 }}
+                  transition={{ type: 'spring', stiffness: 250, damping: 24 }}
+                >
                 {/* 메인 이미지 */}
                 <motion.div className="relative" variants={fadeInScale}>
                   <img 
@@ -281,8 +240,9 @@ const Teachers: React.FC = () => {
                     </div>
                   </div>
                 </motion.div>
-            </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.section>
       </motion.main>
