@@ -183,3 +183,22 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #7c3aed, #4f46e5);
 }
+
+/* Horizontal Scrollbar */
+.scrollbar-horizontal::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.3);
+  border-radius: 4px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #8b5cf6, #6366f1);
+  border-radius: 4px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #7c3aed, #4f46e5);
+}

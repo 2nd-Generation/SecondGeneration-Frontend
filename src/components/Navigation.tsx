@@ -28,7 +28,17 @@ const Navigation: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-6 lg:py-12 flex justify-center items-center relative">
         {/* Logo - 중앙 배치 */}
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Link to="/" className="group flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+          <Link 
+            to="/" 
+            className="group flex items-center space-x-2 sm:space-x-3 lg:space-x-4"
+            onClick={(e) => {
+              // 메인 페이지에 있을 때는 상단으로 스크롤
+              if (location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <div className="relative">
               <img 
                 src={scrolled ? "/TopLogoPurple.png" : "/TopLogoWhite.png"} 
@@ -170,7 +180,7 @@ const Navigation: React.FC = () => {
                 }
               }}
             >
-              문의하기
+              상담 신청
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>

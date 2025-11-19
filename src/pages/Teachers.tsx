@@ -144,20 +144,25 @@ const Teachers: React.FC = () => {
             강사 프로필
           </motion.h2>
           <motion.div
-            className="grid md:grid-cols-3 gap-6 lg:gap-8"
+            className="overflow-x-auto pb-4 -mx-6 px-6 md:-mx-12 md:px-12 scrollbar-horizontal"
             variants={staggerUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(147, 51, 234, 0.5) transparent',
+            }}
           >
-            {coaches.map((coach) => (
-              <motion.div
-                key={coach.id}
-                className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl"
-                variants={fadeInUp}
-                whileHover={{ y: -8 }}
-                transition={{ type: 'spring', stiffness: 250, damping: 24 }}
-              >
+            <div className="flex gap-6 lg:gap-8 min-w-max">
+              {coaches.map((coach) => (
+                <motion.div
+                  key={coach.id}
+                  className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl flex-shrink-0 w-[85vw] sm:w-[200px] md:w-[300px] lg:w-[400px]"
+                  variants={fadeInUp}
+                  whileHover={{ y: -8 }}
+                  transition={{ type: 'spring', stiffness: 250, damping: 24 }}
+                >
                 {/* 메인 이미지 */}
                 <motion.div className="relative" variants={fadeInScale}>
                   <img 
@@ -235,8 +240,9 @@ const Teachers: React.FC = () => {
                     </div>
                   </div>
                 </motion.div>
-            </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </motion.section>
       </motion.main>
