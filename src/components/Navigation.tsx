@@ -86,8 +86,15 @@ const Navigation: React.FC = () => {
         {/* 문의하기 버튼 - 오른쪽 배치 */}
         <div className="hidden md:flex absolute right-0">
           <Link
-            to="/#contact"
+            to={location.pathname === '/' ? '#contact' : '/#contact'}
             className="font-bebas group px-4 py-2 lg:px-6 lg:py-3 rounded-full font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/50 flex items-center gap-2 text-base lg:text-lg tracking-wider text-white"
+            onClick={(e) => {
+              if (location.pathname !== '/') {
+                // 다른 페이지에서 메인 페이지로 이동 후 스크롤
+                e.preventDefault();
+                window.location.href = '/#contact';
+              }
+            }}
           >
             상담 신청
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,9 +160,15 @@ const Navigation: React.FC = () => {
               뉴스
             </Link>
             <Link
-              to="/#contact"
+              to={location.pathname === '/' ? '#contact' : '/#contact'}
               className="font-bebas inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 transition-all duration-300 shadow-lg text-lg tracking-wider"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => {
+                setIsMobileMenuOpen(false);
+                if (location.pathname !== '/') {
+                  e.preventDefault();
+                  window.location.href = '/#contact';
+                }
+              }}
             >
               문의하기
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
