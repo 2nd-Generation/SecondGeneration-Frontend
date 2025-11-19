@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   fadeInSoft,
@@ -10,6 +11,7 @@ import {
 } from '../utils/motionPresets';
 
 const About: React.FC = () => {
+  const navigate = useNavigate();
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -101,6 +103,7 @@ const About: React.FC = () => {
                     className="px-8 py-4 bg-violet-500 hover:bg-violet-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/25"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
+                    onClick={() => navigate('/class')}
                   >
                     프로그램 보기
                   </motion.button>
@@ -108,6 +111,7 @@ const About: React.FC = () => {
                     className="px-8 py-4 border-2 border-violet-500/50 hover:border-violet-400 text-violet-300 hover:text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.97 }}
+                    onClick={() => navigate('/teachers')}
                   >
                     강사진 소개
                   </motion.button>
@@ -334,17 +338,23 @@ const About: React.FC = () => {
                     className="flex flex-col sm:flex-row gap-6 justify-center items-center"
                     variants={fadeInUp}
                   >
-                    <motion.button
-                      className="px-10 py-4 bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/25"
+                    <motion.a
+                      href="http://pf.kakao.com/_xayxnLG"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-10 py-4 bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/25 cursor-pointer"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.97 }}
                     >
                       프로그램 신청하기
-                    </motion.button>
+                    </motion.a>
                     <motion.button
                       className="px-10 py-4 border-2 border-accent-gold/50 hover:border-accent-gold text-accent-gold hover:text-white hover:bg-accent-gold font-bold rounded-xl transition-all duration-300 transform hover:scale-105"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.97 }}
+                      onClick={() => {
+                        window.location.href = '/#contact';
+                      }}
                     >
                       무료 상담 신청
                     </motion.button>
