@@ -1,4 +1,6 @@
-export const API_BASE_URL = 'http://3.38.35.5:8080';
+// 환경 변수에서 API URL 가져오기, 없으면 기본값 사용
+// Vite에서는 VITE_ 접두사가 필요합니다
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://3.38.35.5:8080';
 
 // JWT 토큰을 localStorage에서 가져오기
 export const getAccessToken = (): string | null => {
