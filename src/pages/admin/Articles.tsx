@@ -10,6 +10,7 @@ import {
   type ArticleCreateRequest,
   type ArticleCategory,
 } from '../../api/article';
+import { uploadImage } from '../../api/image';
 import { fadeInUp, staggerUp, fadeInSoft } from '../../utils/motionPresets';
 
 const Articles: React.FC = () => {
@@ -221,7 +222,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     title: article?.title || '',
     subTitle: article?.subTitle || '',
     content: '',
-    thumbnailUrl: null,
+    thumbnailUrl: article?.thumbnailUrl || null,
     postedAt: article?.postedAt || new Date().toISOString().split('T')[0],
     startDate: new Date().toISOString().split('T')[0],
     endDate: new Date().toISOString().split('T')[0],
@@ -229,6 +230,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     popup: article?.popup || false,
   });
   const [loading, setLoading] = useState(false);
+  const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
   const [error, setError] = useState('');
 
   const categories: ArticleCategory[] = ['NEWS', 'EVENT', 'RECRUIT', 'TEST_UPDATE'];
@@ -255,6 +257,26 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleThumbnailUpload = async (file: File) => {
+    try {
+      setUploadingThumbnail(true);
+      const imageUrl = await uploadImage(file);
+      setFormData({ ...formData, thumbnailUrl: imageUrl });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '이미지 업로드에 실패했습니다.');
+    } finally {
+      setUploadingThumbnail(false);
+    }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleThumbnailUpload(file);
+    }
+    e.target.value = '';
   };
 
   return (
@@ -314,6 +336,31 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
               required
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold mb-2">썸네일 이미지 URL</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={formData.thumbnailUrl || ''}
+                onChange={(e) =>
+                  setFormData({ ...formData, thumbnailUrl: e.target.value || null })
+                }
+                className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
+                placeholder="null 또는 URL"
+              />
+              <label className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg cursor-pointer transition-colors text-sm whitespace-nowrap">
+                {uploadingThumbnail ? '업로드 중...' : '업로드'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleFileSelect}
+                  disabled={uploadingThumbnail}
+                />
+              </label>
+            </div>
           </div>
 
           <div>

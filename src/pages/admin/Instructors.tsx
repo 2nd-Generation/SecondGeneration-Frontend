@@ -11,6 +11,7 @@ import {
   type InstructorCreateRequest,
   type CareerHistoryRequest,
 } from '../../api/instructor';
+import { uploadImage } from '../../api/image';
 import { fadeInUp, staggerUp, fadeInSoft } from '../../utils/motionPresets';
 
 const Instructors: React.FC = () => {
@@ -206,6 +207,7 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
+  const [uploadingImages, setUploadingImages] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
   const [formData, setFormData] = useState<InstructorCreateRequest>({
     name: '',
@@ -302,6 +304,43 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
     setFormData({ ...formData, careers: newCareers });
   };
 
+  const handleImageUpload = async (
+    file: File,
+    field: 'profileImgUrl' | 'sgeaLogoImgUrl' | `career-${number}-logoImgUrl`
+  ) => {
+    try {
+      setUploadingImages((prev) => ({ ...prev, [field]: true }));
+      const imageUrl = await uploadImage(file);
+      
+      if (field === 'profileImgUrl') {
+        setFormData({ ...formData, profileImgUrl: imageUrl });
+      } else if (field === 'sgeaLogoImgUrl') {
+        setFormData({ ...formData, sgeaLogoImgUrl: imageUrl });
+      } else if (field.startsWith('career-')) {
+        const careerIndex = parseInt(field.split('-')[1]);
+        const newCareers = [...formData.careers];
+        newCareers[careerIndex] = { ...newCareers[careerIndex], logoImgUrl: imageUrl };
+        setFormData({ ...formData, careers: newCareers });
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '이미지 업로드에 실패했습니다.');
+    } finally {
+      setUploadingImages((prev) => ({ ...prev, [field]: false }));
+    }
+  };
+
+  const handleFileSelect = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: 'profileImgUrl' | 'sgeaLogoImgUrl' | `career-${number}-logoImgUrl`
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleImageUpload(file, field);
+    }
+    // 같은 파일을 다시 선택할 수 있도록 input 값 초기화
+    e.target.value = '';
+  };
+
   if (loadingDetail) {
     return (
       <motion.div
@@ -361,27 +400,51 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold mb-2">프로필 이미지 URL</label>
-              <input
-                type="text"
-                value={formData.profileImgUrl || ''}
-                onChange={(e) =>
-                  setFormData({ ...formData, profileImgUrl: e.target.value || null })
-                }
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
-                placeholder="null 또는 URL"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={formData.profileImgUrl || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, profileImgUrl: e.target.value || null })
+                  }
+                  className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
+                  placeholder="null 또는 URL"
+                />
+                <label className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg cursor-pointer transition-colors text-sm whitespace-nowrap">
+                  {uploadingImages['profileImgUrl'] ? '업로드 중...' : '업로드'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileSelect(e, 'profileImgUrl')}
+                    disabled={uploadingImages['profileImgUrl']}
+                  />
+                </label>
+              </div>
             </div>
             <div>
               <label className="block text-sm font-semibold mb-2">SGEA 로고 이미지 URL</label>
-              <input
-                type="text"
-                value={formData.sgeaLogoImgUrl || ''}
-                onChange={(e) =>
-                  setFormData({ ...formData, sgeaLogoImgUrl: e.target.value || null })
-                }
-                className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
-                placeholder="null 또는 URL"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={formData.sgeaLogoImgUrl || ''}
+                  onChange={(e) =>
+                    setFormData({ ...formData, sgeaLogoImgUrl: e.target.value || null })
+                  }
+                  className="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
+                  placeholder="null 또는 URL"
+                />
+                <label className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg cursor-pointer transition-colors text-sm whitespace-nowrap">
+                  {uploadingImages['sgeaLogoImgUrl'] ? '업로드 중...' : '업로드'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleFileSelect(e, 'sgeaLogoImgUrl')}
+                    disabled={uploadingImages['sgeaLogoImgUrl']}
+                  />
+                </label>
+              </div>
             </div>
           </div>
 
@@ -460,13 +523,25 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
                       <option value="ANALYST">ANALYST</option>
                       <option value="MANAGER">MANAGER</option>
                     </select>
-                    <input
-                      type="text"
-                      value={career.logoImgUrl || ''}
-                      onChange={(e) => updateCareer(index, 'logoImgUrl', e.target.value || null)}
-                      placeholder="로고 이미지 URL"
-                      className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
-                    />
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={career.logoImgUrl || ''}
+                        onChange={(e) => updateCareer(index, 'logoImgUrl', e.target.value || null)}
+                        placeholder="로고 이미지 URL"
+                        className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+                      />
+                      <label className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded cursor-pointer transition-colors text-sm whitespace-nowrap">
+                        {uploadingImages[`career-${index}-logoImgUrl`] ? '업로드 중...' : '업로드'}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleFileSelect(e, `career-${index}-logoImgUrl` as `career-${number}-logoImgUrl`)}
+                          disabled={uploadingImages[`career-${index}-logoImgUrl`]}
+                        />
+                      </label>
+                    </div>
                   </div>
                 </div>
               ))}

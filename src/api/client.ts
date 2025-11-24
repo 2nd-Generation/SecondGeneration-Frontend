@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://3.38.35.5:8080';
+export const API_BASE_URL = 'http://3.38.35.5:8080';
 
 // JWT 토큰을 localStorage에서 가져오기
 export const getAccessToken = (): string | null => {
