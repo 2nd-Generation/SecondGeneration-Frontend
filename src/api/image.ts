@@ -1,4 +1,4 @@
-import { API_BASE_URL, getAccessToken } from './client';
+import { getApiBaseUrl, getAccessToken } from './client';
 
 /**
  * 이미지 파일을 업로드하고 URL을 반환받습니다.
@@ -18,7 +18,9 @@ export const uploadImage = async (file: File): Promise<string> => {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/image/upload`, {
+  // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
+  const apiBaseUrl = getApiBaseUrl();
+  const response = await fetch(`${apiBaseUrl}/api/image/upload`, {
     method: 'POST',
     headers,
     body: formData,
