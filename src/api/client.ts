@@ -1,19 +1,24 @@
 // 환경 변수에서 API URL 가져오기, 없으면 기본값 사용
 // Vite에서는 VITE_ 접두사가 필요합니다
-// 프로덕션에서는 Vercel rewrites를 통해 프록시되므로 상대 경로 사용
-// 개발 환경에서는 직접 API 서버로 요청
+// HTTPS 환경에서는 Vercel serverless function을 통해 프록시되므로 상대 경로 사용
+// 개발 환경(HTTP)에서는 직접 API 서버로 요청
 const getApiBaseUrl = () => {
   // 환경 변수가 설정되어 있으면 사용
   if (import.meta.env.VITE_API_BASE_URL) {
     return import.meta.env.VITE_API_BASE_URL;
   }
   
-  // 프로덕션 환경에서는 상대 경로 사용 (Vercel rewrites가 프록시)
+  // 브라우저 환경에서 HTTPS인 경우 항상 상대 경로 사용 (Mixed Content 방지)
+  if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
+    return '';
+  }
+  
+  // 프로덕션 빌드인 경우 상대 경로 사용
   if (import.meta.env.PROD) {
     return '';
   }
   
-  // 개발 환경에서는 직접 API 서버로 요청
+  // 개발 환경(HTTP)에서는 직접 API 서버로 요청
   return 'http://3.38.35.5:8080';
 };
 
