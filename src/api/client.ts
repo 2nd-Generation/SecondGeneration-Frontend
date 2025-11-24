@@ -2,15 +2,17 @@
 // Vite에서는 VITE_ 접두사가 필요합니다
 // HTTPS 환경에서는 Vercel serverless function을 통해 프록시되므로 상대 경로 사용
 // 개발 환경(HTTP)에서는 직접 API 서버로 요청
-const getApiBaseUrl = () => {
-  // 환경 변수가 설정되어 있으면 사용
-  if (import.meta.env.VITE_API_BASE_URL) {
-    return import.meta.env.VITE_API_BASE_URL;
-  }
-  
+// 런타임에서 매번 체크하여 HTTPS 환경을 감지
+export const getApiBaseUrl = () => {
   // 브라우저 환경에서 HTTPS인 경우 항상 상대 경로 사용 (Mixed Content 방지)
+  // 환경 변수보다 우선순위가 높음
   if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
     return '';
+  }
+  
+  // 환경 변수가 설정되어 있으면 사용 (HTTP 환경에서만)
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
   }
   
   // 프로덕션 빌드인 경우 상대 경로 사용
@@ -21,8 +23,6 @@ const getApiBaseUrl = () => {
   // 개발 환경(HTTP)에서는 직접 API 서버로 요청
   return 'http://3.38.35.5:8080';
 };
-
-export const API_BASE_URL = getApiBaseUrl();
 
 // JWT 토큰을 localStorage에서 가져오기
 export const getAccessToken = (): string | null => {
@@ -56,7 +56,9 @@ export const apiRequest = async <T>(
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
+  const apiBaseUrl = getApiBaseUrl();
+  const response = await fetch(`${apiBaseUrl}${endpoint}`, {
     ...options,
     headers,
   });
