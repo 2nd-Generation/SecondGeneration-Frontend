@@ -6,6 +6,14 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  // 디버깅: 요청 정보 로깅
+  console.log('API Request:', {
+    method: req.method,
+    url: req.url,
+    query: req.query,
+    path: req.query.path,
+  });
+
   // CORS 헤더 설정
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,9 +37,17 @@ export default async function handler(
 
   try {
     // path 파라미터 추출
-    const path = Array.isArray(req.query.path) 
-      ? req.query.path.join('/') 
-      : (req.query.path as string) || '';
+    // Vercel의 catch-all 라우트에서 req.query.path 사용
+    let path = '';
+    if (req.query.path) {
+      path = Array.isArray(req.query.path) 
+        ? req.query.path.join('/') 
+        : (req.query.path as string);
+    } else if (req.url) {
+      // fallback: req.url에서 직접 추출
+      const urlPath = req.url.replace(/^\/api\//, '').split('?')[0];
+      path = urlPath;
+    }
     
     const url = `${API_BASE_URL}/api/${path}`;
 
