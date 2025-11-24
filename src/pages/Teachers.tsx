@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   fadeInSoft,
@@ -7,6 +7,7 @@ import {
   staggerUp,
   easeEmphasized,
 } from '../utils/motionPresets';
+import { getInstructors, getInstructor, type InstructorDetailResponse } from '../api/instructor';
 
 // 팀 로고 파일 경로 매핑
 const teamLogoSrcByName: Record<string, string> = {
@@ -41,82 +42,113 @@ type HistoryItem = {
 };
 
 type Coach = {
-  id: string;
+  id: number;
   name: string;
   displayName: string;
-  title: string;
   photoSrc: string;
+  sgeaLogoSrc: string;
   gameLogoSrc?: string | string[];
   playerHistory: HistoryItem[];
   coachHistory: HistoryItem[];
+  content: string;
 };
 
-const coaches: Coach[] = [
-  {
-    id: 'jeonghi',
-    name: '이정하',
-    displayName: 'Jeong Hi 이정하',
-    title: 'Coach',
-    photoSrc: '/Jeong Hi.png',
-    gameLogoSrc: '/CITYPNG11.png',
-    playerHistory: [
-      { year: '2015-2018', team: 'Heroes Player' },
-      { year: '2021', team: 'APEX PEOPLE' },
-      { year: '2021-2022', team: 'DWG KIA' },
-      { year: '2022', team: 'Maru Gaming' },
-      { year: '2023', team: 'Nongshim RedForce' },
-      { year: '2023', team: 'Regans Gaming' },
-      { year: '2024', team: 'BNK FearX' },
-      { year: '2025', team: 'Pulsar Esports' },
-    ],
-    coachHistory: [
-      { year: '2025', team: 'SGEA', role: 'Coach', isCoach: true },
-    ],
-  },
-  {
-    id: 'rexi',
-    name: '서재원',
-    displayName: 'Rexi 서재원',
-    title: 'Head/Coach',
-    photoSrc: '/coach/rexi.png',
-    gameLogoSrc: ['/Overwatch.png', '/CITYPNG11.png'],
-    playerHistory: [
-      { year: '2018', team: 'SkyFoxes' },
-      { year: '2019', team: 'X-Gaming' },
-      { year: '2020', team: 'Neutral Break Gaming' },
-    ],
-    coachHistory: [
-      { year: '2019', team: 'Eternity Gaming', role: 'Head Coach', isCoach: true },
-      { year: '2020', team: 'Seoulgame Academy', role: 'Coach', isCoach: true },
-      { year: '2021', team: 'Gen.G Global Academy', role: 'Coach', isCoach: true },
-      { year: '2022-2023', team: 'Maru Game Academy', role: 'Coach', isCoach: true },
-      { year: '2024', team: 'WindTree', role: 'Head Coach', isCoach: true },
-      { year: '2025', team: 'SGEA', role: 'Coach', isCoach: true },
-    ],
-  },
-  {
-    id: 'mandu',
-    name: '김찬희',
-    displayName: 'Mandu 김찬희',
-    title: 'Coach',
-    photoSrc: '/coach/mandu.jpg',
-    gameLogoSrc: ['/Overwatch.png', '/CITYPNG11.png'],
-    playerHistory: [
-      { year: '2018', team: 'WGS Armament' },
-      { year: '2019', team: 'O2 Blast' },
-      { year: '2020', team: 'New York Excelsior' },
-      { year: '2021', team: 'Guangzhou Charge' },
-      { year: '2024', team: 'WindTree' },
-    ],
-    coachHistory: [
-      { year: '2023', team: 'Maru Game Academy', role: 'Coach', isCoach: true },
-      { year: '2025', team: 'Maru Game Academy', role: 'Coach', isCoach: true },
-      { year: '2025', team: 'SGEA', role: 'Coach', isCoach: true },
-    ],
-  },
-];
+// API 데이터를 Coach 타입으로 변환
+const convertInstructorToCoach = (instructor: InstructorDetailResponse): Coach => {
+  const playerHistory: HistoryItem[] = [];
+  const coachHistory: HistoryItem[] = [];
+
+  instructor.careers.forEach((career) => {
+    const historyItem: HistoryItem = {
+      year: career.period,
+      team: career.teamName,
+    };
+
+    if (career.roleType === 'PLAYER') {
+      playerHistory.push(historyItem);
+    } else {
+      historyItem.isCoach = true;
+      historyItem.role = 
+        career.roleType === 'HEAD_COACH' ? 'Head Coach' :
+        career.roleType === 'COACH' ? 'Coach' :
+        career.roleType === 'MANAGER' ? 'Manager' : '';
+      coachHistory.push(historyItem);
+    }
+  });
+
+  const gameLogoSrc = instructor.games.length === 1
+    ? instructor.games[0].gameLogoUrl
+    : instructor.games.length > 1
+    ? instructor.games.map(g => g.gameLogoUrl)
+    : undefined;
+
+  return {
+    id: instructor.id,
+    name: instructor.name,
+    displayName: `${instructor.nickname} ${instructor.name}`,
+    photoSrc: instructor.profileImgUrl || '',
+    sgeaLogoSrc: instructor.sgeaLogoImgUrl || '/LogoWhite.png',
+    gameLogoSrc,
+    playerHistory,
+    coachHistory,
+    content: instructor.content || '메이저 리그 출신 코치의 풍부한 경험과 노하우를 바탕으로\n학생 개개인의 특성을 분석하여 맞춤형 훈련을 제공합니다.',
+  };
+};
 
 const Teachers: React.FC = () => {
+  const [coaches, setCoaches] = useState<Coach[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    loadInstructors();
+  }, []);
+
+  const loadInstructors = async () => {
+    try {
+      setLoading(true);
+      const instructors = await getInstructors();
+      
+      // 각 강사의 상세 정보 가져오기
+      const instructorDetails = await Promise.all(
+        instructors.map(instructor => getInstructor(instructor.id))
+      );
+      
+      const convertedCoaches = instructorDetails.map(convertInstructorToCoach);
+      setCoaches(convertedCoaches);
+      setError('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '강사 정보를 불러오는데 실패했습니다.');
+      console.error('Failed to load instructors:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-custom-bg min-h-screen flex items-center justify-center">
+        <div className="text-white text-xl">로딩 중...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="bg-custom-bg min-h-screen flex items-center justify-center">
+        <div className="text-red-400 text-xl">{error}</div>
+      </div>
+    );
+  }
+
+  if (coaches.length === 0) {
+    return (
+      <div className="bg-custom-bg min-h-screen flex items-center justify-center">
+        <div className="text-white text-xl">등록된 강사가 없습니다.</div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-custom-bg min-h-screen">
       {/* Header Space */}
@@ -157,7 +189,7 @@ const Teachers: React.FC = () => {
             <div className="flex gap-6 lg:gap-8 min-w-max">
               {coaches.map((coach) => (
                 <motion.div
-                  key={coach.id}
+                  key={coach.id.toString()}
                   className="group relative bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl flex-shrink-0 w-[85vw] sm:w-[200px] md:w-[300px] lg:w-[400px]"
                   variants={fadeInUp}
                   whileHover={{ y: -8 }}
@@ -179,7 +211,7 @@ const Teachers: React.FC = () => {
                     <div className="flex items-end justify-between">
                       <div className="flex items-end gap-2 md:gap-3">
                         <div className="flex-shrink-0">
-                          <img src="/LogoWhite.png" alt="SGEA Logo" className="h-[calc(2.5rem+0.25rem+1.25rem-0.5rem)] md:h-[calc(3rem+0.25rem+1.5rem-1.5rem)] lg:h-[calc(4rem+0.25rem+1.75rem-1.5rem)] w-auto object-contain" />
+                          <img src={coach.sgeaLogoSrc} alt="SGEA Logo" className="h-[calc(2.5rem+0.25rem+1.25rem-0.5rem)] md:h-[calc(3rem+0.25rem+1.5rem-1.5rem)] lg:h-[calc(4rem+0.25rem+1.75rem-1.5rem)] w-auto object-contain" />
                         </div>
                         <div>
                           <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-0.2" style={{ letterSpacing: 0 }}>
@@ -206,9 +238,8 @@ const Teachers: React.FC = () => {
                   {/* Hover 오버레이 - 상세 정보 */}
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
                     <div className="p-4 md:p-5 lg:p-6 w-full h-full overflow-hidden flex flex-col">
-                      <p className="text-gray-700 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed flex-shrink-0 mt-8 md:mt-10">
-                        메이저 리그 출신 코치의 풍부한 경험과 노하우를 바탕으로<br />
-                        학생 개개인의 특성을 분석하여 맞춤형 훈련을 제공합니다.
+                      <p className="text-gray-700 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed flex-shrink-0 mt-8 md:mt-10 whitespace-pre-line">
+                        {coach.content}
                       </p>
                       
                       <div className="border-t border-gray-200 pt-3 md:pt-4 flex-1 overflow-hidden">

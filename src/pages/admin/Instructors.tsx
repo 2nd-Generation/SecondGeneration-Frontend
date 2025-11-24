@@ -520,7 +520,6 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
                       <option value="PLAYER">PLAYER</option>
                       <option value="HEAD_COACH">HEAD_COACH</option>
                       <option value="COACH">COACH</option>
-                      <option value="ANALYST">ANALYST</option>
                       <option value="MANAGER">MANAGER</option>
                     </select>
                     <div className="flex gap-2">

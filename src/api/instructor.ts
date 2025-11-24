@@ -1,6 +1,6 @@
 import { apiRequest } from './client';
 
-export type RoleType = 'PLAYER' | 'HEAD_COACH' | 'COACH' | 'ANALYST' | 'MANAGER';
+export type RoleType = 'PLAYER' | 'HEAD_COACH' | 'COACH' | 'MANAGER';
 
 export interface GameResponse {
   id: number;
