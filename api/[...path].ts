@@ -21,26 +21,45 @@ export default async function handler(
     return;
   }
 
+  // 메서드가 없으면 405 에러
+  if (!req.method) {
+    res.status(405).json({ message: 'Method not allowed' });
+    return;
+  }
+
   try {
-    const path = Array.isArray(req.query.path) ? req.query.path.join('/') : req.query.path || '';
+    // path 파라미터 추출
+    const path = Array.isArray(req.query.path) 
+      ? req.query.path.join('/') 
+      : (req.query.path as string) || '';
+    
     const url = `${API_BASE_URL}/api/${path}`;
 
-    // 요청 헤더 복사 (Authorization 등)
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
-
-    if (req.headers.authorization) {
-      headers['Authorization'] = req.headers.authorization;
+    // 요청 헤더 복사
+    const headers: Record<string, string> = {};
+    
+    // Content-Type은 body가 있을 때만 설정
+    if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
+      headers['Content-Type'] = 'application/json';
     }
 
-    // 요청 본문
-    const body = req.method !== 'GET' && req.method !== 'HEAD' ? JSON.stringify(req.body) : undefined;
+    // Authorization 헤더 복사
+    if (req.headers.authorization) {
+      headers['Authorization'] = req.headers.authorization as string;
+    }
+
+    // 요청 본문 처리
+    let body: string | undefined = undefined;
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+      if (req.body) {
+        body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+      }
+    }
 
     // API 서버로 요청 전달
     const response = await fetch(url, {
       method: req.method,
-      headers,
+      headers: Object.keys(headers).length > 0 ? headers : undefined,
       body,
     });
 
