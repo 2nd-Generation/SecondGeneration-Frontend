@@ -1,6 +1,23 @@
 // 환경 변수에서 API URL 가져오기, 없으면 기본값 사용
 // Vite에서는 VITE_ 접두사가 필요합니다
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://3.38.35.5:8080';
+// 프로덕션에서는 Vercel rewrites를 통해 프록시되므로 상대 경로 사용
+// 개발 환경에서는 직접 API 서버로 요청
+const getApiBaseUrl = () => {
+  // 환경 변수가 설정되어 있으면 사용
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+  
+  // 프로덕션 환경에서는 상대 경로 사용 (Vercel rewrites가 프록시)
+  if (import.meta.env.PROD) {
+    return '';
+  }
+  
+  // 개발 환경에서는 직접 API 서버로 요청
+  return 'http://3.38.35.5:8080';
+};
+
+export const API_BASE_URL = getApiBaseUrl();
 
 // JWT 토큰을 localStorage에서 가져오기
 export const getAccessToken = (): string | null => {
