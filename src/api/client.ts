@@ -21,7 +21,7 @@ export const getApiBaseUrl = () => {
   }
   
   // 개발 환경(HTTP)에서는 직접 API 서버로 요청
-  return 'https://sgeaapi.kro.kr/swagger-ui/index.html';
+  return 'https://sgeaapi.kro.kr';
 };
 
 // JWT 토큰을 localStorage에서 가져오기

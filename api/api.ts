@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const API_BASE_URL = 'https://sgeaapi.kro.kr';
+const API_BASE_URL = process.env.API_BASE_URL || 'https://sgeaapi.kro.kr';
+const API_PREFIX = process.env.API_PREFIX || '/api';
 
 export default async function handler(
   req: VercelRequest,
@@ -11,7 +12,6 @@ export default async function handler(
     method: req.method,
     url: req.url,
     query: req.query,
-    path: req.query.path,
   });
 
   // CORS 헤더 설정
@@ -36,20 +36,23 @@ export default async function handler(
   }
 
   try {
-    // path 파라미터 추출
-    // Vercel의 catch-all 라우트에서 req.query.path 사용
+    // req.url에서 경로 추출
+    // 예: /api/admin/login -> admin/login
+    // 예: /api/admin/login?param=value -> admin/login
     let path = '';
-    if (req.query.path) {
-      path = Array.isArray(req.query.path) 
-        ? req.query.path.join('/') 
-        : (req.query.path as string);
-    } else if (req.url) {
-      // fallback: req.url에서 직접 추출
-      const urlPath = req.url.replace(/^\/api\//, '').split('?')[0];
+    if (req.url) {
+      // /api/ 이후의 경로 추출
+      const urlPath = req.url.replace(/^\/api\/?/, '').split('?')[0];
       path = urlPath;
     }
     
-    const url = `${API_BASE_URL}/api/${path}`;
+    // API URL 구성: API_BASE_URL + API_PREFIX + path
+    const url = path 
+      ? `${API_BASE_URL}${API_PREFIX}/${path}`
+      : `${API_BASE_URL}${API_PREFIX}`;
+    
+    // 디버깅: 최종 프록시 URL 로깅
+    console.log('Proxying to:', url);
 
     // 요청 헤더 복사
     const headers: Record<string, string> = {};
@@ -101,4 +104,3 @@ export default async function handler(
     });
   }
 }
-
