@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://sgeaapi.kro.kr/api/:path*"
+      "destination": "https://sgeaapi.kro.kr/api/:path*"
     },
     {
       "source": "/(.*)",
