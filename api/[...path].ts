@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const API_BASE_URL = 'http://3.38.35.5:8080';
+const API_BASE_URL = 'https://sgeaapi.kro.kr/swagger-ui/index.html';
 
 export default async function handler(
   req: VercelRequest,
