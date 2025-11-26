@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const API_BASE_URL = 'https://sgeaapi.kro.kr/swagger-ui/index.html';
+const API_BASE_URL = 'https://sgeaapi.kro.kr';
 
 export default async function handler(
   req: VercelRequest,
@@ -53,21 +53,24 @@ export default async function handler(
 
     // 요청 헤더 복사
     const headers: Record<string, string> = {};
-    
-    // Content-Type은 body가 있을 때만 설정
-    if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
-      headers['Content-Type'] = 'application/json';
-    }
 
     // Authorization 헤더 복사
     if (req.headers.authorization) {
       headers['Authorization'] = req.headers.authorization as string;
     }
 
+    // 다른 헤더들 복사 (필요한 경우)
+    if (req.headers['content-type']) {
+      headers['Content-Type'] = req.headers['content-type'] as string;
+    } else if (req.method !== 'GET' && req.method !== 'HEAD') {
+      headers['Content-Type'] = 'application/json';
+    }
+
     // 요청 본문 처리
     let body: string | undefined = undefined;
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       if (req.body) {
+        // req.body가 이미 객체인 경우 JSON.stringify, 문자열인 경우 그대로 사용
         body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
       }
     }
