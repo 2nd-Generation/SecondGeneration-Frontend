@@ -36,12 +36,15 @@ export default async function handler(
   }
 
   try {
-    // req.url에서 경로 추출
-    // 예: /api/admin/login -> admin/login
-    // 예: /api/admin/login?param=value -> admin/login
+    // 경로 추출: catch-all 라우트에서는 req.query.path 사용
     let path = '';
-    if (req.url) {
-      // /api/ 이후의 경로 추출
+    if (req.query.path) {
+      // req.query.path는 배열일 수 있음
+      path = Array.isArray(req.query.path) 
+        ? req.query.path.join('/') 
+        : (req.query.path as string);
+    } else if (req.url) {
+      // fallback: req.url에서 직접 추출
       const urlPath = req.url.replace(/^\/api\/?/, '').split('?')[0];
       path = urlPath;
     }
