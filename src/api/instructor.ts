@@ -45,6 +45,8 @@ export interface InstructorCreateRequest {
   sgeaLogoImgUrl: string | null;
   content: string;
   careers: CareerHistoryRequest[];
+  // API 문서 예시에서는 문자열("Overwatch2, Valorant")로 되어 있지만,
+  // 실제 서버는 배열을 받을 수 있습니다. 배열로 전송합니다.
   gameNames: string[];
 }
 

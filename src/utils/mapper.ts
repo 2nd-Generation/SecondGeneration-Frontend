@@ -22,6 +22,8 @@ export const normalizeGameName = (input: string): string | null => {
     .replace(/[^\w\s]/g, ''); // 특수문자 제거
   
   // Overwatch 2 변형들
+  // API 문서 예시에서는 "Overwatch2" (공백 없음)도 사용되지만,
+  // 일반적으로는 "Overwatch 2" (공백 있음)를 사용합니다.
   if (
     normalized === 'overwatch2' ||
     normalized === 'overwatch 2' ||
@@ -30,6 +32,8 @@ export const normalizeGameName = (input: string): string | null => {
     normalized === '오버워치2' ||
     normalized === '오버워치 2'
   ) {
+    // API 문서 예시와 일치시키기 위해 "Overwatch2"도 허용하지만,
+    // 표준 형식인 "Overwatch 2"를 반환합니다.
     return 'Overwatch 2';
   }
   
@@ -63,6 +67,18 @@ export const parseGameNames = (input: string): string[] => {
     .split(',') // 쉼표로 분리
     .map(name => normalizeGameName(name)) // 각 이름 정규화
     .filter((name): name is string => name !== null); // null 제거
+};
+
+/**
+ * 게임 이름 배열을 서버가 기대하는 문자열 형식으로 변환
+ * API 문서에 따르면 gameNames는 문자열로 전송될 수 있습니다.
+ * 
+ * @param gameNames - 게임 이름 배열 (예: ["Overwatch 2", "Valorant"])
+ * @returns 쉼표로 구분된 문자열 (예: "Overwatch 2, Valorant")
+ */
+export const formatGameNamesToString = (gameNames: string[]): string => {
+  if (!Array.isArray(gameNames) || gameNames.length === 0) return '';
+  return gameNames.join(', ');
 };
 
 /**
@@ -143,10 +159,11 @@ export const normalizeInteger = (value: number | string | null | undefined, defa
 
 /**
  * RoleType을 검증하고 정규화
+ * API 문서 예시에서는 "Head Coach" 형식도 사용됩니다.
  * 
- * @param value - 검증할 RoleType 값
+ * @param value - 검증할 RoleType 값 (예: "Head Coach", "HEAD_COACH", "Player")
  * @param defaultValue - 유효하지 않은 경우 기본값 (기본: 'PLAYER')
- * @returns 정규화된 RoleType
+ * @returns 정규화된 RoleType (예: "HEAD_COACH", "PLAYER")
  */
 export const normalizeRoleType = (
   value: string | null | undefined,
@@ -154,15 +171,29 @@ export const normalizeRoleType = (
 ): 'PLAYER' | 'HEAD_COACH' | 'COACH' | 'MANAGER' => {
   if (!value || typeof value !== 'string') return defaultValue;
   
-  const normalized = value.trim().toUpperCase();
+  const trimmed = value.trim();
+  const normalized = trimmed.toUpperCase().replace(/\s+/g, '_');
   
+  // "Head Coach" → "HEAD_COACH" 변환
   if (
-    normalized === 'PLAYER' ||
     normalized === 'HEAD_COACH' ||
-    normalized === 'COACH' ||
-    normalized === 'MANAGER'
+    normalized === 'HEADCOACH' ||
+    trimmed.toLowerCase() === 'head coach'
   ) {
-    return normalized as 'PLAYER' | 'HEAD_COACH' | 'COACH' | 'MANAGER';
+    return 'HEAD_COACH';
+  }
+  
+  // 다른 RoleType들
+  if (normalized === 'PLAYER') {
+    return 'PLAYER';
+  }
+  
+  if (normalized === 'COACH') {
+    return 'COACH';
+  }
+  
+  if (normalized === 'MANAGER') {
+    return 'MANAGER';
   }
   
   return defaultValue;

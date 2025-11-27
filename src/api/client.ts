@@ -62,11 +62,14 @@ export const apiRequest = async <T>(
     }
   }
 
-  // 헤더 구성: 기본 헤더 + 기존 헤더 + Authorization (우선순위)
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-    ...existingHeaders,
-  };
+  // 헤더 구성: 기존 헤더를 먼저 복사
+  const headers: Record<string, string> = { ...existingHeaders };
+
+  // Body가 FormData가 아닐 때만 Content-Type: application/json 추가
+  // FormData의 경우 브라우저가 자동으로 multipart/form-data와 boundary를 설정해야 함
+  if (!(options.body instanceof FormData) && !headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   // 토큰이 있으면 Authorization 헤더에 추가 (항상 마지막에 추가하여 덮어쓰기 방지)
   if (token) {
