@@ -92,9 +92,21 @@ export const apiRequest = async <T>(
 
   if (!response.ok) {
     if (response.status === 401) {
-      // 인증 실패 시 토큰 제거
-      removeAccessToken();
-      throw new Error('인증에 실패했습니다. 다시 로그인해주세요.');
+      // 인증 실패 처리
+      // 개발 환경에서는 토큰을 즉시 삭제하지 않아 디버깅이 용이합니다.
+      // 프로덕션에서는 보안을 위해 토큰을 삭제합니다.
+      if (import.meta.env.PROD) {
+        // 프로덕션: 보안을 위해 토큰 즉시 삭제
+        removeAccessToken();
+      } else {
+        // 개발 환경: 토큰 유지 (수동으로 삭제 가능하도록)
+        console.warn(
+          '[개발 모드] 인증 실패(401)가 발생했습니다. ' +
+          '토큰이 만료되었거나 서버가 재시작되었을 수 있습니다. ' +
+          '로컬 스토리지에서 accessToken을 수동으로 삭제하고 다시 로그인해주세요.'
+        );
+      }
+      throw new Error('인증에 실패했습니다. (401 Unauthorized) 다시 로그인해주세요.');
     }
     const error = await response.json().catch(() => ({ message: '요청에 실패했습니다.' }));
     throw new Error(error.message || `HTTP error! status: ${response.status}`);
