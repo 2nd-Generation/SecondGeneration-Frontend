@@ -209,19 +209,30 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [uploadingImages, setUploadingImages] = useState<Record<string, boolean>>({});
   const [error, setError] = useState('');
-  const [formData, setFormData] = useState<InstructorCreateRequest>({
+  const [gameNamesInput, setGameNamesInput] = useState<string>('');
+  const [formData, setFormData] = useState<Omit<InstructorCreateRequest, 'gameNames'>>({
     name: '',
     nickname: '',
     profileImgUrl: null,
     sgeaLogoImgUrl: null,
     content: '',
     careers: [],
-    gameNames: '',
   });
 
   useEffect(() => {
     if (instructorId) {
       loadInstructorDetail();
+    } else {
+      // 새로 생성할 때는 초기화
+      setGameNamesInput('');
+      setFormData({
+        name: '',
+        nickname: '',
+        profileImgUrl: null,
+        sgeaLogoImgUrl: null,
+        content: '',
+        careers: [],
+      });
     }
   }, [instructorId]);
 
@@ -243,8 +254,9 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
           roleType: career.roleType,
           logoImgUrl: career.logoImgUrl || null,
         })),
-        gameNames: detail.games.map((g) => g.name).join(', '),
       });
+      // 게임 목록을 쉼표로 구분된 문자열로 설정
+      setGameNamesInput(detail.games.map((g) => g.name).join(', '));
     } catch (err) {
       setError(err instanceof Error ? err.message : '강사 정보를 불러오는데 실패했습니다.');
     } finally {
@@ -269,11 +281,18 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
       return trimmed;
     };
 
+    // gameNames 문자열을 배열로 변환 (쉼표로 구분, 공백 제거, 빈 값 필터링)
+    const gameNamesArray = gameNamesInput
+      .split(',')
+      .map((name) => name.trim())
+      .filter((name) => name.length > 0);
+
     // 전송할 데이터 정리
     const submitData: InstructorCreateRequest = {
       ...formData,
       profileImgUrl: normalizeNull(formData.profileImgUrl),
       sgeaLogoImgUrl: normalizeNull(formData.sgeaLogoImgUrl),
+      gameNames: gameNamesArray, // 배열로 변환된 게임 목록
       careers: formData.careers.map((career) => ({
         ...career,
         logoImgUrl: normalizeNull(career.logoImgUrl),
@@ -492,8 +511,8 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
             <label className="block text-sm font-semibold mb-2">게임 목록 (쉼표로 구분)</label>
             <input
               type="text"
-              value={formData.gameNames}
-              onChange={(e) => setFormData({ ...formData, gameNames: e.target.value })}
+              value={gameNamesInput}
+              onChange={(e) => setGameNamesInput(e.target.value)}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
               placeholder="예: Overwatch2, Valorant"
             />

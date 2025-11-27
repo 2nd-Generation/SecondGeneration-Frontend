@@ -45,7 +45,7 @@ export interface InstructorCreateRequest {
   sgeaLogoImgUrl: string | null;
   content: string;
   careers: CareerHistoryRequest[];
-  gameNames: string;
+  gameNames: string[];
 }
 
 export interface InstructorUpdateRequest extends InstructorCreateRequest {}
