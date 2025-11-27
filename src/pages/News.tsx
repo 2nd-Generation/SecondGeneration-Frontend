@@ -26,6 +26,7 @@ const News: React.FC = () => {
   const [articles, setArticles] = useState<ArticleListResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
   const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT', 'TEST_UPDATE'];
 
@@ -315,15 +316,42 @@ const News: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 240, damping: 18 }}
               >
                 <div className={`h-2 ${news.categoryColor}`}></div>
-                {articles.find(a => a.id === news.id)?.thumbnailUrl && (
-                  <div className="w-full h-48 overflow-hidden">
-                    <img
-                      src={articles.find(a => a.id === news.id)?.thumbnailUrl}
-                      alt={news.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                )}
+                <div className="w-full h-48 overflow-hidden bg-gray-700 relative">
+                  {(() => {
+                    const article = articles.find(a => a.id === news.id);
+                    const thumbnailUrl = article?.thumbnailUrl;
+                    // 썸네일 URL이 유효한지 확인 (null, undefined, 빈 문자열, 'null' 문자열 체크)
+                    const hasValidThumbnail = thumbnailUrl && 
+                      thumbnailUrl.trim() !== '' && 
+                      thumbnailUrl !== 'null' &&
+                      thumbnailUrl !== 'undefined';
+                    const imageFailed = imageErrors.has(news.id);
+                    
+                    if (hasValidThumbnail && !imageFailed) {
+                      return (
+                        <>
+                          <img
+                            src={thumbnailUrl}
+                            alt={news.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            onError={() => {
+                              // 이미지 로드 실패 시 에러 상태에 추가
+                              setImageErrors(prev => new Set(prev).add(news.id));
+                            }}
+                          />
+                        </>
+                      );
+                    }
+                    // 썸네일이 없거나 이미지 로드 실패 시 placeholder 표시
+                    return (
+                      <div className="w-full h-full flex items-center justify-center text-gray-500">
+                        <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
+                    );
+                  })()}
+                </div>
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-6">
                     <div
