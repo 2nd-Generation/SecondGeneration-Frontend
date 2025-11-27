@@ -261,12 +261,38 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
       return;
     }
 
+    // 문자열 "null"을 실제 null로 변환하는 헬퍼 함수
+    const normalizeNull = (value: string | null): string | null => {
+      if (value === null || value === undefined) return null;
+      const trimmed = value.trim();
+      if (trimmed === '' || trimmed.toLowerCase() === 'null') return null;
+      return trimmed;
+    };
+
+    // 전송할 데이터 정리
+    const submitData: InstructorCreateRequest = {
+      ...formData,
+      profileImgUrl: normalizeNull(formData.profileImgUrl),
+      sgeaLogoImgUrl: normalizeNull(formData.sgeaLogoImgUrl),
+      careers: formData.careers.map((career) => ({
+        ...career,
+        logoImgUrl: normalizeNull(career.logoImgUrl),
+        // roleType이 올바른 enum 값인지 확인
+        roleType: (career.roleType === 'PLAYER' || 
+                   career.roleType === 'HEAD_COACH' || 
+                   career.roleType === 'COACH' || 
+                   career.roleType === 'MANAGER') 
+          ? career.roleType 
+          : 'PLAYER', // 기본값
+      })),
+    };
+
     try {
       setLoading(true);
       if (instructorId) {
-        await updateInstructor(instructorId, formData);
+        await updateInstructor(instructorId, submitData);
       } else {
-        await createInstructor(formData);
+        await createInstructor(submitData);
       }
       onSuccess();
     } catch (err) {

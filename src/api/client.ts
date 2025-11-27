@@ -46,20 +46,40 @@ export const apiRequest = async <T>(
 ): Promise<T> => {
   const token = getAccessToken();
   
+  // 기존 헤더를 객체로 변환
+  const existingHeaders: Record<string, string> = {};
+  if (options.headers) {
+    if (options.headers instanceof Headers) {
+      options.headers.forEach((value, key) => {
+        existingHeaders[key] = value;
+      });
+    } else if (Array.isArray(options.headers)) {
+      options.headers.forEach(([key, value]) => {
+        existingHeaders[key] = value;
+      });
+    } else {
+      Object.assign(existingHeaders, options.headers);
+    }
+  }
+
+  // 헤더 구성: 기본 헤더 + 기존 헤더 + Authorization (우선순위)
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...(options.headers as Record<string, string>),
+    ...existingHeaders,
   };
 
-  // 토큰이 있으면 Authorization 헤더에 추가
+  // 토큰이 있으면 Authorization 헤더에 추가 (항상 마지막에 추가하여 덮어쓰기 방지)
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
   // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
   const apiBaseUrl = getApiBaseUrl();
+  
+  // options에서 headers를 제거하고 새로 만든 headers 사용
+  const { headers: _, ...restOptions } = options;
   const response = await fetch(`${apiBaseUrl}${endpoint}`, {
-    ...options,
+    ...restOptions,
     headers,
   });
 
