@@ -12,6 +12,17 @@ import {
 } from '../../api/article';
 import { uploadImage } from '../../api/image';
 import { fadeInUp, staggerUp, fadeInSoft } from '../../utils/motionPresets';
+import {
+  formatDateToLocalDate,
+  normalizeInteger,
+  normalizeNull,
+} from '../../utils/mapper';
+import {
+  validateRequiredFields,
+  validateDate,
+  validateDateRange,
+  validateNumberRange,
+} from '../../utils/validator';
 
 const Articles: React.FC = () => {
   const [articles, setArticles] = useState<ArticleListResponse[]>([]);
@@ -239,39 +250,61 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     e.preventDefault();
     setError('');
 
-    if (!formData.title || !formData.subTitle || !formData.content) {
-      setError('제목, 부제목, 내용을 모두 입력해주세요.');
+    // 1. 필수 필드 검증
+    const requiredValidation = validateRequiredFields({
+      제목: formData.title,
+      부제목: formData.subTitle,
+      내용: formData.content,
+    });
+    if (!requiredValidation.isValid) {
+      setError(requiredValidation.error || '필수 필드를 입력해주세요.');
       return;
     }
 
-    // 날짜를 YYYY-MM-DD 형식으로 명시적으로 변환 (백엔드 LocalDate 형식 요구)
-    const formatDate = (dateString: string): string => {
-      if (!dateString) return '';
-      // 이미 YYYY-MM-DD 형식이면 그대로 반환
-      if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
-        return dateString;
-      }
-      // Date 객체나 ISO 문자열인 경우 변환
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) {
-        return dateString; // 유효하지 않은 날짜면 원본 반환
-      }
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const day = String(date.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    };
+    // 2. 날짜 형식 검증
+    const postedAtValidation = validateDate(formData.postedAt, '게시일');
+    if (!postedAtValidation.isValid) {
+      setError(postedAtValidation.error || '게시일이 유효하지 않습니다.');
+      return;
+    }
 
-    // 전송할 데이터 준비 (날짜 포맷 명시적 변환)
+    const startDateValidation = validateDate(formData.startDate, '시작일');
+    if (!startDateValidation.isValid) {
+      setError(startDateValidation.error || '시작일이 유효하지 않습니다.');
+      return;
+    }
+
+    const endDateValidation = validateDate(formData.endDate, '종료일');
+    if (!endDateValidation.isValid) {
+      setError(endDateValidation.error || '종료일이 유효하지 않습니다.');
+      return;
+    }
+
+    // 3. 날짜 범위 검증
+    const dateRangeValidation = validateDateRange(formData.startDate, formData.endDate);
+    if (!dateRangeValidation.isValid) {
+      setError(dateRangeValidation.error || '날짜 범위가 유효하지 않습니다.');
+      return;
+    }
+
+    // 4. 우선순위 검증
+    const priorityValidation = validateNumberRange(formData.priority, 0, 9999, '우선순위');
+    if (!priorityValidation.isValid) {
+      setError(priorityValidation.error || '우선순위가 유효하지 않습니다.');
+      return;
+    }
+
+    // 5. 데이터 변환 및 정규화
     const submitData: ArticleCreateRequest = {
       ...formData,
-      postedAt: formatDate(formData.postedAt),
-      startDate: formatDate(formData.startDate),
-      endDate: formatDate(formData.endDate),
-      // priority가 숫자가 아닌 경우 처리
-      priority: typeof formData.priority === 'number' ? formData.priority : parseInt(String(formData.priority)) || 0,
+      postedAt: formatDateToLocalDate(formData.postedAt),
+      startDate: formatDateToLocalDate(formData.startDate),
+      endDate: formatDateToLocalDate(formData.endDate),
+      priority: normalizeInteger(formData.priority, 0),
+      thumbnailUrl: normalizeNull(formData.thumbnailUrl),
     };
 
+    // 6. 서버로 전송
     try {
       setLoading(true);
       if (article) {

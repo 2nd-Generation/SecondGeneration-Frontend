@@ -13,6 +13,16 @@ import {
 } from '../../api/instructor';
 import { uploadImage } from '../../api/image';
 import { fadeInUp, staggerUp, fadeInSoft } from '../../utils/motionPresets';
+import {
+  parseGameNames,
+  normalizeNull,
+  normalizeRoleType,
+} from '../../utils/mapper';
+import {
+  validateRequiredFields,
+  validateGameNames,
+  validateCareers,
+} from '../../utils/validator';
 
 const Instructors: React.FC = () => {
   const [instructors, setInstructors] = useState<InstructorListResponse[]>([]);
@@ -268,65 +278,45 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
     e.preventDefault();
     setError('');
 
-    if (!formData.name || !formData.nickname) {
-      setError('이름과 닉네임을 입력해주세요.');
+    // 1. 필수 필드 검증
+    const requiredValidation = validateRequiredFields({
+      이름: formData.name,
+      닉네임: formData.nickname,
+    });
+    if (!requiredValidation.isValid) {
+      setError(requiredValidation.error || '필수 필드를 입력해주세요.');
       return;
     }
 
-    // 문자열 "null"을 실제 null로 변환하는 헬퍼 함수
-    const normalizeNull = (value: string | null): string | null => {
-      if (value === null || value === undefined) return null;
-      const trimmed = value.trim();
-      if (trimmed === '' || trimmed.toLowerCase() === 'null') return null;
-      return trimmed;
-    };
-
-    // gameNames 문자열을 배열로 변환 (쉼표로 구분, 공백 제거, 빈 값 필터링)
-    // 백엔드는 정확히 "Overwatch 2" 또는 "Valorant"를 기대합니다
-    const gameNamesArray = gameNamesInput
-      .split(',')
-      .map((name) => {
-        const trimmed = name.trim();
-        // 대소문자 구분 없이 매핑하여 정확한 값으로 변환
-        const normalized = trimmed.toLowerCase();
-        if (normalized === 'overwatch2' || normalized === 'overwatch 2' || normalized === 'overwatch') {
-          return 'Overwatch 2';
-        }
-        if (normalized === 'valorant') {
-          return 'Valorant';
-        }
-        // 이미 정확한 형식이면 그대로 사용
-        return trimmed;
-      })
-      .filter((name) => name.length > 0);
-    
-    // 유효한 게임 이름인지 검증
-    const validGameNames = ['Overwatch 2', 'Valorant'];
-    const invalidGames = gameNamesArray.filter(name => !validGameNames.includes(name));
-    if (invalidGames.length > 0) {
-      setError(`유효하지 않은 게임 이름입니다: ${invalidGames.join(', ')}. 허용된 값: ${validGameNames.join(', ')}`);
+    // 2. 게임 이름 변환 및 검증
+    const gameNamesArray = parseGameNames(gameNamesInput);
+    const gameValidation = validateGameNames(gameNamesArray);
+    if (!gameValidation.isValid) {
+      setError(gameValidation.error || '게임 이름이 유효하지 않습니다.');
       return;
     }
 
-    // 전송할 데이터 정리
+    // 3. 경력 데이터 검증
+    const careerValidation = validateCareers(formData.careers);
+    if (!careerValidation.isValid) {
+      setError(careerValidation.error || '경력 정보가 유효하지 않습니다.');
+      return;
+    }
+
+    // 4. 데이터 변환 및 정규화
     const submitData: InstructorCreateRequest = {
       ...formData,
       profileImgUrl: normalizeNull(formData.profileImgUrl),
       sgeaLogoImgUrl: normalizeNull(formData.sgeaLogoImgUrl),
-      gameNames: gameNamesArray, // 배열로 변환된 게임 목록
+      gameNames: gameNamesArray,
       careers: formData.careers.map((career) => ({
         ...career,
         logoImgUrl: normalizeNull(career.logoImgUrl),
-        // roleType이 올바른 enum 값인지 확인
-        roleType: (career.roleType === 'PLAYER' || 
-                   career.roleType === 'HEAD_COACH' || 
-                   career.roleType === 'COACH' || 
-                   career.roleType === 'MANAGER') 
-          ? career.roleType 
-          : 'PLAYER', // 기본값
+        roleType: normalizeRoleType(career.roleType),
       })),
     };
 
+    // 5. 서버로 전송
     try {
       setLoading(true);
       if (instructorId) {
