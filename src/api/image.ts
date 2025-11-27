@@ -34,8 +34,23 @@ export const uploadImage = async (file: File): Promise<string> => {
     throw new Error(error.message || `HTTP error! status: ${response.status}`);
   }
 
-  // 응답이 JSON 문자열로 반환됨
-  const imageUrl = await response.json();
-  return imageUrl;
+  // 응답이 JSON 문자열 또는 일반 문자열로 반환될 수 있음
+  const contentType = response.headers.get('content-type');
+  if (contentType?.includes('application/json')) {
+    const jsonData = await response.json();
+    // JSON 객체인 경우 문자열 속성 추출, 아니면 그대로 반환
+    return typeof jsonData === 'string' ? jsonData : (jsonData.url || jsonData.imageUrl || JSON.stringify(jsonData));
+  } else {
+    // 일반 문자열로 반환되는 경우
+    const textData = await response.text();
+    // 따옴표로 감싸진 JSON 문자열인 경우 파싱
+    try {
+      const parsed = JSON.parse(textData);
+      return typeof parsed === 'string' ? parsed : (parsed.url || parsed.imageUrl || textData);
+    } catch {
+      // JSON이 아니면 그대로 반환
+      return textData.trim();
+    }
+  }
 };
 

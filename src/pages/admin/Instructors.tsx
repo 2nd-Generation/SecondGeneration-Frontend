@@ -312,6 +312,11 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
       setUploadingImages((prev) => ({ ...prev, [field]: true }));
       const imageUrl = await uploadImage(file);
       
+      // URL이 제대로 반환되었는지 확인
+      if (!imageUrl || typeof imageUrl !== 'string') {
+        throw new Error('이미지 URL을 받아오지 못했습니다.');
+      }
+      
       if (field === 'profileImgUrl') {
         setFormData({ ...formData, profileImgUrl: imageUrl });
       } else if (field === 'sgeaLogoImgUrl') {

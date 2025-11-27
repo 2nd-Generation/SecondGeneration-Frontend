@@ -263,7 +263,12 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     try {
       setUploadingThumbnail(true);
       const imageUrl = await uploadImage(file);
-      setFormData({ ...formData, thumbnailUrl: imageUrl });
+      // URL이 제대로 반환되었는지 확인하고 설정
+      if (imageUrl && typeof imageUrl === 'string') {
+        setFormData({ ...formData, thumbnailUrl: imageUrl });
+      } else {
+        throw new Error('이미지 URL을 받아오지 못했습니다.');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : '이미지 업로드에 실패했습니다.');
     } finally {
