@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   fadeInSoft,
@@ -7,6 +7,7 @@ import {
   staggerUp,
   easeEmphasized,
 } from '../utils/motionPresets';
+import { getArticles, getArticle, type ArticleListResponse, type ArticleCategory, type ArticleDetailResponse } from '../api/article';
 
 interface NewsItem {
   id: number;
@@ -16,21 +17,119 @@ interface NewsItem {
   category: string;
   categoryColor: string;
   categoryBorder: string;
+  postedAt: string;
 }
 
 const News: React.FC = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const [articles, setArticles] = useState<ArticleListResponse[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
-  const newsData: NewsItem[] = [];
+  const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT', 'TEST_UPDATE'];
 
-  const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT'];
+  // 카테고리 색상 매핑
+  const getCategoryColor = (category: string): string => {
+    switch (category) {
+      case 'NEWS':
+        return 'bg-blue-600';
+      case 'EVENT':
+        return 'bg-purple-600';
+      case 'RECRUIT':
+        return 'bg-green-600';
+      case 'TEST_UPDATE':
+        return 'bg-yellow-600';
+      default:
+        return 'bg-gray-600';
+    }
+  };
+
+  const getCategoryBorder = (category: string): string => {
+    switch (category) {
+      case 'NEWS':
+        return 'border-blue-500';
+      case 'EVENT':
+        return 'border-purple-500';
+      case 'RECRUIT':
+        return 'border-green-500';
+      case 'TEST_UPDATE':
+        return 'border-yellow-500';
+      default:
+        return 'border-gray-500';
+    }
+  };
+
+  // API에서 공지사항 목록 가져오기
+  useEffect(() => {
+    const loadArticles = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const category = selectedCategory === 'ALL' ? undefined : (selectedCategory as ArticleCategory);
+        const data = await getArticles(category);
+        setArticles(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '공지사항을 불러오는데 실패했습니다.');
+        console.error('공지사항 로드 실패:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadArticles();
+  }, [selectedCategory]);
+
+  // ArticleListResponse를 NewsItem으로 변환
+  const convertToNewsItem = (article: ArticleListResponse): NewsItem => {
+    return {
+      id: article.id,
+      title: article.title,
+      summary: article.subTitle,
+      content: '', // 상세 내용은 별도 API 호출 필요
+      category: article.category,
+      categoryColor: getCategoryColor(article.category),
+      categoryBorder: getCategoryBorder(article.category),
+      postedAt: article.postedAt,
+    };
+  };
+
+  const newsData: NewsItem[] = articles.map(convertToNewsItem);
   
   const filteredNews = selectedCategory === 'ALL' 
     ? newsData 
     : newsData.filter(news => news.category === selectedCategory);
 
+  // 상세 조회 상태
+  const [articleDetail, setArticleDetail] = useState<ArticleDetailResponse | null>(null);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+
+  // 상세 페이지에서 공지사항 상세 정보 로드
+  useEffect(() => {
+    if (selectedNews) {
+      const loadArticleDetail = async () => {
+        try {
+          setLoadingDetail(true);
+          const detail = await getArticle(selectedNews.id);
+          setArticleDetail(detail);
+        } catch (err) {
+          console.error('공지사항 상세 로드 실패:', err);
+          // 에러가 발생해도 기본 정보는 표시
+        } finally {
+          setLoadingDetail(false);
+        }
+      };
+      loadArticleDetail();
+    } else {
+      setArticleDetail(null);
+    }
+  }, [selectedNews]);
+
   if (selectedNews) {
+    const displayContent = articleDetail?.safeHtmlContent || selectedNews.content;
+    const displayTitle = selectedNews.title;
+    const displaySummary = selectedNews.summary;
+
     return (
       <div className="bg-custom-bg text-white min-h-screen">
         <div className="pt-24"></div>
@@ -68,30 +167,51 @@ const News: React.FC = () => {
                 <span className={`px-4 py-2 rounded-full text-sm font-bold text-white ${selectedNews.categoryColor}`}>
                   {selectedNews.category}
                 </span>
-                <span className="text-gray-400 text-sm">2024.12.20</span>
+                <span className="text-gray-400 text-sm">
+                  {new Date(selectedNews.postedAt).toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                {selectedNews.title}
+                {displayTitle}
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
-                {selectedNews.summary}
+                {displaySummary}
               </p>
             </motion.header>
 
             {/* Article Content */}
-            <motion.div
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden"
-              variants={fadeInScale}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.div className="p-8 md:p-16" variants={fadeInSoft} initial="hidden" animate="visible">
-                <div
-                  className="prose prose-lg prose-invert max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700"
-                  dangerouslySetInnerHTML={{ __html: selectedNews.content }}
-                />
+            {loadingDetail ? (
+              <motion.div
+                className="bg-white rounded-3xl shadow-2xl overflow-hidden p-16 text-center"
+                variants={fadeInScale}
+                initial="hidden"
+                animate="visible"
+              >
+                <div className="text-gray-400">로딩 중...</div>
               </motion.div>
-            </motion.div>
+            ) : (
+              <motion.div
+                className="bg-white rounded-3xl shadow-2xl overflow-hidden"
+                variants={fadeInScale}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.div className="p-8 md:p-16" variants={fadeInSoft} initial="hidden" animate="visible">
+                  {displayContent ? (
+                    <div
+                      className="prose prose-lg prose-invert max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700"
+                      dangerouslySetInnerHTML={{ __html: displayContent }}
+                    />
+                  ) : (
+                    <div className="text-gray-500">내용이 없습니다.</div>
+                  )}
+                </motion.div>
+              </motion.div>
+            )}
 
             {/* Article Footer */}
             <motion.footer className="mt-12 text-center" variants={fadeInUp} initial="hidden" animate="visible">
@@ -150,16 +270,41 @@ const News: React.FC = () => {
           </div>
         </motion.section>
 
+        {/* Error Message */}
+        {error && (
+          <motion.div
+            className="mb-8 bg-red-500/20 border border-red-500 text-red-400 px-6 py-4 rounded-lg text-center"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+          >
+            {error}
+          </motion.div>
+        )}
+
+        {/* Loading State */}
+        {loading && (
+          <motion.div
+            className="text-center py-16"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="text-gray-400 text-lg">로딩 중...</div>
+          </motion.div>
+        )}
+
         {/* News Grid */}
-        <motion.section
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={staggerUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredNews.map((news) => (
+        {!loading && (
+          <motion.section
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredNews.map((news) => (
               <motion.article
                 key={news.id}
                 layout
@@ -170,6 +315,15 @@ const News: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 240, damping: 18 }}
               >
                 <div className={`h-2 ${news.categoryColor}`}></div>
+                {articles.find(a => a.id === news.id)?.thumbnailUrl && (
+                  <div className="w-full h-48 overflow-hidden">
+                    <img
+                      src={articles.find(a => a.id === news.id)?.thumbnailUrl}
+                      alt={news.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-6">
                     <div
@@ -177,7 +331,13 @@ const News: React.FC = () => {
                     >
                       <span className="text-sm px-2 py-1 font-bold text-white">{news.category}</span>
                     </div>
-                    <span className="text-gray-400 text-xs">2024.12.20</span>
+                    <span className="text-gray-400 text-xs">
+                      {new Date(news.postedAt).toLocaleDateString('ko-KR', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                      })}
+                    </span>
                   </div>
                   <h3 className="text-lg font-bold mb-4 text-white group-hover:text-purple-400 transition-colors leading-tight">
                     {news.title}
@@ -194,11 +354,12 @@ const News: React.FC = () => {
                 </div>
               </motion.article>
             ))}
-          </AnimatePresence>
-        </motion.section>
+            </AnimatePresence>
+          </motion.section>
+        )}
 
         {/* Empty State */}
-        {filteredNews.length === 0 && (
+        {!loading && filteredNews.length === 0 && (
           <motion.div
             className="text-center py-16"
             variants={fadeInUp}

@@ -9,6 +9,7 @@ export const uploadImage = async (file: File): Promise<string> => {
   const token = getAccessToken();
   
   const formData = new FormData();
+  // 백엔드는 @RequestPart("file")을 사용하므로 키 이름이 정확히 "file"이어야 합니다
   formData.append('file', file);
 
   const headers: Record<string, string> = {};
@@ -16,7 +17,16 @@ export const uploadImage = async (file: File): Promise<string> => {
   // 토큰이 있으면 Authorization 헤더에 추가
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
+    // 디버깅용: 개발 환경에서만 로그 출력
+    if (import.meta.env.DEV) {
+      console.log('[Image Upload] Authorization header:', `Bearer ${token.substring(0, 20)}...`);
+      console.log('[Image Upload] FormData key:', 'file');
+    }
   }
+
+  // 중요: FormData를 사용할 때는 Content-Type을 명시적으로 설정하지 않습니다.
+  // 브라우저가 자동으로 multipart/form-data와 boundary를 설정합니다.
+  // Content-Type을 수동으로 설정하면 boundary가 누락되어 요청이 실패할 수 있습니다.
 
   // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
   const apiBaseUrl = getApiBaseUrl();

@@ -40,6 +40,11 @@ export const getArticles = async (category?: ArticleCategory): Promise<ArticleLi
   return apiRequest<ArticleListResponse[]>(`/api/article${query}`);
 };
 
+// 공지 상세 조회
+export const getArticle = async (id: number): Promise<ArticleDetailResponse> => {
+  return apiRequest<ArticleDetailResponse>(`/api/article/${id}`);
+};
+
 // 공지 상세 조회 (팝업 공지 조회 API 사용)
 export const getPopupArticles = async (): Promise<ArticleListResponse[]> => {
   return apiRequest<ArticleListResponse[]>('/api/article/popups');

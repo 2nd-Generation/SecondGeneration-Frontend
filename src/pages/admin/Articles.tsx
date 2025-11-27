@@ -244,12 +244,40 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
       return;
     }
 
+    // 날짜를 YYYY-MM-DD 형식으로 명시적으로 변환 (백엔드 LocalDate 형식 요구)
+    const formatDate = (dateString: string): string => {
+      if (!dateString) return '';
+      // 이미 YYYY-MM-DD 형식이면 그대로 반환
+      if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+        return dateString;
+      }
+      // Date 객체나 ISO 문자열인 경우 변환
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return dateString; // 유효하지 않은 날짜면 원본 반환
+      }
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // 전송할 데이터 준비 (날짜 포맷 명시적 변환)
+    const submitData: ArticleCreateRequest = {
+      ...formData,
+      postedAt: formatDate(formData.postedAt),
+      startDate: formatDate(formData.startDate),
+      endDate: formatDate(formData.endDate),
+      // priority가 숫자가 아닌 경우 처리
+      priority: typeof formData.priority === 'number' ? formData.priority : parseInt(String(formData.priority)) || 0,
+    };
+
     try {
       setLoading(true);
       if (article) {
-        await updateArticle(article.id, formData);
+        await updateArticle(article.id, submitData);
       } else {
-        await createArticle(formData);
+        await createArticle(submitData);
       }
       onSuccess();
     } catch (err) {

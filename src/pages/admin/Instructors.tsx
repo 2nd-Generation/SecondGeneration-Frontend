@@ -282,10 +282,31 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
     };
 
     // gameNames 문자열을 배열로 변환 (쉼표로 구분, 공백 제거, 빈 값 필터링)
+    // 백엔드는 정확히 "Overwatch 2" 또는 "Valorant"를 기대합니다
     const gameNamesArray = gameNamesInput
       .split(',')
-      .map((name) => name.trim())
+      .map((name) => {
+        const trimmed = name.trim();
+        // 대소문자 구분 없이 매핑하여 정확한 값으로 변환
+        const normalized = trimmed.toLowerCase();
+        if (normalized === 'overwatch2' || normalized === 'overwatch 2' || normalized === 'overwatch') {
+          return 'Overwatch 2';
+        }
+        if (normalized === 'valorant') {
+          return 'Valorant';
+        }
+        // 이미 정확한 형식이면 그대로 사용
+        return trimmed;
+      })
       .filter((name) => name.length > 0);
+    
+    // 유효한 게임 이름인지 검증
+    const validGameNames = ['Overwatch 2', 'Valorant'];
+    const invalidGames = gameNamesArray.filter(name => !validGameNames.includes(name));
+    if (invalidGames.length > 0) {
+      setError(`유효하지 않은 게임 이름입니다: ${invalidGames.join(', ')}. 허용된 값: ${validGameNames.join(', ')}`);
+      return;
+    }
 
     // 전송할 데이터 정리
     const submitData: InstructorCreateRequest = {
@@ -514,8 +535,11 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
               value={gameNamesInput}
               onChange={(e) => setGameNamesInput(e.target.value)}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
-              placeholder="예: Overwatch2, Valorant"
+              placeholder="예: Overwatch 2, Valorant"
             />
+            <p className="text-xs text-gray-400 mt-1">
+              허용된 값: "Overwatch 2", "Valorant" (띄어쓰기 포함)
+            </p>
           </div>
 
           <div>

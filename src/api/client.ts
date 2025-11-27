@@ -71,6 +71,10 @@ export const apiRequest = async <T>(
   // 토큰이 있으면 Authorization 헤더에 추가 (항상 마지막에 추가하여 덮어쓰기 방지)
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
+    // 디버깅용: 개발 환경에서만 로그 출력
+    if (import.meta.env.DEV) {
+      console.log('[API Request] Authorization header:', `Bearer ${token.substring(0, 20)}...`);
+    }
   }
 
   // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
