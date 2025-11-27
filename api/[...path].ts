@@ -12,6 +12,10 @@ export default async function handler(
     method: req.method,
     url: req.url,
     query: req.query,
+    headers: {
+      authorization: req.headers.authorization,
+      'content-type': req.headers['content-type'],
+    },
   });
 
   // CORS 헤더 설정
@@ -60,24 +64,52 @@ export default async function handler(
     // 요청 헤더 복사
     const headers: Record<string, string> = {};
 
-    // Authorization 헤더 복사
-    if (req.headers.authorization) {
-      headers['Authorization'] = req.headers.authorization as string;
+    // Authorization 헤더 복사 (대소문자 구분 없이 확인)
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (authHeader) {
+      headers['Authorization'] = typeof authHeader === 'string' ? authHeader : authHeader[0];
     }
 
-    // 다른 헤더들 복사 (필요한 경우)
-    if (req.headers['content-type']) {
-      headers['Content-Type'] = req.headers['content-type'] as string;
-    } else if (req.method !== 'GET' && req.method !== 'HEAD') {
+    // Content-Type 확인
+    const contentType = (req.headers['content-type'] || req.headers['Content-Type']) as string | undefined;
+    const isFormData = contentType?.includes('multipart/form-data');
+    
+    // Content-Type 헤더 복사 (FormData의 경우 boundary 포함, 브라우저가 자동 설정)
+    // FormData의 경우 Content-Type을 설정하지 않으면 fetch가 자동으로 boundary를 추가함
+    if (contentType && !isFormData) {
+      headers['Content-Type'] = typeof contentType === 'string' ? contentType : contentType[0];
+    } else if (req.method !== 'GET' && req.method !== 'HEAD' && !isFormData) {
       headers['Content-Type'] = 'application/json';
     }
+    
+    // 디버깅: 전송할 헤더 로깅
+    console.log('Proxying headers:', {
+      authorization: headers['Authorization'] ? 'present' : 'missing',
+      'content-type': headers['Content-Type'] || 'auto (FormData)',
+      isFormData,
+    });
 
     // 요청 본문 처리
     let body: string | undefined = undefined;
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       if (req.body) {
-        // req.body가 이미 객체인 경우 JSON.stringify, 문자열인 경우 그대로 사용
-        body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+        if (isFormData) {
+          if (typeof req.body === 'string') {
+            body = req.body;
+          } else if (Buffer.isBuffer(req.body)) {
+            body = req.body.toString('binary');
+          } else if (typeof req.body === 'object') {
+            // 파싱된 객체인 경우 - FormData를 재구성할 수 없으므로 에러
+            console.error('FormData body is already parsed, cannot proxy');
+            // 일단 빈 body로 시도 (실제로는 작동하지 않을 수 있음)
+            body = undefined;
+          } else {
+            body = String(req.body);
+          }
+        } else {
+          // JSON 요청의 경우
+          body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+        }
       }
     }
 
