@@ -1,4 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import FormData from 'form-data';
+import { Readable } from 'stream';
 
 const API_BASE_URL = process.env.API_BASE_URL || 'https://sgeaapi.kro.kr';
 const API_PREFIX = process.env.API_PREFIX || '/api';
@@ -84,32 +86,67 @@ export default async function handler(
     
     // 디버깅: 전송할 헤더 로깅
     console.log('Proxying headers:', {
-      authorization: headers['Authorization'] ? 'present' : 'missing',
+      authorization: headers['Authorization'] ? `present (${headers['Authorization'].substring(0, 20)}...)` : 'missing',
       'content-type': headers['Content-Type'] || 'auto (FormData)',
       isFormData,
+      allHeaders: Object.keys(headers),
     });
+    
+    // Authorization 헤더가 없으면 경고
+    if (!headers['Authorization']) {
+      console.warn('WARNING: Authorization header is missing!');
+      console.log('Request headers:', Object.keys(req.headers));
+    }
 
     // 요청 본문 처리
-    let body: string | undefined = undefined;
+    let body: string | FormData | undefined = undefined;
     if (req.method !== 'GET' && req.method !== 'HEAD') {
-      if (req.body) {
-        if (isFormData) {
-          if (typeof req.body === 'string') {
-            body = req.body;
-          } else if (Buffer.isBuffer(req.body)) {
-            body = req.body.toString('binary');
-          } else if (typeof req.body === 'object') {
-            // 파싱된 객체인 경우 - FormData를 재구성할 수 없으므로 에러
-            console.error('FormData body is already parsed, cannot proxy');
-            // 일단 빈 body로 시도 (실제로는 작동하지 않을 수 있음)
-            body = undefined;
-          } else {
-            body = String(req.body);
+      if (isFormData) {
+        // FormData의 경우: req.body가 파싱된 객체일 수 있으므로 재구성 필요
+        // Vercel에서는 multipart/form-data가 파싱되어 req.body에 객체로 들어올 수 있음
+        if (typeof req.body === 'object' && req.body !== null && !Buffer.isBuffer(req.body)) {
+          // 파싱된 객체인 경우 FormData 재구성
+          const formData = new FormData();
+          for (const [key, value] of Object.entries(req.body)) {
+            if (Array.isArray(value)) {
+              value.forEach((v) => {
+                if (v && typeof v === 'object' && 'data' in v) {
+                  // 파일 객체인 경우
+                  const fileData = (v as any).data || v;
+                  const buffer = Buffer.isBuffer(fileData) ? fileData : Buffer.from(fileData);
+                  formData.append(key, buffer, {
+                    filename: (v as any).filename || 'file',
+                    contentType: (v as any).contentType || 'application/octet-stream',
+                  });
+                } else {
+                  formData.append(key, String(v));
+                }
+              });
+            } else if (value && typeof value === 'object' && 'data' in value) {
+              // 단일 파일 객체인 경우
+              const fileData = (value as any).data || value;
+              const buffer = Buffer.isBuffer(fileData) ? fileData : Buffer.from(fileData);
+              formData.append(key, buffer, {
+                filename: (value as any).filename || 'file',
+                contentType: (value as any).contentType || 'application/octet-stream',
+              });
+            } else {
+              formData.append(key, String(value));
+            }
           }
+          body = formData;
+          // FormData의 Content-Type은 boundary가 포함되어야 하므로 자동 설정
+          delete headers['Content-Type'];
+        } else if (typeof req.body === 'string') {
+          body = req.body;
+        } else if (Buffer.isBuffer(req.body)) {
+          body = req.body.toString('binary');
         } else {
-          // JSON 요청의 경우
-          body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+          body = String(req.body);
         }
+      } else {
+        // JSON 요청의 경우
+        body = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
       }
     }
 
@@ -117,7 +154,7 @@ export default async function handler(
     const response = await fetch(url, {
       method: req.method,
       headers: Object.keys(headers).length > 0 ? headers : undefined,
-      body,
+      body: body instanceof FormData ? body : body,
     });
 
     // 응답 데이터 가져오기
