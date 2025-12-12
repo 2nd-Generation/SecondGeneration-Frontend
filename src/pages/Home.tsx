@@ -106,22 +106,22 @@ const Home: React.FC = () => {
               transition={{ type: 'spring', damping: 30, stiffness: 400 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* 이미지 상단 */}
+              {/* 썸네일 이미지 - 상단에 크게 */}
               {popupArticles[currentPopupIndex].thumbnailUrl ? (
-                <div className="w-full h-[60vh] min-h-[400px] bg-gray-100 overflow-hidden relative">
+                <div className="relative w-full h-96 sm:h-[500px] bg-gray-100 overflow-hidden">
                   <img
                     src={popupArticles[currentPopupIndex].thumbnailUrl}
                     alt={popupArticles[currentPopupIndex].title}
                     className="w-full h-full object-cover"
                   />
-                  {/* 닫기 버튼 오버레이 */}
+                  {/* 닫기 버튼 - 이미지 우상단 */}
                   <button
                     onClick={handleClosePopup}
-                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm"
+                    className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
                     aria-label="닫기"
                   >
                     <svg
-                      className="w-5 h-5 text-white/80"
+                      className="w-5 h-5 text-gray-700"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -136,25 +136,15 @@ const Home: React.FC = () => {
                   </button>
                 </div>
               ) : (
-                <div className="w-full h-[60vh] min-h-[400px] bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center relative">
-                  <div className="text-center p-6">
-                    <h2 className="text-2xl font-bold text-white mb-2">
-                      {popupArticles[currentPopupIndex].title}
-                    </h2>
-                    {popupArticles[currentPopupIndex].subTitle && (
-                      <p className="text-purple-100 text-sm">
-                        {popupArticles[currentPopupIndex].subTitle}
-                      </p>
-                    )}
-                  </div>
-                  {/* 닫기 버튼 오버레이 */}
+                <div className="relative w-full h-96 sm:h-[500px] bg-gradient-to-br from-purple-100 to-indigo-100">
+                  {/* 닫기 버튼 - 이미지 우상단 */}
                   <button
                     onClick={handleClosePopup}
-                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm"
+                    className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
                     aria-label="닫기"
                   >
                     <svg
-                      className="w-5 h-5 text-white/80"
+                      className="w-5 h-5 text-gray-700"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -171,17 +161,17 @@ const Home: React.FC = () => {
               )}
 
               {/* 하단 버튼 */}
-              <div className="border-t border-gray-200 p-4 bg-white">
-                <div className="flex items-center gap-3">
+              <div className="border-t border-gray-200 p-4">
+                <div className="flex items-center justify-between gap-3">
                   <button
                     onClick={handleHideToday}
-                    className="flex-1 px-4 py-3 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors font-medium"
+                    className="flex-1 px-4 py-2.5 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     오늘 하루 보지 않기
                   </button>
                   <button
                     onClick={handleClosePopup}
-                    className="flex-1 px-4 py-3 text-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-lg transition-colors font-semibold"
+                    className="flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-lg transition-all duration-200"
                   >
                     닫기
                   </button>

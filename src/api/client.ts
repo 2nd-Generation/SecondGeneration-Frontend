@@ -120,3 +120,55 @@ export const apiRequest = async <T>(
   return response.json();
 };
 
+// 공개 API 요청 함수 (인증 없이 호출)
+export const publicApiRequest = async <T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<T> => {
+  // 기존 헤더를 객체로 변환
+  const existingHeaders: Record<string, string> = {};
+  if (options.headers) {
+    if (options.headers instanceof Headers) {
+      options.headers.forEach((value, key) => {
+        existingHeaders[key] = value;
+      });
+    } else if (Array.isArray(options.headers)) {
+      options.headers.forEach(([key, value]) => {
+        existingHeaders[key] = value;
+      });
+    } else {
+      Object.assign(existingHeaders, options.headers);
+    }
+  }
+
+  // 헤더 구성: 기존 헤더를 먼저 복사
+  const headers: Record<string, string> = { ...existingHeaders };
+
+  // Body가 FormData가 아닐 때만 Content-Type: application/json 추가
+  if (!(options.body instanceof FormData) && !headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  // 런타임에서 매번 API URL 가져오기 (HTTPS 환경 감지)
+  const apiBaseUrl = getApiBaseUrl();
+  
+  // options에서 headers를 제거하고 새로 만든 headers 사용
+  const { headers: _, ...restOptions } = options;
+  const response = await fetch(`${apiBaseUrl}${endpoint}`, {
+    ...restOptions,
+    headers,
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ message: '요청에 실패했습니다.' }));
+    throw new Error(error.message || `HTTP error! status: ${response.status}`);
+  }
+
+  // 응답 본문이 없는 경우 (204 No Content 등)
+  if (response.status === 204 || response.headers.get('Content-Length') === '0') {
+    return {} as T;
+  }
+
+  return response.json();
+};
+

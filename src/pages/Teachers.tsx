@@ -39,6 +39,7 @@ type HistoryItem = {
   team: string;
   role?: string;
   isCoach?: boolean;
+  logoUrl?: string | null;
 };
 
 type Coach = {
@@ -62,6 +63,7 @@ const convertInstructorToCoach = (instructor: InstructorDetailResponse): Coach =
     const historyItem: HistoryItem = {
       year: career.period,
       team: career.teamName,
+      logoUrl: career.logoImgUrl,
     };
 
     if (career.roleType === 'PLAYER') {
@@ -255,8 +257,8 @@ const Teachers: React.FC = () => {
                             .map((h, idx) => (
                             <li key={`${coach.id}-${idx}-${h.year}-${h.team}`} className="flex items-center gap-2 flex-shrink-0">
                               <span className="text-purple-600 font-bold min-w-[55px] md:min-w-[65px] text-xs md:text-sm">{h.year}</span>
-                              {teamLogoSrcByName[h.team] ? (
-                                <img src={teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-4 h-4 md:w-5 md:h-5 object-contain flex-shrink-0" />
+                              {(h.logoUrl || teamLogoSrcByName[h.team]) ? (
+                                <img src={h.logoUrl || teamLogoSrcByName[h.team]} alt={`${h.team} 로고`} className="w-4 h-4 md:w-5 md:h-5 object-contain flex-shrink-0" />
                               ) : (
                                 <div className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
                               )}
