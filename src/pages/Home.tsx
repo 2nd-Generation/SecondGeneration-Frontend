@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   easeAccent,
@@ -10,9 +10,13 @@ import {
   fadeInUp,
   staggerUp,
 } from '../utils/motionPresets';
+import { getPopupArticles, type ArticleListResponse } from '../api/article';
 
 const Home: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
+  const [popupArticles, setPopupArticles] = useState<ArticleListResponse[]>([]);
+  const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -32,8 +36,161 @@ const Home: React.FC = () => {
     };
   }, []);
 
+  // 팝업 공지 로드
+  useEffect(() => {
+    const loadPopupArticles = async () => {
+      try {
+        const articles = await getPopupArticles();
+        if (articles.length > 0) {
+          // 오늘 하루 보지 않기로 설정된 팝업 필터링
+          const today = new Date().toDateString();
+          const hiddenPopups = JSON.parse(localStorage.getItem('hiddenPopups') || '{}');
+          const visibleArticles = articles.filter(
+            (article) => hiddenPopups[article.id] !== today
+          );
+
+          if (visibleArticles.length > 0) {
+            setPopupArticles(visibleArticles);
+            setCurrentPopupIndex(0);
+            setShowPopup(true);
+          }
+        }
+      } catch (error) {
+        console.error('팝업 공지 로드 실패:', error);
+      }
+    };
+
+    loadPopupArticles();
+  }, []);
+
+  // 팝업 닫기
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
+  // 오늘 하루 보지 않기
+  const handleHideToday = () => {
+    if (popupArticles.length > 0) {
+      const currentArticle = popupArticles[currentPopupIndex];
+      const today = new Date().toDateString();
+      const hiddenPopups = JSON.parse(localStorage.getItem('hiddenPopups') || '{}');
+      hiddenPopups[currentArticle.id] = today;
+      localStorage.setItem('hiddenPopups', JSON.stringify(hiddenPopups));
+
+      // 다음 팝업이 있으면 표시
+      if (currentPopupIndex < popupArticles.length - 1) {
+        setCurrentPopupIndex(currentPopupIndex + 1);
+      } else {
+        setShowPopup(false);
+      }
+    }
+  };
+
   return (
     <div className="bg-custom-bg">
+      {/* 팝업 공지 모달 */}
+      <AnimatePresence>
+        {showPopup && popupArticles.length > 0 && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleClosePopup}
+          >
+            <motion.div
+              className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden flex flex-col"
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* 이미지 상단 */}
+              {popupArticles[currentPopupIndex].thumbnailUrl ? (
+                <div className="w-full h-[60vh] min-h-[400px] bg-gray-100 overflow-hidden relative">
+                  <img
+                    src={popupArticles[currentPopupIndex].thumbnailUrl}
+                    alt={popupArticles[currentPopupIndex].title}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* 닫기 버튼 오버레이 */}
+                  <button
+                    onClick={handleClosePopup}
+                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm"
+                    aria-label="닫기"
+                  >
+                    <svg
+                      className="w-5 h-5 text-white/80"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <div className="w-full h-[60vh] min-h-[400px] bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center relative">
+                  <div className="text-center p-6">
+                    <h2 className="text-2xl font-bold text-white mb-2">
+                      {popupArticles[currentPopupIndex].title}
+                    </h2>
+                    {popupArticles[currentPopupIndex].subTitle && (
+                      <p className="text-purple-100 text-sm">
+                        {popupArticles[currentPopupIndex].subTitle}
+                      </p>
+                    )}
+                  </div>
+                  {/* 닫기 버튼 오버레이 */}
+                  <button
+                    onClick={handleClosePopup}
+                    className="absolute top-4 right-4 p-2 bg-white/20 hover:bg-white/30 rounded-full transition-colors backdrop-blur-sm"
+                    aria-label="닫기"
+                  >
+                    <svg
+                      className="w-5 h-5 text-white/80"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
+
+              {/* 하단 버튼 */}
+              <div className="border-t border-gray-200 p-4 bg-white">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleHideToday}
+                    className="flex-1 px-4 py-3 text-sm text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors font-medium"
+                  >
+                    오늘 하루 보지 않기
+                  </button>
+                  <button
+                    onClick={handleClosePopup}
+                    className="flex-1 px-4 py-3 text-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 rounded-lg transition-colors font-semibold"
+                  >
+                    닫기
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Hero Section */}
       <motion.header
         className="relative flex items-center justify-center h-screen overflow-hidden"
