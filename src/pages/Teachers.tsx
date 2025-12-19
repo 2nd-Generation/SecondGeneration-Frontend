@@ -49,33 +49,30 @@ type Coach = {
   photoSrc: string;
   sgeaLogoSrc: string;
   gameLogoSrc?: string | string[];
-  playerHistory: HistoryItem[];
-  coachHistory: HistoryItem[];
+  careers: HistoryItem[]; // 백엔드에서 받은 순서대로 유지
   content: string;
 };
 
 // API 데이터를 Coach 타입으로 변환
+// 백엔드에서 이미 displayOrder 순서대로 정렬된 데이터를 제공하므로 순서를 그대로 유지
 const convertInstructorToCoach = (instructor: InstructorDetailResponse): Coach => {
-  const playerHistory: HistoryItem[] = [];
-  const coachHistory: HistoryItem[] = [];
-
-  instructor.careers.forEach((career) => {
+  // 백엔드에서 받은 순서대로 경력 배열 생성
+  const careers: HistoryItem[] = instructor.careers.map((career) => {
     const historyItem: HistoryItem = {
       year: career.period,
       team: career.teamName,
       logoUrl: career.logoImgUrl,
     };
 
-    if (career.roleType === 'PLAYER') {
-      playerHistory.push(historyItem);
-    } else {
+    if (career.roleType !== 'PLAYER') {
       historyItem.isCoach = true;
       historyItem.role = 
         career.roleType === 'HEAD_COACH' ? 'Head Coach' :
         career.roleType === 'COACH' ? 'Coach' :
         career.roleType === 'MANAGER' ? 'Manager' : '';
-      coachHistory.push(historyItem);
     }
+
+    return historyItem;
   });
 
   const gameLogoSrc = instructor.games.length === 1
@@ -91,8 +88,7 @@ const convertInstructorToCoach = (instructor: InstructorDetailResponse): Coach =
     photoSrc: instructor.profileImgUrl || '',
     sgeaLogoSrc: instructor.sgeaLogoImgUrl || '/LogoWhite.png',
     gameLogoSrc,
-    playerHistory,
-    coachHistory,
+    careers, // 백엔드 순서 그대로 유지
     content: instructor.content || '메이저 리그 출신 코치의 풍부한 경험과 노하우를 바탕으로\n학생 개개인의 특성을 분석하여 맞춤형 훈련을 제공합니다.',
   };
 };
@@ -247,14 +243,8 @@ const Teachers: React.FC = () => {
                       <div className="border-t border-gray-200 pt-3 md:pt-4 flex-1 overflow-hidden">
                         <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 md:mb-3 flex-shrink-0">경력</h4>
                         <ul className="space-y-2 md:space-y-3 overflow-hidden">
-                          {[...coach.playerHistory, ...coach.coachHistory]
-                            .sort((a, b) => {
-                              // 년도 파싱 (예: "2022-2023" -> 2022)
-                              const yearA = parseInt(a.year.split('-')[0]);
-                              const yearB = parseInt(b.year.split('-')[0]);
-                              return yearA - yearB; // 과거순
-                            })
-                            .map((h, idx) => (
+                          {/* 백엔드에서 받은 순서대로 표시 (displayOrder 기준) */}
+                          {coach.careers.map((h, idx) => (
                             <li key={`${coach.id}-${idx}-${h.year}-${h.team}`} className="flex items-center gap-2 flex-shrink-0">
                               <span className="text-purple-600 font-bold min-w-[55px] md:min-w-[65px] text-xs md:text-sm">{h.year}</span>
                               {(h.logoUrl || teamLogoSrcByName[h.team]) ? (

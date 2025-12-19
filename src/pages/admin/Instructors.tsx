@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import {
   getInstructors,
   getInstructor,
   createInstructor,
@@ -228,6 +245,31 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
     content: '',
     careers: [],
   });
+
+  // 드래그 앤 드롭 센서 설정
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  // 드래그 종료 시 순서 변경 처리
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      setFormData((prev) => {
+        const oldIndex = parseInt(active.id as string);
+        const newIndex = parseInt(over.id as string);
+
+        return {
+          ...prev,
+          careers: arrayMove(prev.careers, oldIndex, newIndex),
+        };
+      });
+    }
+  };
 
   useEffect(() => {
     if (instructorId) {
@@ -543,72 +585,31 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
                 + 경력 추가
               </button>
             </div>
-            <div className="space-y-3">
-              {formData.careers.map((career, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-700 rounded-lg p-4 space-y-2"
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-semibold">경력 {index + 1}</span>
-                    <button
-                      type="button"
-                      onClick={() => removeCareer(index)}
-                      className="text-red-400 hover:text-red-300 text-sm"
-                    >
-                      삭제
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <input
-                      type="text"
-                      value={career.period}
-                      onChange={(e) => updateCareer(index, 'period', e.target.value)}
-                      placeholder="기간 (예: 2018-2020)"
-                      className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={formData.careers.map((_, index) => index.toString())}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className="space-y-3">
+                  {formData.careers.map((career, index) => (
+                    <SortableCareerItem
+                      key={index}
+                      id={index.toString()}
+                      career={career}
+                      index={index}
+                      onUpdate={(field, value) => updateCareer(index, field, value)}
+                      onRemove={() => removeCareer(index)}
+                      onFileSelect={(e) => handleFileSelect(e, `career-${index}-logoImgUrl` as `career-${number}-logoImgUrl`)}
+                      uploading={uploadingImages[`career-${index}-logoImgUrl`] || false}
                     />
-                    <input
-                      type="text"
-                      value={career.teamName}
-                      onChange={(e) => updateCareer(index, 'teamName', e.target.value)}
-                      placeholder="팀 이름"
-                      className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <select
-                      value={career.roleType}
-                      onChange={(e) => updateCareer(index, 'roleType', e.target.value)}
-                      className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
-                    >
-                      <option value="PLAYER">PLAYER</option>
-                      <option value="HEAD_COACH">HEAD_COACH</option>
-                      <option value="COACH">COACH</option>
-                      <option value="MANAGER">MANAGER</option>
-                    </select>
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        value={career.logoImgUrl || ''}
-                        onChange={(e) => updateCareer(index, 'logoImgUrl', e.target.value || null)}
-                        placeholder="로고 이미지 URL"
-                        className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
-                      />
-                      <label className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded cursor-pointer transition-colors text-sm whitespace-nowrap">
-                        {uploadingImages[`career-${index}-logoImgUrl`] ? '업로드 중...' : '업로드'}
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => handleFileSelect(e, `career-${index}-logoImgUrl` as `career-${number}-logoImgUrl`)}
-                          disabled={uploadingImages[`career-${index}-logoImgUrl`]}
-                        />
-                      </label>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </SortableContext>
+            </DndContext>
           </div>
 
           {error && (
@@ -636,6 +637,131 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
         </form>
       </motion.div>
     </motion.div>
+  );
+};
+
+// 정렬 가능한 경력 항목 컴포넌트
+interface SortableCareerItemProps {
+  id: string;
+  career: CareerHistoryRequest;
+  index: number;
+  onUpdate: (field: keyof CareerHistoryRequest, value: string | null) => void;
+  onRemove: () => void;
+  onFileSelect: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  uploading: boolean;
+}
+
+const SortableCareerItem: React.FC<SortableCareerItemProps> = ({
+  id,
+  career,
+  index,
+  onUpdate,
+  onRemove,
+  onFileSelect,
+  uploading,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className="bg-gray-700 rounded-lg p-4 space-y-2"
+    >
+      <div className="flex justify-between items-center mb-2">
+        <div className="flex items-center gap-2">
+          <div
+            {...attributes}
+            {...listeners}
+            className="cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-300"
+            title="드래그하여 순서 변경"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 8h16M4 16h16"
+              />
+            </svg>
+          </div>
+          <span className="text-sm font-semibold">경력 {index + 1}</span>
+        </div>
+        <button
+          type="button"
+          onClick={onRemove}
+          className="text-red-400 hover:text-red-300 text-sm"
+        >
+          삭제
+        </button>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <input
+          type="text"
+          value={career.period}
+          onChange={(e) => onUpdate('period', e.target.value)}
+          placeholder="기간 (예: 2018-2020)"
+          className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+        />
+        <input
+          type="text"
+          value={career.teamName}
+          onChange={(e) => onUpdate('teamName', e.target.value)}
+          placeholder="팀 이름"
+          className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <select
+          value={career.roleType}
+          onChange={(e) => onUpdate('roleType', e.target.value)}
+          className="px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+        >
+          <option value="PLAYER">PLAYER</option>
+          <option value="HEAD_COACH">HEAD_COACH</option>
+          <option value="COACH">COACH</option>
+          <option value="MANAGER">MANAGER</option>
+        </select>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={career.logoImgUrl || ''}
+            onChange={(e) => onUpdate('logoImgUrl', e.target.value || null)}
+            placeholder="로고 이미지 URL"
+            className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 rounded text-white text-sm"
+          />
+          <label className="px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded cursor-pointer transition-colors text-sm whitespace-nowrap">
+            {uploading ? '업로드 중...' : '업로드'}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={onFileSelect}
+              disabled={uploading}
+            />
+          </label>
+        </div>
+      </div>
+    </div>
   );
 };
 
