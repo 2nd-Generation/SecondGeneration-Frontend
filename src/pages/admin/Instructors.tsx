@@ -447,7 +447,7 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
   if (loadingDetail) {
     return (
       <motion.div
-        className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+        className="fixed top-0 left-0 z-50 p-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -459,18 +459,16 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-6"
+      className="fixed top-0 left-0 z-50 p-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
     >
       <motion.div
         className="bg-gray-800 rounded-2xl p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-2xl font-bold mb-6">
           {instructorId ? '강사 정보 수정' : '새 강사 추가'}
@@ -619,13 +617,6 @@ const InstructorModal: React.FC<InstructorModalProps> = ({
           )}
 
           <div className="flex gap-3 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-            >
-              취소
-            </button>
             <button
               type="submit"
               disabled={loading}
