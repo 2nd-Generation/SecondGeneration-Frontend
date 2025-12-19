@@ -229,9 +229,11 @@ interface InstructorModalProps {
 
 const InstructorModal: React.FC<InstructorModalProps> = ({
   instructorId,
-  onClose,
+  onClose, // 현재 사용하지 않지만 prop으로 유지 (저장 후 자동 닫기)
   onSuccess,
 }) => {
+  // onClose는 현재 사용하지 않음 (모달은 저장 후 onSuccess에서 자동으로 닫힘)
+  void onClose;
   const [loading, setLoading] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [uploadingImages, setUploadingImages] = useState<Record<string, boolean>>({});
