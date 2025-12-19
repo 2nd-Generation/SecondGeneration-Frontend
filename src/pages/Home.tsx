@@ -847,29 +847,42 @@ const Home: React.FC = () => {
         transition={{ duration: 0.8, ease: easeEmphasized }}
       >
         <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <h3 className="text-xl font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
-          <p>대표 김민수 | 상호명 (주)에듀테크스포츠 | 사업자번호 123-45-67890 | 학원등록번호 제22001호</p>
-          <p className="mt-1">주소 경기도 성남시 분당구 판교로 289, 12층 (삼평동)</p>
-          <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base text-gray-300">
-            <span className="font-bold">연락처</span> <span>031-999-8888</span>
-            <span className="hidden md:inline">|</span>
-            <span className="font-bold">E-mail</span> <span>info@sgea.kr</span>
+          <h3 className="text-xl font-bold text-purple-500 mb-6"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
+          
+          {/* 사업자 정보 - 주요 정보 */}
+          <div className="mb-6 space-y-2">
+            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">대표번호</span>
+                <span>010-3976-4210</span>
+              </div>
+              <span className="hidden md:inline text-gray-600">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">사업자 번호</span>
+                <span>157-99-02026</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">대표</span>
+                <span>서재원 외1명</span>
+              </div>
+              <span className="hidden md:inline text-gray-600">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">학원등록번호</span>
+                <span>제4845호</span>
+              </div>
+              <div className="flex items-center gap-2">
+              <span className="hidden md:inline text-gray-600">|</span>
+
+                <span className="font-bold text-gray-400">E-mail</span>
+                <span>info@sgea.kr</span>
+              </div>
+            </div>
           </div>
-          <div className="my-6 text-base text-gray-300">
-            <span className="font-bold block mb-2">운영시간 안내</span>
-            <p>월~금 | 14:00-22:00</p>
-            <p>토~일 | 12:00-22:00</p>
-          </div>
-          <p className="mt-8 text-xs text-gray-400">©2024. <span className="font-bebas">SGEA</span> All rights reserved.</p>
-          <div className="flex justify-center space-x-4 mt-4 text-xs">
-            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
-              이용약관
-            </a>
-            <span className="text-gray-600">|</span>
-            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
-              개인정보처리방침
-            </a>
-          </div>
+
+          {/* 저작권 */}
+          <p className="mt-8 text-xs text-gray-400">©2025. <span className="font-bebas">SGEA</span> All rights reserved.</p>
         </div>
       </motion.footer>
     </div>
