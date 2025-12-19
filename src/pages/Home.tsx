@@ -782,7 +782,7 @@ const Home: React.FC = () => {
               
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <motion.a
-                  href="http://pf.kakao.com/_xayxnLG"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeJ5Jald5tjTEhfZNlQfi7OsaarfgBOXJCr1o2UZwp2KjmhFw/viewform?usp=sharing&ouid=112071300713069105181"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
