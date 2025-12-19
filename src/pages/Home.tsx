@@ -93,7 +93,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-custom-bg">
       {/* 팝업 공지 모달 */}
-      <div className="fixed top-0 left-0 z-[100] p-4 flex flex-col gap-4">
+      <div className="fixed top-0 right-0 z-[100] p-4 flex flex-col gap-4">
         <AnimatePresence>
           {visiblePopupIndices.map((index) => {
             const article = popupArticles[index];
@@ -846,33 +846,33 @@ const Home: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: easeEmphasized }}
       >
-        <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <h3 className="text-xl font-bold text-purple-500 mb-6"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
+        <div className="container mx-auto px-6 text-center text-gray-500 text-xs">
+          <h3 className="text-lg font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
           
           {/* 사업자 정보 - 주요 정보 */}
-          <div className="mb-6 space-y-2">
-            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
-              <div className="flex items-center gap-2">
+          <div className="mb-4 space-y-1.5">
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1.5 text-xs text-gray-300">
+              <div className="flex items-center gap-1.5">
                 <span className="font-bold text-gray-400">대표번호</span>
                 <span>010-3976-4210</span>
               </div>
               <span className="hidden md:inline text-gray-600">|</span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span className="font-bold text-gray-400">사업자 번호</span>
                 <span>157-99-02026</span>
               </div>
             </div>
-            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1.5 text-xs text-gray-300">
+              <div className="flex items-center gap-1.5">
                 <span className="font-bold text-gray-400">대표</span>
                 <span>서재원 외1명</span>
               </div>
               <span className="hidden md:inline text-gray-600">|</span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span className="font-bold text-gray-400">학원등록번호</span>
                 <span>제4845호</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
               <span className="hidden md:inline text-gray-600">|</span>
 
                 <span className="font-bold text-gray-400">E-mail</span>
@@ -882,7 +882,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* 저작권 */}
-          <p className="mt-8 text-xs text-gray-400">©2025. <span className="font-bebas">SGEA</span> All rights reserved.</p>
+          <p className="mt-6 text-xs text-gray-400">©2025. <span className="font-bebas">SGEA</span> All rights reserved.</p>
         </div>
       </motion.footer>
     </div>
