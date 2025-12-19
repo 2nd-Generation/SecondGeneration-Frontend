@@ -15,8 +15,7 @@ import { getPopupArticles, type ArticleListResponse } from '../api/article';
 const Home: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
   const [popupArticles, setPopupArticles] = useState<ArticleListResponse[]>([]);
-  const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
+  const [visiblePopupIndices, setVisiblePopupIndices] = useState<number[]>([]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -51,8 +50,9 @@ const Home: React.FC = () => {
 
           if (visibleArticles.length > 0) {
             setPopupArticles(visibleArticles);
-            setCurrentPopupIndex(0);
-            setShowPopup(true);
+            // 최대 2개까지 표시
+            const indicesToShow = visibleArticles.slice(0, 2).map((_, index) => index);
+            setVisiblePopupIndices(indicesToShow);
           }
         }
       } catch (error) {
@@ -63,25 +63,29 @@ const Home: React.FC = () => {
     loadPopupArticles();
   }, []);
 
-  // 팝업 닫기
-  const handleClosePopup = () => {
-    setShowPopup(false);
+  // 특정 팝업 닫기
+  const handleClosePopup = (index: number) => {
+    setVisiblePopupIndices((prev) => prev.filter((i) => i !== index));
   };
 
   // 오늘 하루 보지 않기
-  const handleHideToday = () => {
-    if (popupArticles.length > 0) {
-      const currentArticle = popupArticles[currentPopupIndex];
+  const handleHideToday = (index: number) => {
+    if (popupArticles.length > index) {
+      const article = popupArticles[index];
       const today = new Date().toDateString();
       const hiddenPopups = JSON.parse(localStorage.getItem('hiddenPopups') || '{}');
-      hiddenPopups[currentArticle.id] = today;
+      hiddenPopups[article.id] = today;
       localStorage.setItem('hiddenPopups', JSON.stringify(hiddenPopups));
 
-      // 다음 팝업이 있으면 표시
-      if (currentPopupIndex < popupArticles.length - 1) {
-        setCurrentPopupIndex(currentPopupIndex + 1);
-      } else {
-        setShowPopup(false);
+      // 해당 팝업 닫기
+      setVisiblePopupIndices((prev) => prev.filter((i) => i !== index));
+
+      // 다음 팝업이 있고 현재 표시 중인 팝업이 2개 미만이면 추가
+      if (visiblePopupIndices.length < 2) {
+        const nextIndex = Math.max(...visiblePopupIndices, -1) + 1;
+        if (nextIndex < popupArticles.length && !visiblePopupIndices.includes(nextIndex)) {
+          setVisiblePopupIndices((prev) => [...prev, nextIndex]);
+        }
       }
     }
   };
@@ -89,98 +93,89 @@ const Home: React.FC = () => {
   return (
     <div className="bg-custom-bg">
       {/* 팝업 공지 모달 */}
-      <AnimatePresence>
-        {showPopup && popupArticles.length > 0 && (
-          <motion.div
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[100] p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClosePopup}
-          >
-            <motion.div
-              className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden flex flex-col"
-              initial={{ scale: 0.95, opacity: 0, y: 10 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 10 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* 썸네일 이미지 - 상단에 크게 */}
-              {popupArticles[currentPopupIndex].thumbnailUrl ? (
-                <div className="relative w-full h-96 sm:h-[500px] bg-gray-100 overflow-hidden">
-                  <img
-                    src={popupArticles[currentPopupIndex].thumbnailUrl}
-                    alt={popupArticles[currentPopupIndex].title}
-                    className="w-full h-full object-cover"
-                  />
-                  {/* 닫기 버튼 - 이미지 우상단 */}
-                  <button
-                    onClick={handleClosePopup}
-                    className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
-                    aria-label="닫기"
-                  >
-                    <svg
-                      className="w-5 h-5 text-gray-700"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ) : (
-                <div className="relative w-full h-96 sm:h-[500px] bg-gradient-to-br from-purple-100 to-indigo-100">
-                  {/* 닫기 버튼 - 이미지 우상단 */}
-                  <button
-                    onClick={handleClosePopup}
-                    className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
-                    aria-label="닫기"
-                  >
-                    <svg
-                      className="w-5 h-5 text-gray-700"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2.5}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              )}
+      <div className="fixed top-0 left-0 z-[100] p-4 flex flex-col gap-4">
+        <AnimatePresence>
+          {visiblePopupIndices.map((index) => {
+            const article = popupArticles[index];
+            if (!article) return null;
 
-              {/* 하단 버튼 */}
-              <div className="border-t border-gray-200 p-4">
-                <div className="flex items-center justify-between gap-3">
+            return (
+              <motion.div
+                key={index}
+                className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden flex flex-col"
+                initial={{ scale: 0.95, opacity: 0, y: 10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 10 }}
+                transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              >
+                {/* 썸네일 이미지 - 상단에 크게 */}
+                {article.thumbnailUrl ? (
+                  <div className="relative w-full h-80 sm:h-[450px] bg-gray-100 overflow-hidden">
+                    <img
+                      src={article.thumbnailUrl}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* 닫기 버튼 - 이미지 우상단 */}
+                    <button
+                      onClick={() => handleClosePopup(index)}
+                      className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
+                      aria-label="닫기"
+                    >
+                      <svg
+                        className="w-5 h-5 text-gray-700"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-80 sm:h-[450px] bg-gradient-to-br from-purple-100 to-indigo-100">
+                    {/* 닫기 버튼 - 이미지 우상단 */}
+                    <button
+                      onClick={() => handleClosePopup(index)}
+                      className="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-colors shadow-lg"
+                      aria-label="닫기"
+                    >
+                      <svg
+                        className="w-5 h-5 text-gray-700"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+                
+                {/* 오늘 하루 보지 않기 버튼 */}
+                <div className="p-4">
                   <button
-                    onClick={handleHideToday}
-                    className="flex-1 px-4 py-2.5 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                    onClick={() => handleHideToday(index)}
+                    className="w-full px-4 py-2.5 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     오늘 하루 보지 않기
                   </button>
-                  <button
-                    onClick={handleClosePopup}
-                    className="flex-1 px-4 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-lg transition-all duration-200"
-                  >
-                    닫기
-                  </button>
                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
       {/* Hero Section */}
       <motion.header
         className="relative flex items-center justify-center h-screen overflow-hidden"
@@ -787,7 +782,7 @@ const Home: React.FC = () => {
               
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <motion.a
-                  href="http://pf.kakao.com/_xayxnLG"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSeJ5Jald5tjTEhfZNlQfi7OsaarfgBOXJCr1o2UZwp2KjmhFw/viewform?usp=sharing&ouid=112071300713069105181"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
@@ -852,29 +847,42 @@ const Home: React.FC = () => {
         transition={{ duration: 0.8, ease: easeEmphasized }}
       >
         <div className="container mx-auto px-6 text-center text-gray-500 text-sm">
-          <h3 className="text-xl font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
-          <p>대표 김민수 | 상호명 (주)에듀테크스포츠 | 사업자번호 123-45-67890 | 학원등록번호 제22001호</p>
-          <p className="mt-1">주소 경기도 성남시 분당구 판교로 289, 12층 (삼평동)</p>
-          <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 my-6 text-base text-gray-300">
-            <span className="font-bold">연락처</span> <span>031-999-8888</span>
-            <span className="hidden md:inline">|</span>
-            <span className="font-bold">E-mail</span> <span>info@sgea.kr</span>
+          <h3 className="text-xl font-bold text-purple-500 mb-6"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
+          
+          {/* 사업자 정보 - 주요 정보 */}
+          <div className="mb-6 space-y-2">
+            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">대표번호</span>
+                <span>010-3976-4210</span>
+              </div>
+              <span className="hidden md:inline text-gray-600">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">사업자 번호</span>
+                <span>157-99-02026</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-base text-gray-300">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">대표</span>
+                <span>서재원 외1명</span>
+              </div>
+              <span className="hidden md:inline text-gray-600">|</span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-gray-400">학원등록번호</span>
+                <span>제4845호</span>
+              </div>
+              <div className="flex items-center gap-2">
+              <span className="hidden md:inline text-gray-600">|</span>
+
+                <span className="font-bold text-gray-400">E-mail</span>
+                <span>info@sgea.kr</span>
+              </div>
+            </div>
           </div>
-          <div className="my-6 text-base text-gray-300">
-            <span className="font-bold block mb-2">운영시간 안내</span>
-            <p>월~금 | 14:00-22:00</p>
-            <p>토~일 | 12:00-22:00</p>
-          </div>
-          <p className="mt-8 text-xs text-gray-400">©2024. <span className="font-bebas">SGEA</span> All rights reserved.</p>
-          <div className="flex justify-center space-x-4 mt-4 text-xs">
-            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
-              이용약관
-            </a>
-            <span className="text-gray-600">|</span>
-            <a href="#" className="text-gray-500 hover:text-gray-300 transition-colors duration-300">
-              개인정보처리방침
-            </a>
-          </div>
+
+          {/* 저작권 */}
+          <p className="mt-8 text-xs text-gray-400">©2025. <span className="font-bebas">SGEA</span> All rights reserved.</p>
         </div>
       </motion.footer>
     </div>
