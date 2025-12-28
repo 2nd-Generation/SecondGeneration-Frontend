@@ -847,14 +847,24 @@ const Home: React.FC = () => {
         transition={{ duration: 0.8, ease: easeEmphasized }}
       >
         <div className="container mx-auto px-6 text-center text-gray-500 text-xs">
-          <h3 className="text-lg font-bold text-purple-500 mb-4"><span className="font-bebas">SGEA</span> | <span className="font-bebas">SGEA</span> 이스포츠 아카데미</h3>
-          
+<div className="flex justify-center mb-6">
+  <img 
+    src="/MainLogoWhite.png" 
+    alt="SGEA" 
+    className="block mx-auto w-[120px] h-auto" 
+  />
+</div>
           {/* 사업자 정보 - 주요 정보 */}
           <div className="mb-4 space-y-1.5">
             <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1.5 text-xs text-gray-300">
+            <div className="flex items-center gap-1.5">
+                <span className="font-bold text-gray-400">상 호</span>
+                <span>에스지이에이(SGEA)원격학원</span>
+              </div>
+              <span className="hidden md:inline text-gray-600">|</span>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-gray-400">대표번호</span>
-                <span>010-3976-4210</span>
+                <span className="font-bold text-gray-400">학원등록번호</span>
+                <span>제 300076703호</span>
               </div>
               <span className="hidden md:inline text-gray-600">|</span>
               <div className="flex items-center gap-1.5">
@@ -869,8 +879,8 @@ const Home: React.FC = () => {
               </div>
               <span className="hidden md:inline text-gray-600">|</span>
               <div className="flex items-center gap-1.5">
-                <span className="font-bold text-gray-400">학원등록번호</span>
-                <span>제4845호</span>
+                <span className="font-bold text-gray-400">대표번호</span>
+                <span>010-3976-4210</span>
               </div>
               <div className="flex items-center gap-1.5">
               <span className="hidden md:inline text-gray-600">|</span>
@@ -885,6 +895,65 @@ const Home: React.FC = () => {
           <p className="mt-6 text-xs text-gray-400">©2025. <span className="font-bebas">SGEA</span> All rights reserved.</p>
         </div>
       </motion.footer>
+      {/* Floating Action Button (FAB) Section - 상시 노출 버전 */}
+      <div className="fixed top-[14%] right-6 z-50 flex flex-col items-center gap-4">
+        {/* 전화 */}
+        <motion.a
+          href="tel:010-3976-4210"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/phone.png" alt="전화" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 카카오톡 */}
+        <motion.a
+          href="https://pf.kakao.com/_MMlyn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/kakaotalk.png" alt="카카오톡" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 인스타그램 */}
+        <motion.a
+          href="https://www.instagram.com/sgeagg/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/instagram.png" alt="인스타그램" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 디스코드 */}
+        <motion.a
+          href="https://discord.gg/EDbNT5EKyX"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
+        </motion.a>
+      </div>
     </div>
   );
 };

@@ -403,6 +403,66 @@ const Class: React.FC = () => {
           </motion.div>
         </motion.section>
       </motion.main>
+
+      {/* Floating Action Button (FAB) Section - 상시 노출 버전 */}
+      <div className="fixed top-[14%] right-6 z-50 flex flex-col items-center gap-4">
+        {/* 전화 */}
+        <motion.a
+          href="tel:010-3976-4210"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/phone.png" alt="전화" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 카카오톡 */}
+        <motion.a
+          href="https://pf.kakao.com/_MMlyn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/kakaotalk.png" alt="카카오톡" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 인스타그램 */}
+        <motion.a
+          href="https://www.instagram.com/sgeagg/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/instagram.png" alt="인스타그램" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 디스코드 */}
+        <motion.a
+          href="https://discord.gg/EDbNT5EKyX"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
+        </motion.a>
+      </div>
     </div>
   );
 };

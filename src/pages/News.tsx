@@ -28,7 +28,7 @@ const News: React.FC = () => {
   const [error, setError] = useState<string>('');
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
 
-  const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT', 'TEST_UPDATE'];
+  const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT'];
 
   // 카테고리 색상 매핑
   const getCategoryColor = (category: string): string => {
@@ -39,8 +39,6 @@ const News: React.FC = () => {
         return 'bg-purple-600';
       case 'RECRUIT':
         return 'bg-green-600';
-      case 'TEST_UPDATE':
-        return 'bg-yellow-600';
       default:
         return 'bg-gray-600';
     }
@@ -54,8 +52,6 @@ const News: React.FC = () => {
         return 'border-purple-500';
       case 'RECRUIT':
         return 'border-green-500';
-      case 'TEST_UPDATE':
-        return 'border-yellow-500';
       default:
         return 'border-gray-500';
     }
@@ -401,6 +397,66 @@ const News: React.FC = () => {
           </motion.div>
         )}
       </motion.main>
+
+      {/* Floating Action Button (FAB) Section - 상시 노출 버전 */}
+      <div className="fixed top-[14%] right-6 z-50 flex flex-col items-center gap-4">
+        {/* 전화 */}
+        <motion.a
+          href="tel:010-3976-4210"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/phone.png" alt="전화" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 카카오톡 */}
+        <motion.a
+          href="https://pf.kakao.com/_MMlyn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/kakaotalk.png" alt="카카오톡" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 인스타그램 */}
+        <motion.a
+          href="https://www.instagram.com/sgeagg/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/instagram.png" alt="인스타그램" className="w-10 h-10 object-contain" />
+        </motion.a>
+        
+        {/* 디스코드 */}
+        <motion.a
+          href="https://discord.gg/EDbNT5EKyX"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center w-12 h-12 transition-transform"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
+        </motion.a>
+      </div>
     </div>
   );
 };
