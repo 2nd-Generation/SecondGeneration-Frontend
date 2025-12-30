@@ -473,7 +473,6 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
                         >
                           <option value="">선택해주세요</option>
                           <option value="탱커">탱커</option>
-                          <option value="척후대 (Initiator)">척후대 (Initiator)</option>
                           <option value="딜러">딜러</option>
                           <option value="힐러">힐러</option>
                         </select>
