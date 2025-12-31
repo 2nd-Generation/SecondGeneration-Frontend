@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   getArticles,
+  getArticle,
   createArticle,
   updateArticle,
   deleteArticle,
@@ -241,10 +242,54 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     popup: article?.popup || false,
   });
   const [loading, setLoading] = useState(false);
+  const [loadingDetail, setLoadingDetail] = useState(false);
   const [uploadingThumbnail, setUploadingThumbnail] = useState(false);
   const [error, setError] = useState('');
 
   const categories: ArticleCategory[] = ['NEWS', 'EVENT', 'RECRUIT', 'TEST_UPDATE'];
+
+  // 공지 수정 시 상세 정보 로드
+  useEffect(() => {
+    if (article) {
+      const loadArticleDetail = async () => {
+        try {
+          setLoadingDetail(true);
+          const detail = await getArticle(article.id);
+          setFormData({
+            category: detail.category,
+            title: detail.title,
+            subTitle: detail.subTitle,
+            content: detail.safeHtmlContent || '',
+            thumbnailUrl: detail.thumbnailUrl || null,
+            postedAt: detail.postedAt,
+            startDate: detail.startDate,
+            endDate: detail.endDate,
+            priority: detail.priority,
+            popup: detail.popup,
+          });
+        } catch (err) {
+          setError(err instanceof Error ? err.message : '공지 정보를 불러오는데 실패했습니다.');
+        } finally {
+          setLoadingDetail(false);
+        }
+      };
+      loadArticleDetail();
+    } else {
+      // 새 공지 생성 시 초기화
+      setFormData({
+        category: 'NEWS',
+        title: '',
+        subTitle: '',
+        content: '',
+        thumbnailUrl: null,
+        postedAt: new Date().toISOString().split('T')[0],
+        startDate: new Date().toISOString().split('T')[0],
+        endDate: new Date().toISOString().split('T')[0],
+        priority: 0,
+        popup: false,
+      });
+    }
+  }, [article]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -351,7 +396,6 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
     >
       <motion.div
         className="bg-gray-800 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
@@ -364,7 +408,10 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
           {article ? '공지 수정' : '새 공지 생성'}
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {loadingDetail ? (
+          <div className="text-center py-16 text-gray-400">로딩 중...</div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-semibold mb-2">카테고리</label>
             <select
@@ -523,6 +570,7 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
             </button>
           </div>
         </form>
+        )}
       </motion.div>
     </motion.div>
   );

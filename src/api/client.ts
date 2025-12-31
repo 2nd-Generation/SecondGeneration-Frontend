@@ -169,6 +169,20 @@ export const publicApiRequest = async <T>(
     return {} as T;
   }
 
-  return response.json();
+  // Content-Type 확인하여 JSON 또는 텍스트 처리
+  const contentType = response.headers.get('content-type');
+  if (contentType?.includes('application/json')) {
+    return response.json();
+  } else {
+    // JSON이 아닌 경우 텍스트로 받아서 처리
+    const text = await response.text();
+    try {
+      // JSON 문자열인 경우 파싱 시도
+      return JSON.parse(text) as T;
+    } catch {
+      // 일반 텍스트인 경우 객체로 래핑
+      return { message: text } as T;
+    }
+  }
 };
 

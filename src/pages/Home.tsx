@@ -11,11 +11,13 @@ import {
   staggerUp,
 } from '../utils/motionPresets';
 import { getPopupArticles, type ArticleListResponse } from '../api/article';
+import GoogleFormModal from '../components/GoogleFormModal';
 
 const Home: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
   const [popupArticles, setPopupArticles] = useState<ArticleListResponse[]>([]);
   const [visiblePopupIndices, setVisiblePopupIndices] = useState<number[]>([]);
+  const [isGoogleFormModalOpen, setIsGoogleFormModalOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -102,7 +104,7 @@ const Home: React.FC = () => {
             return (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden flex flex-col"
+                className="bg-white rounded-xl shadow-2xl w-[300px] overflow-hidden flex flex-col"
                 initial={{ scale: 0.95, opacity: 0, y: 10 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -110,7 +112,7 @@ const Home: React.FC = () => {
               >
                 {/* 썸네일 이미지 - 상단에 크게 */}
                 {article.thumbnailUrl ? (
-                  <div className="relative w-full h-80 sm:h-[450px] bg-gray-100 overflow-hidden">
+                  <div className="relative w-[300px] h-[450px] bg-gray-100 overflow-hidden">
                     <img
                       src={article.thumbnailUrl}
                       alt={article.title}
@@ -138,7 +140,7 @@ const Home: React.FC = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="relative w-full h-80 sm:h-[450px] bg-gradient-to-br from-purple-100 to-indigo-100">
+                  <div className="relative w-[300px] h-[450px] bg-gradient-to-br from-purple-100 to-indigo-100">
                     {/* 닫기 버튼 - 이미지 우상단 */}
                     <button
                       onClick={() => handleClosePopup(index)}
@@ -781,10 +783,8 @@ const Home: React.FC = () => {
               </motion.p>
               
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">
-                <motion.a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSeJ5Jald5tjTEhfZNlQfi7OsaarfgBOXJCr1o2UZwp2KjmhFw/viewform?usp=sharing&ouid=112071300713069105181"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <motion.button
+                  onClick={() => setIsGoogleFormModalOpen(true)}
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05 }}
@@ -797,7 +797,7 @@ const Home: React.FC = () => {
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                </motion.a>
+                </motion.button>
                 
                 <motion.a
                   href="http://pf.kakao.com/_xayxnLG"
@@ -954,6 +954,12 @@ const Home: React.FC = () => {
           <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
         </motion.a>
       </div>
+
+      {/* Google Form Modal */}
+      <GoogleFormModal
+        isOpen={isGoogleFormModalOpen}
+        onClose={() => setIsGoogleFormModalOpen(false)}
+      />
     </div>
   );
 };
