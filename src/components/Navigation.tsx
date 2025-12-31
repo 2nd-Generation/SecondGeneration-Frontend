@@ -103,6 +103,13 @@ const Navigation: React.FC = () => {
                 // 다른 페이지에서 메인 페이지로 이동 후 스크롤
                 e.preventDefault();
                 window.location.href = '/#contact';
+              } else {
+                // 메인 페이지에 있을 때는 명시적으로 스크롤 처리
+                e.preventDefault();
+                const contactElement = document.querySelector('#contact');
+                if (contactElement) {
+                  contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
               }
             }}
           >
@@ -177,6 +184,13 @@ const Navigation: React.FC = () => {
                 if (location.pathname !== '/') {
                   e.preventDefault();
                   window.location.href = '/#contact';
+                } else {
+                  // 메인 페이지에 있을 때는 명시적으로 스크롤 처리
+                  e.preventDefault();
+                  const contactElement = document.querySelector('#contact');
+                  if (contactElement) {
+                    contactElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
                 }
               }}
             >
