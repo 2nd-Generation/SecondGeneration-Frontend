@@ -34,15 +34,34 @@ export interface ArticleCreateRequest {
 
 export interface ArticleUpdateRequest extends ArticleCreateRequest {}
 
-// 공지 조회
+// 공지 조회 (공개 API - 인증 불필요)
 export const getArticles = async (category?: ArticleCategory): Promise<ArticleListResponse[]> => {
   const query = category ? `?category=${category}` : '';
-  return apiRequest<ArticleListResponse[]>(`/api/article${query}`);
+  try {
+    return await publicApiRequest<ArticleListResponse[]>(`/api/article${query}`);
+  } catch (error: any) {
+    // 401 에러 또는 기타 에러 발생 시 빈 배열 반환
+    if (error?.message?.includes('401') || error?.message?.includes('Unauthorized')) {
+      console.warn('공지 조회 실패 (인증 필요):', error.message);
+      return [];
+    }
+    console.warn('공지 조회 실패:', error.message);
+    return [];
+  }
 };
 
-// 공지 상세 조회
+// 공지 상세 조회 (공개 API - 인증 불필요)
 export const getArticle = async (id: number): Promise<ArticleDetailResponse> => {
-  return apiRequest<ArticleDetailResponse>(`/api/article/${id}`);
+  try {
+    return await publicApiRequest<ArticleDetailResponse>(`/api/article/${id}`);
+  } catch (error: any) {
+    // 401 에러는 조용히 처리하고 나머지는 throw
+    if (error?.message?.includes('401') || error?.message?.includes('Unauthorized')) {
+      console.warn('공지 상세 조회 실패 (인증 필요):', error.message);
+      throw new Error('공지사항을 불러오는데 실패했습니다.');
+    }
+    throw error;
+  }
 };
 
 // 팝업 공지 조회

@@ -107,11 +107,14 @@ const News: React.FC = () => {
       const loadArticleDetail = async () => {
         try {
           setLoadingDetail(true);
+          setError('');
           const detail = await getArticle(selectedNews.id);
+          console.log('공지 상세 정보:', detail); // 디버깅용
           setArticleDetail(detail);
         } catch (err) {
+          const errorMessage = err instanceof Error ? err.message : '공지사항 상세 정보를 불러오는데 실패했습니다.';
           console.error('공지사항 상세 로드 실패:', err);
-          // 에러가 발생해도 기본 정보는 표시
+          setError(errorMessage);
         } finally {
           setLoadingDetail(false);
         }
@@ -123,7 +126,8 @@ const News: React.FC = () => {
   }, [selectedNews]);
 
   if (selectedNews) {
-    const displayContent = articleDetail?.safeHtmlContent || selectedNews.content;
+    // safeHtmlContent가 있으면 사용, 없으면 빈 문자열
+    const displayContent = articleDetail?.safeHtmlContent || '';
     const displayTitle = selectedNews.title;
     const displaySummary = selectedNews.summary;
 
@@ -180,6 +184,18 @@ const News: React.FC = () => {
               </p>
             </motion.header>
 
+            {/* Error Message */}
+            {error && (
+              <motion.div
+                className="mb-8 bg-red-500/20 border border-red-500 text-red-400 px-6 py-4 rounded-lg"
+                variants={fadeInUp}
+                initial="hidden"
+                animate="visible"
+              >
+                {error}
+              </motion.div>
+            )}
+
             {/* Article Content */}
             {loadingDetail ? (
               <motion.div
@@ -198,13 +214,20 @@ const News: React.FC = () => {
                 animate="visible"
               >
                 <motion.div className="p-8 md:p-16" variants={fadeInSoft} initial="hidden" animate="visible">
-                  {displayContent ? (
+                  {displayContent && displayContent.trim() ? (
                     <div
                       className="prose prose-lg prose-invert max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-ul:text-gray-700 prose-li:text-gray-700"
                       dangerouslySetInnerHTML={{ __html: displayContent }}
                     />
                   ) : (
-                    <div className="text-gray-500">내용이 없습니다.</div>
+                    <div className="text-gray-500">
+                      {loadingDetail ? '로딩 중...' : '내용이 없습니다.'}
+                      {articleDetail && !articleDetail.safeHtmlContent && (
+                        <div className="mt-2 text-xs text-gray-400">
+                          (서버에서 내용을 받아오지 못했습니다)
+                        </div>
+                      )}
+                    </div>
                   )}
                 </motion.div>
               </motion.div>
