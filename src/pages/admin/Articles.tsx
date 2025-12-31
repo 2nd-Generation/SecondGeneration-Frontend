@@ -351,7 +351,6 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
     >
       <motion.div
         className="bg-gray-800 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
