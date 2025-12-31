@@ -104,7 +104,7 @@ const Home: React.FC = () => {
             return (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden flex flex-col"
+                className="bg-white rounded-xl shadow-2xl w-[300px] overflow-hidden flex flex-col"
                 initial={{ scale: 0.95, opacity: 0, y: 10 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 10 }}
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
               >
                 {/* 썸네일 이미지 - 상단에 크게 */}
                 {article.thumbnailUrl ? (
-                  <div className="relative w-full h-80 sm:h-[450px] bg-gray-100 overflow-hidden">
+                  <div className="relative w-[300px] h-[450px] bg-gray-100 overflow-hidden">
                     <img
                       src={article.thumbnailUrl}
                       alt={article.title}
@@ -140,7 +140,7 @@ const Home: React.FC = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="relative w-full h-80 sm:h-[450px] bg-gradient-to-br from-purple-100 to-indigo-100">
+                  <div className="relative w-[300px] h-[450px] bg-gradient-to-br from-purple-100 to-indigo-100">
                     {/* 닫기 버튼 - 이미지 우상단 */}
                     <button
                       onClick={() => handleClosePopup(index)}
