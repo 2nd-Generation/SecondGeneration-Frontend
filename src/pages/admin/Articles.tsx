@@ -298,7 +298,6 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
     // 1. 필수 필드 검증
     const requiredValidation = validateRequiredFields({
       제목: formData.title,
-      부제목: formData.subTitle,
       내용: formData.content,
     });
     if (!requiredValidation.isValid) {
@@ -447,7 +446,6 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
               value={formData.subTitle}
               onChange={(e) => setFormData({ ...formData, subTitle: e.target.value })}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white"
-              required
             />
           </div>
 

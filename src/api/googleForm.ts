@@ -16,6 +16,7 @@ export interface GoogleFormSubmitRequest {
   address: string;
   phoneNumber: string;
   discordId: string;
+  knowSgeaPath?: string;
   guardianName?: string;
   guardianPhoneNumber?: string;
 }

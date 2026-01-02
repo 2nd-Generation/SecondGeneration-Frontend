@@ -17,6 +17,7 @@ const INITIAL_FORM_DATA: Omit<GoogleFormSubmitRequest, 'valorantClass' | 'valora
   address: '',
   phoneNumber: '',
   discordId: '',
+  knowSgeaPath: '',
 };
 
 const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) => {
@@ -24,6 +25,7 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [knowSgeaPathOther, setKnowSgeaPathOther] = useState('');
 
   // 선택된 게임에 따라 관련 필드 표시 (메모이제이션)
   const hasValorant = useMemo(() => formData.desiredGame === 'VALORANT', [formData.desiredGame]);
@@ -31,6 +33,7 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
 
   const handleClose = useCallback(() => {
     setFormData(INITIAL_FORM_DATA);
+    setKnowSgeaPathOther('');
     setError('');
     setSuccess(false);
     onClose();
@@ -97,6 +100,7 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
           overwatchTier: formData.overwatchTier!,
           overwatchPosition: formData.overwatchPosition!,
         }),
+        ...(formData.knowSgeaPath && { knowSgeaPath: formData.knowSgeaPath }),
         ...(formData.guardianName && { guardianName: formData.guardianName }),
         ...(formData.guardianPhoneNumber && { guardianPhoneNumber: formData.guardianPhoneNumber }),
       };
@@ -271,6 +275,44 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
                         className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none placeholder-gray-400 text-gray-900"
                         required
                       />
+                    </div>
+
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="block text-sm font-semibold text-gray-700">
+                        SGEA를 알게 된 경로
+                      </label>
+                      <select
+                        value={formData.knowSgeaPath || ''}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value === '기타') {
+                            setFormData({ ...formData, knowSgeaPath: '기타' });
+                          } else {
+                            setFormData({ ...formData, knowSgeaPath: value });
+                            setKnowSgeaPathOther('');
+                          }
+                        }}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none bg-white text-gray-900"
+                      >
+                        <option value="">선택해주세요</option>
+                        <option value="지인 추천">지인 추천</option>
+                        <option value="인터넷 검색(네이버 / 구글)">인터넷 검색(네이버 / 구글)</option>
+                        <option value="SGEA 인스타그램">SGEA 인스타그램</option>
+                        <option value="타 인스타그램">타 인스타그램</option>
+                        <option value="기타">기타(자유롭게 작성)</option>
+                      </select>
+                      {formData.knowSgeaPath === '기타' && (
+                        <input
+                          type="text"
+                          value={knowSgeaPathOther}
+                          onChange={(e) => {
+                            setKnowSgeaPathOther(e.target.value);
+                            setFormData({ ...formData, knowSgeaPath: e.target.value ? `기타: ${e.target.value}` : '기타' });
+                          }}
+                          placeholder="자유롭게 작성해주세요"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all outline-none placeholder-gray-400 text-gray-900 mt-2"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
