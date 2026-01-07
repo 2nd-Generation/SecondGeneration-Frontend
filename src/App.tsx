@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import ScrollToTop from './components/ScrollToTop';
 import { PrivateRoute } from './components/PrivateRoute';
+import { useNaverPV } from './utils/useNaverPV';
 import Home from './pages/Home';
 import About from './pages/About';
 import Class from './pages/Class';
@@ -12,9 +13,11 @@ import Dashboard from './pages/admin/Dashboard';
 import Articles from './pages/admin/Articles';
 import Instructors from './pages/admin/Instructors';
 
-function App() {
+function AppContent() {
+  useNaverPV();
+  
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <Routes>
         {/* Public Routes */}
@@ -61,6 +64,14 @@ function App() {
           }
         />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
