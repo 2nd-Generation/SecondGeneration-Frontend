@@ -12,6 +12,7 @@ import {
 } from '../utils/motionPresets';
 import { getPopupArticles, type ArticleListResponse } from '../api/article';
 import GoogleFormModal from '../components/GoogleFormModal';
+import { trackNaverConversion } from '../utils/naverConversion';
 
 const Home: React.FC = () => {
   const [videoSrc, setVideoSrc] = useState('/BackgroundVideo.mp4');
@@ -784,7 +785,10 @@ const Home: React.FC = () => {
               
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <motion.button
-                  onClick={() => setIsGoogleFormModalOpen(true)}
+                  onClick={() => {
+                    trackNaverConversion('consult');
+                    setIsGoogleFormModalOpen(true);
+                  }}
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05 }}
@@ -905,6 +909,7 @@ const Home: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('call')}
         >
           <img src="/phone.png" alt="전화" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -920,6 +925,7 @@ const Home: React.FC = () => {
           transition={{ delay: 0.1 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('kakao')}
         >
           <img src="/kakaotalk.png" alt="카카오톡" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -935,6 +941,7 @@ const Home: React.FC = () => {
           transition={{ delay: 0.2 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('instagram')}
         >
           <img src="/instagram.png" alt="인스타그램" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -950,6 +957,7 @@ const Home: React.FC = () => {
           transition={{ delay: 0.3 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('discord')}
         >
           <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
         </motion.a>

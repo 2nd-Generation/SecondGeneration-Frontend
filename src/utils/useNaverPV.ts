@@ -6,7 +6,7 @@ declare global {
     wcs?: {
       inflow: (domain: string) => void;
     };
-    wcs_do?: () => void;
+    wcs_do?: (...args: any[]) => void;
   }
 }
 

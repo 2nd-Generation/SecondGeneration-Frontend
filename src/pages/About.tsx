@@ -9,6 +9,7 @@ import {
   staggerUp,
   easeEmphasized,
 } from '../utils/motionPresets';
+import { trackNaverConversion } from '../utils/naverConversion';
 
 const About: React.FC = () => {
   const navigate = useNavigate();
@@ -376,6 +377,7 @@ const About: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('call')}
         >
           <img src="/phone.png" alt="전화" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -391,6 +393,7 @@ const About: React.FC = () => {
           transition={{ delay: 0.1 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('kakao')}
         >
           <img src="/kakaotalk.png" alt="카카오톡" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -406,6 +409,7 @@ const About: React.FC = () => {
           transition={{ delay: 0.2 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('instagram')}
         >
           <img src="/instagram.png" alt="인스타그램" className="w-10 h-10 object-contain" />
         </motion.a>
@@ -421,6 +425,7 @@ const About: React.FC = () => {
           transition={{ delay: 0.3 }}
           whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => trackNaverConversion('discord')}
         >
           <img src="/discord.png" alt="디스코드" className="w-10 h-10 object-contain" />
         </motion.a>

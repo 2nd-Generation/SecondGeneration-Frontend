@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { submitGoogleForm, type GoogleFormSubmitRequest } from '../api/googleForm';
+import { trackNaverConversion } from '../utils/naverConversion';
 
 interface GoogleFormModalProps {
   isOpen: boolean;
@@ -107,6 +108,9 @@ const GoogleFormModal: React.FC<GoogleFormModalProps> = ({ isOpen, onClose }) =>
 
       await submitGoogleForm(submitData);
       setSuccess(true);
+      
+      // 전환 스크립트 실행 (폼 제출 성공 시)
+      trackNaverConversion('form_submit');
       
       // 2초 후 모달 닫기
       setTimeout(() => {
