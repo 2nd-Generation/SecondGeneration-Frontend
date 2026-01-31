@@ -823,7 +823,7 @@ const Home: React.FC = () => {
                 </motion.a>
                 
                 <motion.a
-                  href="tel:031-999-8888"
+                  href="tel:1644-5862"
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05 }}
