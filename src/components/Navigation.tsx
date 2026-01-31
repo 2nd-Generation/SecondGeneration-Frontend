@@ -59,6 +59,7 @@ const Navigation: React.FC = () => {
                 ? scrolled ? 'text-purple-600' : 'text-violet-500'
                 : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
             }`}
+            onClick={() => trackNaverConversion('nav_about')} // 소개 메뉴 클릭 트래킹 추가
           >
             소개
           </Link>
@@ -69,6 +70,7 @@ const Navigation: React.FC = () => {
                 ? scrolled ? 'text-purple-600' : 'text-violet-500'
                 : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
             }`}
+            onClick={() => trackNaverConversion('nav_program')} // 프로그램 메뉴 클릭 트래킹 추가
           >
             프로그램
           </Link>
@@ -79,6 +81,7 @@ const Navigation: React.FC = () => {
                 ? scrolled ? 'text-purple-600' : 'text-violet-500'
                 : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
             }`}
+            onClick={() => trackNaverConversion('nav_teachers')} // 강사진 메뉴 클릭 트래킹 추가
           >
             강사진
           </Link>
@@ -89,6 +92,7 @@ const Navigation: React.FC = () => {
                 ? scrolled ? 'text-purple-600' : 'text-violet-500'
                 : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
             }`}
+            onClick={() => trackNaverConversion('nav_news')} // 뉴스 메뉴 클릭 트래킹 추가
           >
             뉴스
           </Link>
@@ -141,7 +145,10 @@ const Navigation: React.FC = () => {
                   ? scrolled ? 'text-purple-600' : 'text-violet-500'
                   : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
               }`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackNaverConversion('nav_about');
+                setIsMobileMenuOpen(false);
+              }}
             >
               소개
             </Link>
@@ -152,7 +159,10 @@ const Navigation: React.FC = () => {
                   ? scrolled ? 'text-purple-600' : 'text-violet-500'
                   : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
               }`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackNaverConversion('nav_program');
+                setIsMobileMenuOpen(false);
+              }}
             >
               프로그램
             </Link>
@@ -163,7 +173,10 @@ const Navigation: React.FC = () => {
                   ? scrolled ? 'text-purple-600' : 'text-violet-500'
                   : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
               }`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackNaverConversion('nav_teachers');
+                setIsMobileMenuOpen(false);
+              }}
             >
               강사진
             </Link>
@@ -174,7 +187,10 @@ const Navigation: React.FC = () => {
                   ? scrolled ? 'text-purple-600' : 'text-violet-500'
                   : scrolled ? 'text-gray-700 hover:text-gray-900' : 'text-gray-300 hover:text-white'
               }`}
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                trackNaverConversion('nav_news');
+                setIsMobileMenuOpen(false);
+              }}
             >
               뉴스
             </Link>
