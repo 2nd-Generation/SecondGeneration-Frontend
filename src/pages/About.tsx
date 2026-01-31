@@ -340,7 +340,7 @@ const About: React.FC = () => {
                     variants={fadeInUp}
                   >
                     <motion.a
-                      href="http://pf.kakao.com/_xayxnLG"
+                      href="https://pf.kakao.com/_MMlyn "
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-10 py-4 bg-gradient-to-r from-violet-500 to-violet-600 hover:from-violet-600 hover:to-violet-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-violet-500/25 cursor-pointer"

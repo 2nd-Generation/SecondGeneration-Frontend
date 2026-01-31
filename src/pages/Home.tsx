@@ -804,9 +804,10 @@ const Home: React.FC = () => {
                 </motion.button>
                 
                 <motion.a
-                  href="http://pf.kakao.com/_xayxnLG"
+                  href="https://pf.kakao.com/_MMlyn "
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackNaverConversion('kakao')}
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-purple-600 font-bold bg-white hover:bg-gray-100 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05 }}
@@ -822,7 +823,7 @@ const Home: React.FC = () => {
                 </motion.a>
                 
                 <motion.a
-                  href="tel:031-999-8888"
+                  href="tel:1644-5862"
                   className="font-bebas group inline-flex items-center gap-0 px-8 py-3 sm:px-10 sm:py-4 rounded-full text-white font-bold bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all duration-300 text-lg sm:text-xl shadow-2xl transform hover:scale-105 tracking-wider w-full sm:w-auto justify-center"
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05 }}
@@ -884,7 +885,7 @@ const Home: React.FC = () => {
               <span className="hidden md:inline text-gray-600">|</span>
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-gray-400">대표번호</span>
-                <span>010-3976-4210</span>
+                <span>1644-5862</span>
               </div>
               <div className="flex items-center gap-1.5">
               <span className="hidden md:inline text-gray-600">|</span>
@@ -903,7 +904,7 @@ const Home: React.FC = () => {
       <div className="fixed top-[14%] right-6 z-50 flex flex-col items-center gap-4">
         {/* 전화 */}
         <motion.a
-          href="tel:010-3976-4210"
+          href="tel:1644-5862"
           className="flex items-center justify-center w-12 h-12 transition-transform"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
