@@ -962,7 +962,7 @@ const Home: React.FC = () => {
         
         {/* 디스코드 */}
         <motion.a
-          href="https://discord.gg/EDbNT5EKyX"
+          href="https://discord.gg/nyPfWBQmQ5"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center w-12 h-12 transition-transform"
