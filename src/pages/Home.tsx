@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import {
   easeAccent,
   easeEmphasized,
@@ -19,6 +19,7 @@ const Home: React.FC = () => {
   const [popupArticles, setPopupArticles] = useState<ArticleListResponse[]>([]);
   const [visiblePopupIndices, setVisiblePopupIndices] = useState<number[]>([]);
   const [isGoogleFormModalOpen, setIsGoogleFormModalOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -37,6 +38,18 @@ const Home: React.FC = () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
   }, []);
+
+  // URL 쿼리 파라미터로 모달 자동 열기
+  useEffect(() => {
+    const modalParam = searchParams.get('modal');
+    if (modalParam === 'register') {
+      setIsGoogleFormModalOpen(true);
+      // URL에서 쿼리 파라미터 제거 (히스토리 정리)
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete('modal');
+      setSearchParams(newSearchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   // 팝업 공지 로드
   useEffect(() => {
