@@ -11,34 +11,34 @@ export function trackNaverConversion(conversionId: string) {
       // 네이버 가이드에 따라 4는 신청/예약, 5~14는 사용자 정의입니다.
       switch (conversionId) {
         case 'consult':
-          _conv.type = '4'; // 신청/예약 (수강신청 등)
+          _conv.type = 'custom001'; // 신청/예약 (수강신청 페이지 클릭)
           break;
         case 'call':
-          _conv.type = '5'; // 사용자 정의 1 (전화)
+          _conv.type = 'custom002'; // 사용자 정의 1 (전화)
           break;
         case 'kakao':
-          _conv.type = '6'; // 사용자 정의 2 (카톡)
+          _conv.type = 'custom003'; // 사용자 정의 2 (카톡)
           break;
         case 'discord':
-          _conv.type = '7'; // 사용자 정의 3 (디스코드)
+          _conv.type = 'custom004'; // 사용자 정의 3 (디스코드)
           break;
         case 'instagram':
-          _conv.type = '8';
+          _conv.type = 'custom005';
           break;
         case 'nav_about':
-          _conv.type = '9';
+          _conv.type = 'custom006';
           break;
         case 'nav_program':
-          _conv.type = '10';
+          _conv.type = 'custom007';
           break;
         case 'nav_teachers':
-          _conv.type = '11';
+          _conv.type = 'custom008';
           break;
         case 'nav_news':
-          _conv.type = '12';
+          _conv.type = 'custom009';
           break;
         default:
-          _conv.type = '13'; // 기타
+          _conv.type = 'custom010'; // 기타
           break;
       }
 
