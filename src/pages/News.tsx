@@ -28,6 +28,7 @@ const News: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [imageAspectRatios, setImageAspectRatios] = useState<Map<number, number>>(new Map());
 
   const categories = ['ALL', 'NEWS', 'EVENT', 'RECRUIT'];
 
@@ -214,6 +215,25 @@ const News: React.FC = () => {
                 initial="hidden"
                 animate="visible"
               >
+                {/* 원본 이미지 표시 */}
+                {articleDetail?.thumbnailUrl && 
+                 articleDetail.thumbnailUrl.trim() !== '' && 
+                 articleDetail.thumbnailUrl !== 'null' &&
+                 articleDetail.thumbnailUrl !== 'undefined' && (
+                  <motion.div 
+                    className="w-full overflow-hidden px-8 md:px-16 pt-8 md:pt-16"
+                    variants={fadeInSoft} 
+                    initial="hidden" 
+                    animate="visible"
+                  >
+                    <img
+                      src={articleDetail.thumbnailUrl}
+                      alt={displayTitle}
+                      className="w-full max-w-md mx-auto h-auto object-contain"
+                    />
+                  </motion.div>
+                )}
+                
                 <motion.div className="p-8 md:p-16" variants={fadeInSoft} initial="hidden" animate="visible">
                   {displayContent && displayContent.trim() ? (
                     <div
@@ -336,7 +356,14 @@ const News: React.FC = () => {
                 transition={{ type: 'spring', stiffness: 240, damping: 18 }}
               >
                 <div className={`h-2 ${news.categoryColor}`}></div>
-                <div className="w-full h-48 overflow-hidden bg-gray-700 relative">
+                <div 
+                  className="w-full bg-gray-700 relative overflow-hidden"
+                  style={{
+                    aspectRatio: imageAspectRatios.get(news.id) 
+                      ? `${imageAspectRatios.get(news.id)!}` 
+                      : '16/9'
+                  }}
+                >
                   {(() => {
                     const article = articles.find(a => a.id === news.id);
                     const thumbnailUrl = article?.thumbnailUrl;
@@ -353,7 +380,14 @@ const News: React.FC = () => {
                           <img
                             src={thumbnailUrl}
                             alt={news.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                            onLoad={(e) => {
+                              const img = e.currentTarget;
+                              const aspectRatio = img.naturalWidth / img.naturalHeight;
+                              if (!imageAspectRatios.has(news.id)) {
+                                setImageAspectRatios(prev => new Map(prev).set(news.id, aspectRatio));
+                              }
+                            }}
                             onError={() => {
                               // 이미지 로드 실패 시 에러 상태에 추가
                               setImageErrors(prev => new Set(prev).add(news.id));
