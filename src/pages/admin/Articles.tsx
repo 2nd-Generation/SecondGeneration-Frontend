@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {
   getArticles,
   getArticle,
@@ -475,13 +477,37 @@ const ArticleModal: React.FC<ArticleModalProps> = ({ article, onClose, onSuccess
           </div>
 
           <div>
-            <label className="block text-sm font-semibold mb-2">내용 (HTML)</label>
-            <textarea
-              value={formData.content}
-              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-              className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white h-32"
-              required
-            />
+            <label className="block text-sm font-semibold mb-2">내용</label>
+            <div className="ckeditor-wrapper">
+              <CKEditor
+                editor={ClassicEditor as any}
+                data={formData.content}
+                onChange={(_event, editor) => {
+                  const data = editor.getData();
+                  setFormData({ ...formData, content: data });
+                }}
+                config={{
+                  toolbar: [
+                    'heading',
+                    '|',
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    '|',
+                    'outdent',
+                    'indent',
+                    '|',
+                    'blockQuote',
+                    'insertTable',
+                    '|',
+                    'undo',
+                    'redo',
+                  ],
+                }}
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
