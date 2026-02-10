@@ -37,9 +37,11 @@ export function trackNaverConversion(conversionId: string) {
         case 'nav_news':
           _conv.type = 'custom009';
           break;
-        default:
-          _conv.type = 'custom010'; // 기타
+        case 'form_submit':
+          _conv.type = 'lead'; // 기타
           break;
+        default:
+          _conv.type = 'custom010';
       }
 
       // 2. 필요 시 가치 설정 (예: 전환 1회당 10원 등 리포트 확인용)
