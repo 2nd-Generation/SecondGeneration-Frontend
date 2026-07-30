@@ -906,6 +906,12 @@ const Home: React.FC = () => {
                 <span className="font-bold text-gray-400">E-mail</span>
                 <span>info@sgea.kr</span>
               </div>
+              <div className="flex items-center gap-1.5">
+              <span className="hidden md:inline text-gray-600">|</span>
+
+                <span className="font-bold text-gray-400">약관</span>
+                <span><Link to="/terms" className="hover:text-gray-300 transition-colors">이용약관 및 교습비 안내</Link></span>
+              </div>
             </div>
           </div>
 

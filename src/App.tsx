@@ -12,6 +12,7 @@ import Login from './pages/admin/Login';
 import Dashboard from './pages/admin/Dashboard';
 import Articles from './pages/admin/Articles';
 import Instructors from './pages/admin/Instructors';
+import Terms from './pages/Terms';
 
 function AppContent() {
   useNaverPV();
@@ -32,6 +33,7 @@ function AppContent() {
                 <Route path="/class" element={<Class />} />
                 <Route path="/teachers" element={<Teachers />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/terms" element={<Terms />} />
               </Routes>
             </div>
           }
